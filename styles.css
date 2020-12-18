@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap');
+
+html {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar-menu-item-products:before {
+    content: '';
+    position: absolute;
+    right: 2px;
+    bottom: -22px;
+    border: 8px solid transparent;
+    border-bottom-color: #111827;
+}
+
+.sub-navbar-menu-item:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -12px;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    height: 4px;
+}
+
+.sub-navbar-menu-item:hover:before {
+    background: #FED831;
+}
