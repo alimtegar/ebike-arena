@@ -30,3 +30,15 @@ html {
 .sub-navbar-menu-item:hover:before {
     background: #FED831;
 }
+
+.slick-slider,
+.slick-slider .slick-list,
+.slick-slider .slick-list .slick-track,
+.slick-slider .slick-list .slick-track .slick-slide,
+.slick-slider .slick-list .slick-track .slick-slide>div {
+    height: 100%;
+}
+
+/* .slider-arrow {
+    display: none;
+} */
