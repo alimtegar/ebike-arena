@@ -23,7 +23,9 @@ const SubNavbar = () => {
                         }`}
                         key={menuItem.title}
                     >
-                        {menuItem.title}
+                        <a href="#">
+                            {menuItem.title}
+                        </a>
                     </li>        
                 ))}
             </ul>
