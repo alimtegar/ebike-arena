@@ -34,21 +34,23 @@ const WhyUs = () => {
     ];
 
     return (
-        <section className="flex justify-center items-center px-32">
-            {whyUs.map((whyUsItem, key) => (
-                <div className="z-50 bg-white w-1/4 text-center -mt-3 mx-1.5 px-12 py-12 shadow-lg" key={key}>
-                    <Hexagon width={24} height={20}>
-                        <img className="w-11" src={whyUsItem.image} alt={whyUsItem.title} />
-                    </Hexagon>
+        <section className="bg-gray-100 mb-16 px-3 md:px-32 pt-3 md:pt-0 pb-3 md:pb-16">
+            <div className="grid md:grid-cols-4 gap-3">
+                {whyUs.map((whyUsItem, key) => (
+                    <div className="z-50 bg-white text-center md:-mt-3 px-12 py-12 rounded" key={key}>
+                        <Hexagon width={24} height={20}>
+                            <img className="w-11" src={whyUsItem.image} alt={whyUsItem.title} />
+                        </Hexagon>
 
-                    <h2 className="font-semibold text-sm mt-5 mb-1">
-                        {whyUsItem.title}
-                    </h2>
-                    <p className="text-xs text-gray-500">
-                        {whyUsItem.description}
-                    </p>
-                </div>
-            ))}
+                        <h2 className="font-semibold text-sm mt-6 mb-3 leading-none">
+                            {whyUsItem.title}
+                        </h2>
+                        <p className="text-xs text-gray-600">
+                            {whyUsItem.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
         </section>
     );
 };

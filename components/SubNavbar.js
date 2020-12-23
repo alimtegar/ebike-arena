@@ -12,21 +12,20 @@ const SubNavbar = () => {
     ];
 
     return (
-        <nav className="bg-gray-900 text-white py-3 shadow-lg">
-            <ul className="flex justify-center">
+        <nav className="bg-gray-900 text-white py-3 shadow overflow-scroll">
+            <ul className="flex md:justify-center">
                 {menu.map((menuItem, i) => (
-                    <li 
-                        className={`sub-navbar-menu-item relative text-sm font-semibold px-4 ${
-                            i > 0 && i < menu.length 
-                                ? 'border-l-2 border-gray-700' 
+                    <li
+                        className={`sub-navbar-menu-item relative text-sm font-semibold px-4 whitespace-nowrap ${i > 0 && i < menu.length
+                                ? 'border-l-2 border-gray-700'
                                 : ''
-                        }`}
+                            }`}
                         key={menuItem.title}
                     >
                         <a href="#">
                             {menuItem.title}
                         </a>
-                    </li>        
+                    </li>
                 ))}
             </ul>
         </nav>

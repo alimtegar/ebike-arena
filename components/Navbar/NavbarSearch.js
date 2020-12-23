@@ -1,7 +1,7 @@
 const NavbarSearch = () => (
-    <form className="relative w-1/2">
+    <form className="relative hidden md:flex w-1/2">
         <input
-            className="w-full text-sm border-2 border-gray-300 px-4 h-11 focus:outline-none focus:border-gray-900"
+            className="w-full text-xs border-2 border-gray-300 px-4 h-11 rounded focus:outline-none focus:border-gray-900"
             placeholder="Search our products here..."
             type="text"
         />
