@@ -16,7 +16,7 @@ const SubNavbar = () => {
             <ul className="flex md:justify-center">
                 {menu.map((menuItem, i) => (
                     <li
-                        className={`sub-navbar-menu-item relative text-sm font-semibold px-4 whitespace-nowrap ${i > 0 && i < menu.length
+                        className={`text-sm font-semibold px-4 whitespace-nowrap ${i > 0 && i < menu.length
                                 ? 'border-l-2 border-gray-700'
                                 : ''
                             }`}

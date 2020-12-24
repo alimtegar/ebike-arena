@@ -1,8 +1,8 @@
 import Navbar from '../components/Navbar';
 import SubNavbar from '../components/SubNavbar';
 import Slider from '../components/Slider';
-import WhyUs from '../components/WhyUs';
-import Products from '../components/Products';
+import WhyUs from '../components/Services';
+import Products from '../components/Products/Products';
 
 const Home = () => {
     return (
@@ -13,10 +13,12 @@ const Home = () => {
             <WhyUs />
             
             <section className="flex justify-center text-center mb-16 px-32">
-                <div className="w-9/12">
-                    <h1 className="text-lg font-bold mb-6">About Us</h1>
-                    <p className="text-xs text-gray-600 text-justify">
-                        Curabitur id varius risus, a luctus erat. Pellentesque ac mollis ligula. Donec tellus odio, tincidunt sed congue in, euismod eu dui. Sed faucibus, ante at iaculis condimentum, nulla massa varius mi, in tincidunt nunc dolor at magna. Etiam in pellentesque metus, eget facilisis dolor. Sed tincidunt mollis tortor vel scelerisque. Praesent consectetur velit sed quam volutpat venenatis. Curabitur volutpat vitae ipsum et euismod. In sed odio in nisl rutrum pellentesque. Fusce sit amet orci nulla.
+                <div className="w-5/12">
+                    <h1 className="text-lg font-bold mb-6">
+                        About ebike arena<sup className="font-semibold text-sm ml-0.5">.id</sup>
+                    </h1>
+                    <p className="text-xs text-gray-600">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fusce id velit ut tortor pretium. Aliquam sem et tortor consequat id porta. Enim neque volutpat ac tincidunt vitae. Tellus pellentesque eu tincidunt tortor aliquam. Sem nulla pharetra diam sit amet nisl. 
                 </p>
                 </div>
             </section>
