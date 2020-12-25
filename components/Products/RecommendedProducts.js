@@ -30,10 +30,10 @@ const RecommendedProducts = ({ className }) => {
                 <h1 className="text-lg text-gray-900 font-bold">Recommended</h1>
                 <ChevronRightIcon className="w-5 h-5 ml-1" />
             </a>
-            <div className="flex flex-grow bg-white rounded transition hover:shadow-lg overflow-hidden">
+            <div className="flex flex-grow bg-white rounded shadow transition hover:shadow-lg overflow-hidden">
                 <Slider {...settings}>
                     {recommendedProducts.map((recommendedProduct, key) => (
-                        <div className="h-full  focus:outline-none" key={key}>
+                        <div className="h-full focus:outline-none" key={key}>
                             <div className="flex flex-col justify-center items-center text-center h-full">
                                 <div className="flex-grow">
                                     <img className="object-cover object-none object-center h-full focus:outline-none" src={recommendedProduct.image} alt="Slider Image" />

@@ -1,18 +1,21 @@
 import Navbar from '../components/Navbar';
 import SubNavbar from '../components/SubNavbar';
 import Slider from '../components/Slider';
-import WhyUs from '../components/Services';
-import Products from '../components/Products/Products';
+import Services from '../components/Services';
+import Products from '../components/Products';
+import Posts from '../components/Posts';
 
 const Home = () => {
     return (
         <div>
-            <Navbar />
-            <SubNavbar />
+            <div className="sticky top-0 z-50">
+                <Navbar />
+                <SubNavbar />
+            </div>
             <Slider />
-            <WhyUs />
+            <Services />
             
-            <section className="flex justify-center text-center mb-16 px-32">
+            <section className="flex justify-center text-center px-32 py-16">
                 <div className="w-5/12">
                     <h1 className="text-lg font-bold mb-6">
                         About ebike arena<sup className="font-semibold text-sm ml-0.5">.id</sup>
@@ -22,7 +25,9 @@ const Home = () => {
                 </p>
                 </div>
             </section>
+
             <Products />
+            <Posts />
         </div>
     );
 };

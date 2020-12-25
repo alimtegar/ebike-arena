@@ -21,7 +21,7 @@ const LatestProducts = ({ className }) => {
             </a>
             <div className="grid grid-cols-4 gap-3">
                 {latestProducts.map((latestProduct, key) => (
-                    <div className="flex flex-col bg-white text-center rounded overflow-hidden transition hover:shadow-lg" key={key}>
+                    <div className="flex flex-col bg-white text-center shadow rounded overflow-hidden transition hover:shadow-lg" key={key}>
                         <img src={latestProduct.image} alt="" />
                         <div className="flex flex-col flex-grow justify-between p-6">
                             <h2 className="text-xs text-gray-600 mb-3">
