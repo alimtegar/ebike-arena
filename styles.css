@@ -39,3 +39,13 @@ html {
 .slick-dots li {
     margin: 0;
 }
+
+.products-item-discount {
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 16px;
+    padding: 0 24px;
+    transform: rotate(45deg) translate(29%, -11%);
+    clip-path: polygon(17% 0%, 83% -1%, 101% 100%, 0% 100%);
+}

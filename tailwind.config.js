@@ -6,6 +6,9 @@ module.exports = {
       height: {
         '128': '32rem',
       },
+      backgroundColor: {
+        'primary': '#FED831',
+      }
     },
   },
   variants: {
