@@ -4,12 +4,7 @@ const NavbarMenu = () => (
     <div className="flex">
         <div className="flex items-center font-bold ml-4">
             <ShoppingCartIcon className="w-5 h-5" />
-            <span className="hidden md:flex ml-1">
-                Cart
-            </span>
-            <sup className="font-semibold text-sm ml-0.5">
-                0
-            </sup>
+            <span className="hidden md:flex ml-1">Cart</span><sup className="font-semibold text-sm ml-0.5">0</sup>
         </div>
         <div className="navbar-menu-item-products relative hidden md:flex items-center font-bold ml-4">
             Products

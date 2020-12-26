@@ -18,7 +18,7 @@ const Services = () => {
     ];
 
     return (
-        <section className="bg-gray-100 px-3 md:px-32 pt-3 md:pt-0 pb-3 md:pb-16">
+        <section className="bg-gray-50 px-3 md:px-24 pt-3 md:pt-0 pb-3 md:pb-12">
             <div className="flex justify-center -mx-1.5">
                 {services.map((service, key) => (
                     <div className="z-10 flex flex-col items-center bg-white text-center w-1/4 mx-1.5 md:-mt-3 px-12 py-12 rounded shadow transition hover:shadow-lg" key={key}>

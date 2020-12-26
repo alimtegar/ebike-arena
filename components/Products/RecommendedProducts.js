@@ -14,6 +14,7 @@ const RecommendedProducts = ({ className }) => {
         pauseOnHover: true,
     };
     const recommendedProducts = [
+        { title: 'Polisport Bilby Junior Baby Carrier', price: 63000, old_price: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/722570001.jpg' },
         { title: 'Brooks Slender Leather 130 mm Handle Grip', price: 109000, old_price: 100000, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/728894.PNG' },
         { title: 'Polisport Bilby Junior Baby Carrier', price: 63000, old_price: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/722570001.jpg' },
         { title: 'Shimano AM501 Gravity Bike Shoes', price: 53000, old_price: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/3/730995.PNG' },
@@ -21,7 +22,7 @@ const RecommendedProducts = ({ className }) => {
         { title: 'Polisport Bilby Junior Baby Carrier', price: 63000, old_price: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/722570001.jpg' },
         { title: 'Shimano AM501 Gravity Bike Shoes', price: 53000, old_price: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/3/730995.PNG' },
         { title: 'Brooks Slender Leather 130 mm Handle Grip', price: 109000, old_price: 100000, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/728894.PNG' },
-        { title: 'Polisport Bilby Junior Baby Carrier', price: 63000, old_price: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/722570001.jpg' },
+        
     ];
 
     return (
