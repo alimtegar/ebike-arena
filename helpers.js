@@ -20,3 +20,5 @@ export const range = (start, stop, step) => {
 
     return result;
 };
+
+export const getDiscountedPrice = (price, discount) => price - (price * discount / 100);

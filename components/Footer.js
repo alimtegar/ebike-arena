@@ -6,41 +6,61 @@ const Footer = () => {
             <div className="flex py-12 border-b-2 border-gray-700">
                 <div className="w-1/4">
                     <h2 className="font-semibold mb-3">Menu</h2>
-                    <ul className="text-xs text-gray-400 -my-1.5">
+                    <ul className="text-xs -my-1.5">
                         <li className="py-1.5">
-                            About ebike arena<sup className="ml-0.5">.id</sup>
+                            <a className="text-gray-400 hover:text-white hover:underline" href="#">
+                                About ebike arena<sup className="ml-0.5">.id</sup>
+                            </a>
                         </li>
                         <li className="py-1.5">
-                            Products
+                            <a className="text-gray-400 hover:text-white hover:underline" href="#">
+                                Products
+                            </a>
                     </li>
                         <li className="py-1.5">
-                            Posts
+                            <a className="text-gray-400 hover:text-white hover:underline" href="#">
+                                Posts
+                            </a>
                     </li>
                         <li className="py-1.5">
-                            How to Order
+                            <a className="text-gray-400 hover:text-white hover:underline" href="#">
+                                How to Order
+                            </a>
                     </li>
                         <li className="py-1.5">
-                            Contact Us
+                            <a className="text-gray-400 hover:text-white hover:underline" href="#">
+                                Contact Us
+                            </a>
                     </li>
                     </ul>
                 </div>
                 <div className="w-1/2">
                     <h2 className="font-semibold mb-3">Posts</h2>
-                    <ul className="text-xs text-gray-400 -my-1.5">
+                    <ul className="text-xs -my-1.5">
                         <li className="py-1.5">
-                            Suspendisse Nec Leo Dapibus Ipsum Iaculis Blandit
+                            <a className="text-gray-400 hover:text-white hover:underline" href="#">
+                                Suspendisse Nec Leo Dapibus Ipsum Iaculis Blandit
+                            </a>
                     </li>
                         <li className="py-1.5">
-                            Vivamus vel Metus ac Tellus Faucibus Pellentesque
+                            <a className="text-gray-400 hover:text-white hover:underline" href="#">
+                                Vivamus vel Metus ac Tellus Faucibus Pellentesque
+                            </a>
                     </li>
                         <li className="py-1.5">
-                            Sed Euismod Risus Quis Euismod
+                            <a className="text-gray-400 hover:text-white hover:underline" href="#">
+                                Sed Euismod Risus Quis Euismod
+                            </a>
                     </li>
                         <li className="py-1.5">
-                            Ut Egestas Tellus Vitae Aliquet Pulvinar
+                            <a className="text-gray-400 hover:text-white hover:underline" href="#">
+                                Ut Egestas Tellus Vitae Aliquet Pulvinar
+                            </a>
                     </li>
                         <li className="py-1.5">
-                            Sed Lobortis Eros Nec Magna Consequat Feugiat
+                            <a className="text-gray-400 hover:text-white hover:underline" href="#">
+                                Sed Lobortis Eros Nec Magna Consequat Feugiat
+                            </a>
                     </li>
                     </ul>
                 </div>

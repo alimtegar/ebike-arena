@@ -4,10 +4,10 @@ import { range } from '../../helpers';
 
 const Posts = () => {
     const posts = [
-        { title: 'Suspendisse Nec Leo Dapibus Ipsum Iaculis Blandit', image: '/images/slider.png', },
-        { title: 'Vivamus vel Metus ac Tellus Faucibus Pellentesque', image: '/images/slider.png', },
-        { title: 'Sed Euismod Risus Quis Euismod', image: '/images/slider.png', },
-        { title: 'Ut Egestas Tellus Vitae Aliquet Pulvinar', image: '/images/slider.png', },
+        { title: 'Suspendisse Nec Leo Dapibus Ipsum Iaculis Blandit', image: 'https://www.rodalink.com/pub/media/rodalinkapp/blogpost/image/1/6/1606813611.jpg', },
+        { title: 'Vivamus vel Metus ac Tellus Faucibus Pellentesque', image: 'https://www.rodalink.com/pub/media/rodalinkapp/blogpost/image/1/6/1605783294.jpg', },
+        { title: 'Sed Euismod Risus Quis Euismod', image: 'https://www.rodalink.com/pub/media/rodalinkapp/blogpost/image/1/6/1603764650.jpg', },
+        { title: 'Ut Egestas Tellus Vitae Aliquet Pulvinar', image: 'https://www.rodalink.com/pub/media/wysiwyg/blog/blog_2020/keselamatan_bersepeda_untuk_riders_5.jpg', },
     ];
 
     return (
@@ -31,7 +31,7 @@ const Posts = () => {
 
                                 return (
                                     <div className={[initClassname, widthClassname].join(' ')}>
-                                        <PostsItem title={post.title} image={post.image} height={60} headingSize={headingSize} imageCover="h" />
+                                        <PostsItem title={post.title} image={post.image} height={60} headingSize={headingSize} imageCover={imageCover} />
                                     </div>
                                 );
                             })}
