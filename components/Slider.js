@@ -31,7 +31,7 @@ const MySlider = () => {
             </Slider>
 
             {/* Add condition if slider < 1 for later */}
-            <div className="absolute hidden md:flex justify-between top-1/2 left-0 transform -translate-y-1/2 w-full px-12">
+            <div className="absolute hidden md:flex justify-between top-1/2 left-0 transform -translate-y-1/2 w-full px-12 pointer-events-none">
                 <OutlineButton width={11} height={11} onClick={() => sliderRef.slickPrev()}>
                     <ChevronLeftIcon className="w-5 h-5" />
                 </OutlineButton>
