@@ -2,7 +2,7 @@ import Slider from "react-slick";
 import RecommendedProductsItem from './RecommendedProductsItem';
 import { ChevronRightIcon } from '../../Icons';
 
-const RecommendedProducts = ({ className }) => {
+const RecommendedProducts = () => {
     const settings = {
         dots: true,
         infinite: true,
@@ -25,11 +25,13 @@ const RecommendedProducts = ({ className }) => {
     ];
 
     return (
-        <div className={className}>
-            <a className="flex items-center text-gray-400 hover:text-gray-900 mb-6 transition" href="#">
-                <h1 className="text-lg text-gray-900 font-bold">Recommended</h1>
-                <ChevronRightIcon className="w-5 h-5 ml-1" />
-            </a>
+        <div className="flex flex-col h-full">
+            <div className="mb-6">
+                <a className="inline-flex items-center text-gray-400 hover:text-gray-900 transition" href="#">
+                    <h1 className="text-lg text-gray-900 font-bold">Recommended</h1>
+                    <ChevronRightIcon className="w-5 h-5 ml-1" />
+                </a>
+            </div>
             <div className="flex flex-grow bg-white rounded shadow transition hover:shadow-lg overflow-hidden">
                 <Slider {...settings}>
                     {recommendedProducts.map((recommendedProduct, key) => (

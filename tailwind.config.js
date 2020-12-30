@@ -10,6 +10,10 @@ module.exports = {
         '128': '32rem',
         '13/12': '1.08333333333%',
       },
+      minHeight: {
+        '60': '15rem',
+        '120': '30rem',
+      },
       backgroundColor: {
         'primary': '#FED831',
       }

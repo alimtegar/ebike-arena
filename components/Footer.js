@@ -2,9 +2,9 @@ import OutlineButton from "./OutlineButton";
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 text-white px-24">
-            <div className="flex py-12 border-b-2 border-gray-700">
-                <div className="w-1/4">
+        <footer className="bg-gray-900 text-white px-3 md:px-24">
+            <div className="flex flex-wrap text-center md:text-left py-6 md:py-12 border-b-2 border-gray-700">
+                <div className="w-full md:w-1/4 mb-6 md:mb-0">
                     <h2 className="font-semibold mb-3">Menu</h2>
                     <ul className="text-xs -my-1.5">
                         <li className="py-1.5">
@@ -34,7 +34,7 @@ const Footer = () => {
                     </li>
                     </ul>
                 </div>
-                <div className="w-1/2">
+                <div className="w-full md:w-1/2 mb-6 md:mb-0">
                     <h2 className="font-semibold mb-3">Posts</h2>
                     <ul className="text-xs -my-1.5">
                         <li className="py-1.5">
@@ -64,9 +64,9 @@ const Footer = () => {
                     </li>
                     </ul>
                 </div>
-                <div className="w-1/4">
+                <div className="w-full md:w-1/4 mb-6 md:mb-0">
                     <h2 className="font-semibold mb-3">Follow Us</h2>
-                    <ul className="flex -mx-1.5">
+                    <ul className="flex justify-center md:justify-start -mx-1.5">
                         <li className="px-1.5">
                             <OutlineButton width={11} height={11}>
                                 <svg className="w-5 h-5" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><title>Twitter icon</title><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg>

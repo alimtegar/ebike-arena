@@ -2,7 +2,7 @@ import Button from '../../Button';
 import { getDiscountedPrice } from '../../../helpers';
 
 const RecommendedProductsItem = ({ title, image, url, price, discount }) => (
-    <div className="relative flex flex-col justify-center items-center text-center h-full overflow-hidden">
+    <div className="relative flex flex-col justify-center items-center text-center min-h-120 h-full overflow-hidden">
         {discount ? (
             <div className="z-10 products-item-discount bg-primary font-semibold text-sm">
                 -{discount}%

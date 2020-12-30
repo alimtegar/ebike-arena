@@ -19,12 +19,12 @@ const MySlider = () => {
     ];
 
     return (
-        <section className="slider bg-gray-300 relative h-48 md:h-128 overflow-hidden">
+        <section className="slider bg-gray-300 relative h-36 md:h-128 overflow-hidden">
             <Slider ref={(c) => sliderRef = c} {...settings}>
                 {slider.map((sliderItem, key) => (
                     <div className="h-full focus:outline-none" key={key}>
                         <a className="relative flex justify-center items-center w-full h-full overflow-hidden" href={sliderItem.url}>
-                            <img className="absolute h-full focus:outline-none" src={sliderItem.image} alt={sliderItem.title} />
+                            <img className="absolute max-w-none w-full md:h-full focus:outline-none" src={sliderItem.image} alt={sliderItem.title} />
                         </a>
                     </div>
                 ))}
