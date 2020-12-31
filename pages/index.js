@@ -13,6 +13,7 @@ const Home = () => {
                 <Navbar />
                 <SubNavbar />
             </div>
+            
             <Slider />
             <Services />
             

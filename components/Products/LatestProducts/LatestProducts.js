@@ -21,11 +21,15 @@ const LatestProducts = () => {
                     <ChevronRightIcon className="w-5 h-5 ml-1" />
                 </a>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-3"> */}
+            <div className="flex flex-wrap -m-1.5">
                 {latestProducts.map((latestProduct, key) => (
-                    <LatestProductsItem {...latestProduct} key={key} />
+                    <div className="w-full md:w-1/4 p-1.5" key={key}>
+                        <LatestProductsItem {...latestProduct} />
+                    </div>
                 ))}
             </div>
+            {/* </div> */}
         </div>
     );
 };
