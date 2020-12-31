@@ -1,7 +1,8 @@
 import Magnifier from "react-magnifier";
 import ProductItemDiscountLabel from '../../components/Products/ProductsItemDiscountLabel';
 import Button from '../../components/Button';
-import { ChevronRightIcon } from '../../components/Icons';
+// import { ChevronRightIcon } from '../../components/Icons';
+import { getDiscountedPrice } from '../../helpers';
 
 import Navbar from '../../components/Navbar';
 import SubNavbar from '../../components/SubNavbar';
@@ -9,7 +10,8 @@ import Footer from '../../components/Footer';
 
 const ProductDetails = () => {
     const image = 'https://www.rodalink.com/pub/media/catalog/product/cache/image/680x510/e9c3970ab036de70892d86c6d221abfe/5/0/502621.jpg';
-
+    const discount = 10;
+    const price = 30000000;
     const specifications = [
         {
             title: 'What\'s in the box',
@@ -104,7 +106,7 @@ const ProductDetails = () => {
                 <SubNavbar />
             </div>
 
-            <section className="product-details flex flex-col bg-gray-50 px-24 pt-12">
+            <section className="product-details flex flex-col bg-gray-50 px-3 md:px-24 pt-3 md:pt-12 pb-3 md:pb-0">
                 {/* <div className="mb-6">
                     <ul className="flex text-xs text-gray-400">
                         <li className="mr-1.5">
@@ -125,17 +127,17 @@ const ProductDetails = () => {
                     </ul>
                 </div> */}
 
-                <div className="relative z-10 bg-white -mb-3 rounded shadow overflow-hidden">
+                <div className="relative z-10 bg-white mb-0 md:-mb-3 rounded shadow overflow-hidden">
                     <div className="flex flex-wrap">
-                        <div className="w-2/3">
+                        <div className="w-full md:w-2/3">
                             {/* <div  className="flex bg-black h-auto rounded overflow-hidden"> */}
                             <Magnifier className="flex justify-center items-center -mb-2" src={image} mgShowOverflow={false} />
                             {/* </div> */}
                         </div>
-                        <div className="w-1/3">
+                        <div className="w-full md:w-1/3">
                             <div className="relative p-6">
                                 {/* Product Discount Label */}
-                                <ProductItemDiscountLabel discount={10} />
+                                <ProductItemDiscountLabel discount={discount} />
 
                                 {/* Product Header */}
                                 <div className="mb-6">
@@ -148,7 +150,7 @@ const ProductDetails = () => {
                                 <table className="w-full mb-6">
                                     <tbody>
                                         <tr className="border-b-2 border-gray-300">
-                                            <td className="w-24 py-2">
+                                            <td className="w-24 py-3">
                                                 <span className="text-xs text-gray-600">Category</span>
                                             </td>
                                             <td>
@@ -156,14 +158,16 @@ const ProductDetails = () => {
                                             </td>
                                         </tr>
                                         <tr className="border-b-2 border-gray-300">
-                                            <td className="w-24 py-2">
+                                            <td className="w-24 py-3">
                                                 <span className="text-xs text-gray-600">Price</span>
                                             </td>
                                             <td>
-                                                <div className="flex items-center">
-                                                    <s className="text-xs text-gray-400 mr-2">Rp14.000</s>
-                                                    <span className="font-semibold">Rp15.000</span>
-                                                </div>
+                                                {/* <div className="flex flex-col"> */}
+                                                    <s className="text-xs text-gray-400 mr-2">Rp.{price.toLocaleString('id-ID')}</s>
+                                                    <span className="font-semibold">
+                                                        Rp.{getDiscountedPrice(price, discount).toLocaleString('id-ID')}
+                                                    </span>
+                                                {/* </div> */}
                                             </td>
                                         </tr>
                                         <tr>
@@ -176,14 +180,6 @@ const ProductDetails = () => {
                                         </tr>
                                     </tbody>
                                 </table>
-
-                                {/* <div className="mb-6">
-                                <span className="text-xs text-gray-600">Price</span>
-                                <div className="flex items-center">
-                                    <s className="text-sm text-gray-400 mr-2">Rp14.000</s>
-                                    <span className="font-semibold">Rp15.000</span>
-                                </div>
-                            </div> */}
 
                                 {/* Product Footer */}
                                 <div>
@@ -204,13 +200,13 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </section>
-            <section className="px-24 py-12">
+            <section className="px-6 md:px-24 py-6 md:py-12">
                 <div className="flex flex-wrap -m-6">
-                    <div className="w-1/2 p-6">
+                    <div className="w-full md:w-1/2 p-6">
                         <div className="mb-6">
                             <h2 className="font-bold text-lg">Specifications</h2>
                         </div>
-                        <table className="text-xs text-gray-600 w-full mb-6">
+                        <table className="text-xs text-gray-600 w-full">
                             <tbody>
                                 {specifications.map((specification, key) => (
                                     <tr className={key < specifications.length - 1 ? 'border-b-2 border-gray-300' : ''}>
@@ -221,7 +217,7 @@ const ProductDetails = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className="w-1/2 p-6">
+                    <div className="w-full md:w-1/2 p-6">
                         <div className="mb-6">
                             <h2 className="font-bold text-lg">Description</h2>
                         </div>
