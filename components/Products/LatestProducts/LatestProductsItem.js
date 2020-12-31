@@ -10,7 +10,7 @@ const LatestProductsItem = ({ title, image, url, price, discount }) => (
             <img className="absolute max-w-none h-full transform group-hover:scale-105 transition duration-300" src={image} alt={title} />
         </div>
         <div className="flex flex-col h-1/2 px-6 py-3">
-            <a href="#" className="text-xs text-gray-600 hover:text-gray-900 hover:underline mb-3">
+            <a href={url} className="text-xs text-gray-600 hover:text-gray-900 hover:underline mb-3">
                 <h2>
                     {title.substring(0, 30).trim() + '...'}
                 </h2>

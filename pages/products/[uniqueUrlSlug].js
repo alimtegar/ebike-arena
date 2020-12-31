@@ -9,9 +9,14 @@ import SubNavbar from '../../components/SubNavbar';
 import Footer from '../../components/Footer';
 
 const ProductDetails = () => {
+    const id = 718423;
+    const title = 'Polygon Sepeda Xquarone EX9';
     const image = 'https://www.rodalink.com/pub/media/catalog/product/cache/image/680x510/e9c3970ab036de70892d86c6d221abfe/5/0/502621.jpg';
-    const discount = 10;
+    const category = 'Bikes';
     const price = 30000000;
+    const discount = 15;
+    const stock = 10;
+    const description = '<p className="mb-3">Vestibulum non posuere nunc, quis tempus velit. Nulla ornare magna at orci malesuada, ac maximus lacus auctor. Aenean non luctus sapien. Donec ornare rhoncus eros, ut lobortis nisl mattis ut. Nulla ut elit consequat, iaculis leo vitae, fringilla lectus. Sed et efficitur velit. Quisque egestas ut nisl quis venenatis.</p><p>Suspendisse molestie odio vestibulum, eleifend tellus mattis, ultrices massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis interdum massa sit amet hendrerit tempor. Ut sodales pharetra aliquet. Nullam vitae arcu posuere, dictum elit eget, tincidunt risus. Fusce molestie magna et eleifend elementum. Fusce semper mauris eget arcu rutrum interdum. Proin id lacus ac ante feugiat consectetur sed at lectus.</p>';
     const specifications = [
         {
             title: 'What\'s in the box',
@@ -99,6 +104,7 @@ const ProductDetails = () => {
         },
     ];
 
+
     return (
         <div>
             <div className="sticky top-0 z-50">
@@ -107,32 +113,10 @@ const ProductDetails = () => {
             </div>
 
             <section className="product-details flex flex-col bg-gray-50 px-3 md:px-24 pt-3 md:pt-12 pb-3 md:pb-0">
-                {/* <div className="mb-6">
-                    <ul className="flex text-xs text-gray-400">
-                        <li className="mr-1.5">
-                            <div className="flex items-center">
-                                <a className="hover:text-gray-600 hover:underline" href="#">Home</a>
-                                <ChevronRightIcon className="w-3 h-3 ml-1.5" />
-                            </div>
-                        </li>
-                        <li className="mr-1.5">
-                            <div className="flex items-center">
-                                <a className="hover:text-gray-600 hover:underline" href="#">Products</a>
-                                <ChevronRightIcon className="w-3 h-3 ml-1.5" />
-                            </div>
-                        </li>
-                        <li className="mr-1.5">
-                            <span className="text-gray-600">Polygon Sepeda Xquarone EX9</span>
-                        </li>
-                    </ul>
-                </div> */}
-
-                <div className="relative z-10 bg-white mb-0 md:-mb-3 rounded shadow overflow-hidden">
+                <div className="relative z-10 bg-white mb-0 md:-mb-3 rounded shadow hover:shadow-lg transition duration-300 overflow-hidden">
                     <div className="flex flex-wrap">
                         <div className="w-full md:w-2/3">
-                            {/* <div  className="flex bg-black h-auto rounded overflow-hidden"> */}
                             <Magnifier className="flex justify-center items-center -mb-2" src={image} mgShowOverflow={false} />
-                            {/* </div> */}
                         </div>
                         <div className="w-full md:w-1/3">
                             <div className="relative p-6">
@@ -142,8 +126,8 @@ const ProductDetails = () => {
                                 {/* Product Header */}
                                 <div className="mb-6">
 
-                                    <h1 className="font-bold text-lg">Polygon Sepeda Xquarone EX9</h1>
-                                    <span className="text-xs text-gray-600">ID #718423</span>
+                                    <h1 className="font-bold text-lg">{title}</h1>
+                                    <span className="text-xs text-gray-600">ID #{id}</span>
                                 </div>
 
                                 {/* Product Body */}
@@ -154,7 +138,7 @@ const ProductDetails = () => {
                                                 <span className="text-xs text-gray-600">Category</span>
                                             </td>
                                             <td>
-                                                <span className="font-semibold">Bikes</span>
+                                                <span className="font-semibold">{category}</span>
                                             </td>
                                         </tr>
                                         <tr className="border-b-2 border-gray-300">
@@ -162,12 +146,12 @@ const ProductDetails = () => {
                                                 <span className="text-xs text-gray-600">Price</span>
                                             </td>
                                             <td>
-                                                {/* <div className="flex flex-col"> */}
-                                                    <s className="text-xs text-gray-400 mr-2">Rp.{price.toLocaleString('id-ID')}</s>
-                                                    <span className="font-semibold">
-                                                        Rp.{getDiscountedPrice(price, discount).toLocaleString('id-ID')}
-                                                    </span>
-                                                {/* </div> */}
+                                                <s className="text-xs text-gray-400 mr-2">
+                                                    Rp.{price.toLocaleString('id-ID')}
+                                                </s>
+                                                <span className="font-semibold">
+                                                    Rp.{getDiscountedPrice(price, discount).toLocaleString('id-ID')}
+                                                </span>
                                             </td>
                                         </tr>
                                         <tr>
@@ -175,7 +159,7 @@ const ProductDetails = () => {
                                                 <span className="text-xs text-gray-600">Stock</span>
                                             </td>
                                             <td>
-                                                <span className="font-semibold">100</span>
+                                                <span className="font-semibold">{stock}</span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -187,8 +171,9 @@ const ProductDetails = () => {
                                         <input
                                             className="text-xs w-20 h-11 mr-3 px-4 border-2 border-gray-300 focus:border-gray-900 rounded focus:outline-none"
                                             type="number"
-                                            minLength={0}
-                                            value={0}
+                                            minLength={1}
+                                            maxLength={stock}
+                                            value={1}
                                         />
                                         <Button width="full" height={11} rounded={true}>
                                             Add to Cart
@@ -221,14 +206,7 @@ const ProductDetails = () => {
                         <div className="mb-6">
                             <h2 className="font-bold text-lg">Description</h2>
                         </div>
-                        <div className="text-xs text-gray-600 text-justify">
-                            <p className="mb-3">
-                                Vestibulum non posuere nunc, quis tempus velit. Nulla ornare magna at orci malesuada, ac maximus lacus auctor. Aenean non luctus sapien. Donec ornare rhoncus eros, ut lobortis nisl mattis ut. Nulla ut elit consequat, iaculis leo vitae, fringilla lectus. Sed et efficitur velit. Quisque egestas ut nisl quis venenatis.
-                            </p>
-                            <p>
-                                Suspendisse molestie odio vestibulum, eleifend tellus mattis, ultrices massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis interdum massa sit amet hendrerit tempor. Ut sodales pharetra aliquet. Nullam vitae arcu posuere, dictum elit eget, tincidunt risus. Fusce molestie magna et eleifend elementum. Fusce semper mauris eget arcu rutrum interdum. Proin id lacus ac ante feugiat consectetur sed at lectus.
-                            </p>
-                        </div>
+                        <div className="product-details-description text-xs text-gray-600 text-justify" dangerouslySetInnerHTML={{ __html: description, }} />
                     </div>
                 </div>
             </section>

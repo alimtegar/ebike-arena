@@ -15,7 +15,8 @@ const MySlider = () => {
         pauseOnHover: true,
     };
     const slider = [
-        { title: 'Slider Item 1', url: '#', image: 'https://www.rodalink.com/pub/media/wysiwyg/promotion_ID_2020/Nov_Des/polygon_zeta.jpg', description: 'lorem ipsum dolor sit amet', },        
+        { title: 'Slider Item 1', url: '#', image: 'https://www.rodalink.com/pub/media/wysiwyg/promotion_ID_2020/Nov_Des/polygon_zeta.jpg', description: 'lorem ipsum dolor sit amet', },
+        { title: 'Slider Item 1', url: '#', image: 'https://www.rodalink.com/pub/media/wysiwyg/promotion_ID_2020/Nov_Des/polygon_zeta.jpg', description: 'lorem ipsum dolor sit amet', },
     ];
 
     return (
@@ -30,15 +31,16 @@ const MySlider = () => {
                 ))}
             </Slider>
 
-            {/* Add condition if slider < 1 for later */}
-            <div className="absolute hidden md:flex justify-between top-1/2 left-0 transform -translate-y-1/2 w-full px-12 pointer-events-none">
-                <OutlineButton width={11} height={11} onClick={() => sliderRef.slickPrev()}>
-                    <ChevronLeftIcon className="w-5 h-5" />
-                </OutlineButton>
-                <OutlineButton width={11} height={11} onClick={() => sliderRef.slickNext()}>
-                    <ChevronRightIcon className="w-5 h-5" />
-                </OutlineButton>
-            </div>
+            {slider.length > 1 ? (
+                <div className="absolute hidden md:flex justify-between top-1/2 left-0 transform -translate-y-1/2 w-full px-12 pointer-events-none">
+                    <OutlineButton width={11} height={11} onClick={() => sliderRef.slickPrev()}>
+                        <ChevronLeftIcon className="w-5 h-5" />
+                    </OutlineButton>
+                    <OutlineButton width={11} height={11} onClick={() => sliderRef.slickNext()}>
+                        <ChevronRightIcon className="w-5 h-5" />
+                    </OutlineButton>
+                </div>
+            ) : null}
         </section>
     );
 };

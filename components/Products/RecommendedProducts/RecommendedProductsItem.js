@@ -1,5 +1,5 @@
 import Button from '../../Button';
-import ProductItemDiscountLabel from '../ProductItemDiscountLabel';
+import ProductItemDiscountLabel from '../ProductsItemDiscountLabel';
 import { getDiscountedPrice } from '../../../helpers';
 
 const RecommendedProductsItem = ({ title, image, url, price, discount }) => (
@@ -7,12 +7,12 @@ const RecommendedProductsItem = ({ title, image, url, price, discount }) => (
         {discount ? (
             <ProductItemDiscountLabel discount={discount} />
         ) : null}
-        <div className="bg-yellow-500 relative flex justify-center items-center h-2/3">
-            <img className="absolute max-w-none h-full transform group-hover:scale-105 transition" src={image} alt={title} />
+        <div className="relative flex justify-center items-center w-full h-2/3">
+            <img className="absolute max-w-none w-full transform group-hover:scale-105 transition" src={image} alt={title} />
         </div>
         <div className="flex flex-col w-full h-1/3">
             <div className="flex flex-col justify-betweenx flex-grow w-full h-full px-24 py-3">
-                <a href="#" className="text-xs text-gray-600 hover:text-gray-900 hover:underline mb-3">
+                <a href={url} className="text-xs text-gray-600 hover:text-gray-900 hover:underline mb-3">
                     <h2>
                         {title}
                     </h2>
