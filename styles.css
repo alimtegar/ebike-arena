@@ -49,3 +49,8 @@ html {
     transform: rotate(45deg) translate(29%, -11%);
     clip-path: polygon(17% 0%, 83% -1%, 101% 100%, 0% 100%);
 }
+
+/* .product-details .magnifier-image {
+    width: auto;
+    height: 100%;
+} */

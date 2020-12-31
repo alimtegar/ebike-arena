@@ -1,12 +1,11 @@
 import Button from '../../Button';
+import ProductItemDiscountLabel from '../ProductItemDiscountLabel';
 import { getDiscountedPrice } from '../../../helpers';
 
 const RecommendedProductsItem = ({ title, image, url, price, discount }) => (
     <div className="relative flex flex-col justify-center items-center text-center min-h-120 h-full overflow-hidden">
         {discount ? (
-            <div className="z-10 products-item-discount bg-primary font-semibold text-sm">
-                -{discount}%
-            </div>
+            <ProductItemDiscountLabel discount={discount} />
         ) : null}
         <div className="bg-yellow-500 relative flex justify-center items-center h-2/3">
             <img className="absolute max-w-none h-full transform group-hover:scale-105 transition" src={image} alt={title} />

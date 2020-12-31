@@ -1,11 +1,10 @@
+import ProductItemDiscountLabel from '../ProductsItemDiscountLabel';
 import { getDiscountedPrice } from '../../../helpers';
 
 const LatestProductsItem = ({ title, image, url, price, discount }) => (
     <div className="group relative flex flex-col bg-white h-60 text-center shadow rounded overflow-hidden transition hover:shadow-lg">
         {discount ? (
-            <div className="z-10 products-item-discount bg-primary font-semibold text-sm">
-                -{discount}%
-            </div>
+            <ProductItemDiscountLabel discount={discount} />
         ) : null}
         <div className="relative flex justify-center items-center h-1/2">
             <img className="absolute max-w-none h-full transform group-hover:scale-105 transition duration-300" src={image} alt={title} />

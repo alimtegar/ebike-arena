@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "autoprefixer": "^10.1.0",
-    "next": "10.0.3",
+    "next": "^10.0.4",
     "postcss": "^8.2.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-image-magnify": "^2.1.1",
+    "react-magnifier": "^3.0.4",
     "react-slick": "^0.27.13",
     "slick-carousel": "^1.8.1",
     "tailwindcss": "^2.0.2"
