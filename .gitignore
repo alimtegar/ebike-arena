@@ -29,4 +29,6 @@ yarn-error.log*
 .env.test.local
 .env.production.locali
 
-.trash-codes.js
+tmp/*
+old/*
+.old-codes.js
