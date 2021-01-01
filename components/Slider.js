@@ -34,10 +34,10 @@ const MySlider = () => {
             {slider.length > 1 ? (
                 <div className="absolute hidden md:flex justify-between top-1/2 left-0 transform -translate-y-1/2 w-full px-12 pointer-events-none">
                     <OutlineButton width={11} height={11} onClick={() => sliderRef.slickPrev()}>
-                        <ChevronLeftIcon className="w-5 h-5" />
+                        <ChevronLeftIcon width={5} height={5} />
                     </OutlineButton>
                     <OutlineButton width={11} height={11} onClick={() => sliderRef.slickNext()}>
-                        <ChevronRightIcon className="w-5 h-5" />
+                        <ChevronRightIcon width={5} height={5} />
                     </OutlineButton>
                 </div>
             ) : null}

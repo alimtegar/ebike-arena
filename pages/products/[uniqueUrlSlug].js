@@ -1,12 +1,10 @@
 import Magnifier from "react-magnifier";
+
+import Layout from '../../components/Layout';
 import ProductItemDiscountLabel from '../../components/Products/ProductsItemDiscountLabel';
 import Button from '../../components/Button';
-// import { ChevronRightIcon } from '../../components/Icons';
-import { getDiscountedPrice } from '../../helpers';
 
-import Navbar from '../../components/Navbar';
-import SubNavbar from '../../components/SubNavbar';
-import Footer from '../../components/Footer';
+import { getDiscountedPrice } from '../../helpers';
 
 const ProductDetails = () => {
     const id = 718423;
@@ -18,99 +16,32 @@ const ProductDetails = () => {
     const stock = 10;
     const description = '<p className="mb-3">Vestibulum non posuere nunc, quis tempus velit. Nulla ornare magna at orci malesuada, ac maximus lacus auctor. Aenean non luctus sapien. Donec ornare rhoncus eros, ut lobortis nisl mattis ut. Nulla ut elit consequat, iaculis leo vitae, fringilla lectus. Sed et efficitur velit. Quisque egestas ut nisl quis venenatis.</p><p>Suspendisse molestie odio vestibulum, eleifend tellus mattis, ultrices massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis interdum massa sit amet hendrerit tempor. Ut sodales pharetra aliquet. Nullam vitae arcu posuere, dictum elit eget, tincidunt risus. Fusce molestie magna et eleifend elementum. Fusce semper mauris eget arcu rutrum interdum. Proin id lacus ac ante feugiat consectetur sed at lectus.</p>';
     const specifications = [
-        {
-            title: 'What\'s in the box',
-            description: '1 x Polygon Xquarone EX9 Bike',
-        },
-        {
-            title: 'Brand',
-            description: 'Polygon',
-        },
-        {
-            title: 'Frame',
-            description: 'ACX SUSPENSION FRAME',
-        },
-        {
-            title: 'Fork',
-            description: 'FOX FACTORY 36 FLOAT 180MM TRAVEL',
-        },
-        {
-            title: 'Rear Shock',
-            description: 'FOX FACTORY FLOAT X2',
-        },
-        {
-            title: 'Head Set',
-            description: 'THREADLESS TAPERED HEADSET',
-        },
-        {
-            title: 'Stem',
-            description: 'RACE FACE TURBINE, ALLOY, E:50MM BB:35MM',
-        },
-        {
-            title: 'Handlebar',
-            description: 'RACE FACE NEXT, CARBON, W:780MM R:20MM BB:35MM',
-        },
-        {
-            title: 'Rear Derailleur',
-            description: 'SHIMANO XTR M9100',
-        },
-        {
-            title: 'Shifter',
-            description: 'SHIMANO XTR M9100 1X12 SPEED',
-        },
-        {
-            title: 'Bottom Bracket',
-            description: 'SHIMANO BB',
-        },
-        {
-            title: 'Crank Set',
-            description: 'SHIMANO XTR 32T BOOST',
-        },
-        {
-            title: 'Cassette',
-            description: 'SHIMANO CSM9100 XTR 12-SPEED 10-51T',
-        },
-        {
-            title: 'Chain',
-            description: 'SHIMANO',
-        },
-        {
-            title: 'Brake',
-            description: 'Brake set : SHIMANO XTR M9120 HYDRAULIC DISC BRAKE , brake lever : SHIMANO XTR M9120',
-        },
-        {
-            title: 'Wheel Set',
-            description: 'E13 TRS RACE WITH SHIMANO XTR HUB',
-        },
-        {
-            title: 'Tire',
-            description: 'WTB VIGILANTE TIRE 27.5"X2.60"',
-        },
-        {
-            title: 'Saddle',
-            description: 'ENTITY XTENT SADDLE',
-        },
-        {
-            title: 'Seat Post',
-            description: 'KS LEV ISO, ALLOY, 30.9MMX405MM',
-        },
-        {
-            title: 'Wheel Size',
-            description: '27.5"',
-        },
-        {
-            title: 'Warna',
-            description: 'Black',
-        },
+        { title: 'What\'s in the box', description: '1 x Polygon Xquarone EX9 Bike', },
+        { title: 'Brand', description: 'Polygon', },
+        { title: 'Frame', description: 'ACX SUSPENSION FRAME', },
+        { title: 'Fork', description: 'FOX FACTORY 36 FLOAT 180MM TRAVEL', },
+        { title: 'Rear Shock', description: 'FOX FACTORY FLOAT X2', },
+        { title: 'Head Set', description: 'THREADLESS TAPERED HEADSET', },
+        { title: 'Stem', description: 'RACE FACE TURBINE, ALLOY, E:50MM BB:35MM', },
+        { title: 'Handlebar', description: 'RACE FACE NEXT, CARBON, W:780MM R:20MM BB:35MM', },
+        { title: 'Rear Derailleur', description: 'SHIMANO XTR M9100', },
+        { title: 'Shifter', description: 'SHIMANO XTR M9100 1X12 SPEED', },
+        { title: 'Bottom Bracket', description: 'SHIMANO BB', },
+        { title: 'Crank Set', description: 'SHIMANO XTR 32T BOOST', },
+        { title: 'Cassette', description: 'SHIMANO CSM9100 XTR 12-SPEED 10-51T', },
+        { title: 'Chain', description: 'SHIMANO', },
+        { title: 'Brake', description: 'Brake set : SHIMANO XTR M9120 HYDRAULIC DISC BRAKE , brake lever : SHIMANO XTR M9120', },
+        { title: 'Wheel Set', description: 'E13 TRS RACE WITH SHIMANO XTR HUB', },
+        { title: 'Tire', description: 'WTB VIGILANTE TIRE 27.5"X2.60"', },
+        { title: 'Saddle', description: 'ENTITY XTENT SADDLE', },
+        { title: 'Seat Post', description: 'KS LEV ISO, ALLOY, 30.9MMX405MM', },
+        { title: 'Wheel Size', description: '27.5"', },
+        { title: 'Warna', description: 'Black', },
     ];
 
 
     return (
-        <div>
-            <div className="sticky top-0 z-50">
-                <Navbar />
-                <SubNavbar />
-            </div>
+        <Layout>
 
             <section className="product-details flex flex-col bg-gray-50 px-3 md:px-24 pt-3 md:pt-12 pb-3 md:pb-0">
                 <div className="relative z-10 bg-white mb-0 md:-mb-3 rounded shadow hover:shadow-lg transition duration-300 overflow-hidden">
@@ -194,7 +125,7 @@ const ProductDetails = () => {
                         <table className="text-xs text-gray-600 w-full">
                             <tbody>
                                 {specifications.map((specification, key) => (
-                                    <tr className={key < specifications.length - 1 ? 'border-b-2 border-gray-300' : ''}>
+                                    <tr className={key < specifications.length - 1 ? 'border-b-2 border-gray-300' : ''} key={key}>
                                         <td className="align-top py-3 w-36">{specification.title}</td>
                                         <td className="py-3 capitalize">{specification.description.toLowerCase()}</td>
                                     </tr>
@@ -211,8 +142,7 @@ const ProductDetails = () => {
                 </div>
             </section>
 
-            <Footer />
-        </div>
+        </Layout>
     );
 };
 

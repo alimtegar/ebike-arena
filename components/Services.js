@@ -21,7 +21,7 @@ const Services = () => {
         <section className="bg-gray-50 px-3 md:px-24 pt-3 md:pt-0 pb-3 md:pb-12">
             <div className="flex flex-wrap justify-center -m-1.5">
                 {services.map((service, key) => (
-                    <div className="w-full md:w-1/4 p-1.5">
+                    <div className="w-full md:w-1/4 p-1.5" key={key}>
                         <div className="relative z-10 flex md:flex-col items-center bg-white md:text-center md:-mt-3 p-6 md:p-12 rounded shadow hover:shadow-lg transition duration-300" key={key}>
                             <img className="h-20 mr-6 md:mr-0 mb-0 md:mb-6" src={service.image} alt={service.title} />
                             <div>
