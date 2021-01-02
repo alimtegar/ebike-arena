@@ -33,8 +33,8 @@ const Products = () => {
         <Layout>
             <section className="bg-gray-50">
                 <div className="flex flex-wrap">
-                    <div className="w-1/5">
-                        <div className="bg-white h-full px-6 py-12">
+                    <div className="w-full md:w-1/5">
+                        <div className="bg-white h-full px-6 py-6 md:py-12">
                             {/* Sort */}
                             <div className="mb-6">
                                 <div className="mb-3">
@@ -62,14 +62,14 @@ const Products = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-4/5">
-                        <div className="py-12 pl-6 pr-24">
+                    <div className="w-full md:w-4/5">
+                        <div className="pt-6 md:pt-12 pb-3 md:pt-6 pl-3 md:pl-6 pr-3 md:pr-24">
                             <div className="text-xs text-gray-600 mb-6">
                                 Found 10 results in products
                                 </div>
                             <div className="flex flex-wrap -m-1.5">
                                 {products.map((product, key) => (
-                                    <div className="w-full md:w-1/5 p-1.5" key={key}>
+                                    <div className="w-1/2 md:w-1/5 p-1.5" key={key}>
                                         <ProductsItem {...product} />
                                     </div>
                                 ))}
