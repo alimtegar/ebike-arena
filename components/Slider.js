@@ -15,17 +15,18 @@ const MySlider = () => {
         pauseOnHover: true,
     };
     const slider = [
-        { title: 'Slider Item 1', url: '#', image: 'https://www.rodalink.com/pub/media/wysiwyg/promotion_ID_2020/Nov_Des/polygon_zeta.jpg', description: 'lorem ipsum dolor sit amet', },
-        { title: 'Slider Item 1', url: '#', image: 'https://www.rodalink.com/pub/media/wysiwyg/promotion_ID_2020/Nov_Des/polygon_zeta.jpg', description: 'lorem ipsum dolor sit amet', },
+        { title: 'Slider 1', url: '#', image: '/images/slider-1.jpg', description: 'Slider 1', },
+        { title: 'Slider 2', url: '#', image: '/images/slider-2.jpg', description: 'Slider 2', },
+        { title: 'Slider 3', url: '#', image: '/images/slider-3.jpg', description: 'Slider 3', },
     ];
 
     return (
-        <section className="slider bg-gray-300 relative h-36 md:h-128 overflow-hidden">
+        <section className="group slider bg-gray-300 relative h-36 md:h-128 overflow-hidden">
             <Slider ref={(c) => sliderRef = c} {...settings}>
                 {slider.map((sliderItem, key) => (
                     <div className="h-full focus:outline-none" key={key}>
                         <a className="relative flex justify-center items-center w-full h-full overflow-hidden" href={sliderItem.url}>
-                            <img className="absolute max-w-none w-full md:h-full focus:outline-none" src={sliderItem.image} alt={sliderItem.title} />
+                            <img className="absolute max-w-none h-full md:h-auto w-auto md:w-full focus:outline-none" src={sliderItem.image} alt={sliderItem.title} />
                         </a>
                     </div>
                 ))}
