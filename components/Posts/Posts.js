@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import PostsItem from './PostsItem';
 import { ChevronRightIcon } from '../Icons';
 import { range } from '../../helpers';
@@ -15,12 +16,14 @@ const Posts = () => {
             <div className="mb-6">
                 <a className="inline-flex items-center text-gray-400 hover:text-gray-900 transition" href="#">
                     <h1 className="text-lg text-gray-900 font-bold">Posts</h1>
-                    <ChevronRightIcon className="w-5 h-5 ml-1" />
+                    <span className="ml-1">
+                        <ChevronRightIcon width={5} height={5} />
+                    </span>
                 </a>
             </div>
             <div className="flex flex-wrap -m-1.5">
                 {range(Math.ceil(posts.length / 4)).map((_, key1) => (
-                    <>
+                    <Fragment key={key1}>
                         <div className="flex flex-grow w-full md:w-1/2 min-h-60 p-1.5">
                             <PostsItem {...posts[4 * key1]} height="full" headingSize="lg" imageCover="h" />
                         </div>
@@ -31,13 +34,13 @@ const Posts = () => {
                                 const imageCover = key2 ? 'h' : 'w';
 
                                 return (
-                                    <div className={'p-1.5' + widthClassname}>
+                                    <div className={'p-1.5' + widthClassname} key={key2}>
                                         <PostsItem {...post} height={60} headingSize={headingSize} imageCover={imageCover} />
                                     </div>
                                 );
                             })}
                         </div>
-                    </>
+                    </Fragment>
                 ))}
             </div>
         </section>

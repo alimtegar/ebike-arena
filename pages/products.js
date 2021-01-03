@@ -63,7 +63,7 @@ const Products = () => {
                         </div>
                     </div>
                     <div className="w-full md:w-4/5">
-                        <div className="pt-6 md:pt-12 pb-3 md:pt-6 pl-3 md:pl-6 pr-3 md:pr-24">
+                        <div className="pt-6 md:pt-12 pb-3 md:pb-12 pl-3 md:pl-6 pr-3 md:pr-24">
                             <div className="text-xs text-gray-600 mb-6">
                                 Found 10 results in products
                                 </div>

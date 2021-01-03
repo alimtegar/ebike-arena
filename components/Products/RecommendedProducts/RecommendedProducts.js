@@ -29,7 +29,9 @@ const RecommendedProducts = () => {
             <div className="mb-6">
                 <a className="inline-flex items-center text-gray-400 hover:text-gray-900 transition" href="#">
                     <h1 className="text-lg text-gray-900 font-bold">Recommended</h1>
-                    <ChevronRightIcon className="w-5 h-5 ml-1" />
+                    <span className="ml-1">
+                        <ChevronRightIcon width={5} height={5}/>
+                    </span>
                 </a>
             </div>
             <div className="flex flex-grow bg-white rounded shadow transition hover:shadow-lg overflow-hidden">
