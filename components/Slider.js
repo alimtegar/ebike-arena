@@ -26,7 +26,7 @@ const MySlider = () => {
                 {slider.map((sliderItem, key) => (
                     <div className="h-full focus:outline-none" key={key}>
                         <a className="relative flex justify-center items-center w-full h-full overflow-hidden" href={sliderItem.url}>
-                            <img className="absolute max-w-none h-full md:h-auto w-auto md:w-full focus:outline-none" src={sliderItem.image} alt={sliderItem.title} />
+                            <img className="absolute max-w-none h-auto w-full focus:outline-none" src={sliderItem.image} alt={sliderItem.title} />
                         </a>
                     </div>
                 ))}
