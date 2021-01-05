@@ -31,7 +31,7 @@ const Products = () => {
 
     return (
         <Layout>
-            <section className="bg-gray-50">
+            <section className="bg-gray-100">
                 <div className="flex flex-wrap">
                     <div className="w-full md:w-1/5">
                         <div className="bg-white h-full px-6 py-6 md:py-12">

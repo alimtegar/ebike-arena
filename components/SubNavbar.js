@@ -1,22 +1,23 @@
 const SubNavbar = () => {
     const menu = [
-        { title: 'Bikes', url: '#', },
-        { title: 'Spareparts', url: '#', },
-        { title: 'Wheels & Tires', url: '#', },
-        { title: 'Apparel', url: '#', },
-        { title: 'Footwears', url: '#', },
-        { title: 'Protection', url: '#', },
-        { title: 'Maintenance', url: '#', },
-        { title: 'Accessories', url: '#', },
-        { title: 'Fuels & Supplements', url: '#', },
+        { title: 'Why EMTB', url: '#', },
+        { title: 'Bikes', url: '/products', },
+        { title: 'Spareparts', url: '/products', },
+        { title: 'Wheels and Tires', url: '/products', },
+        { title: 'Apparel', url: '/products', },
+        { title: 'Footwears', url: '/products', },
+        { title: 'Protection', url: '/products', },
+        { title: 'Maintenance', url: '/products', },
+        { title: 'Accessories', url: '/products', },
+        { title: 'Fuels and Supplements', url: '/products', },
     ];
 
     return (
-        <nav className="bg-gray-900 text-white py-3 shadow overflow-scroll">
+        <nav className="bg-gray-900 text-white py-3 overflow-scroll">
             <ul className="flex md:justify-center">
                 {menu.map((menuItem, i) => (
                     <li
-                        className={`text-sm font-semibold px-4 whitespace-nowrap ${i > 0 && i < menu.length
+                        className={`text-xs font-semibold px-4 whitespace-nowrap ${i > 0 && i < menu.length
                                 ? 'border-l-2 border-gray-700'
                                 : ''
                             }`}

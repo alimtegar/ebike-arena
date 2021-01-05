@@ -4,11 +4,12 @@ import { TwitterIcon, FacebookIcon, InstagramIcon, WhatsAppIcon } from '../Icons
 
 const Footer = () => {
     const mainFooterMenu = [
-        { title: 'About ebike arena', url: '/products/product-details', },
+        { title: 'Why EMTB', url: '/products/product-details', },
+        { title: <span>About ebike arena<sup className="ml-1">.id</sup></span>, url: '/products/product-details', },
         { title: 'Products', url: '/products/product-details', },
         { title: 'Posts', url: '/products/product-details', },
         { title: 'How to Order', url: '/products/product-details', },
-        { title: 'About Us', url: '/products/product-details', },
+        { title: 'Contact Us', url: '/products/product-details', },
     ];
     const postsFooterMenu = [
         { title: 'Suspendisse Nec Leo Dapibus Ipsum Iaculis Blandit', url: '/products/product-details', },

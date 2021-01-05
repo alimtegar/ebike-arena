@@ -26,11 +26,20 @@ html {
     height: 100%;
 }
 
-/* .slider-arrow {
-    display: none;
-} */
+.slick-dots li.slick-active button:before { opacity: 1; }
 
-.slick-dots {
+.slider .slick-dots {
+    z-index: 49;
+    position: absolute;
+    bottom: 12px;
+}
+
+.slider .slick-dots li.slick-active button:before,
+.slider .slick-dots li button:before {
+    color: white;
+}
+
+.products-recommended .slick-dots {
     position: absolute;
     top: 12px;
     bottom: unset;

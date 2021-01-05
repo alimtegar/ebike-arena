@@ -9,9 +9,9 @@ import { getDiscountedPrice } from '../../helpers';
 const ProductDetails = () => {
     const id = 718423;
     const title = 'Polygon Sepeda Xquarone EX9';
-    const image = 'https://www.rodalink.com/pub/media/catalog/product/cache/image/680x510/e9c3970ab036de70892d86c6d221abfe/5/0/502621.jpg';
+    const image = '/images/slider-1.jpg';
     const category = 'Bikes';
-    const price = 30000000;
+    const price = 99900000;
     const discount = 15;
     const stock = 10;
     const description = '<p className="mb-3">Vestibulum non posuere nunc, quis tempus velit. Nulla ornare magna at orci malesuada, ac maximus lacus auctor. Aenean non luctus sapien. Donec ornare rhoncus eros, ut lobortis nisl mattis ut. Nulla ut elit consequat, iaculis leo vitae, fringilla lectus. Sed et efficitur velit. Quisque egestas ut nisl quis venenatis.</p><p>Suspendisse molestie odio vestibulum, eleifend tellus mattis, ultrices massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis interdum massa sit amet hendrerit tempor. Ut sodales pharetra aliquet. Nullam vitae arcu posuere, dictum elit eget, tincidunt risus. Fusce molestie magna et eleifend elementum. Fusce semper mauris eget arcu rutrum interdum. Proin id lacus ac ante feugiat consectetur sed at lectus.</p>';
@@ -43,8 +43,8 @@ const ProductDetails = () => {
     return (
         <Layout>
 
-            <section className="product-details flex flex-col bg-gray-50 px-3 md:px-24 pt-3 md:pt-12 pb-3 md:pb-0">
-                <div className="relative z-10 bg-white mb-0 md:-mb-3 rounded shadow hover:shadow-lg transition duration-300 overflow-hidden">
+            <section className="product-details flex flex-col bg-gray-100 px-3 md:px-24 pt-3 md:pt-12 pb-3 md:pb-12">
+                <div className="relative z-10 bg-white mb-0 md:-mb-3x rounded-lg shadow-sm hover:shadow transition duration-300 overflow-hidden">
                     <div className="flex flex-wrap">
                         <div className="w-full md:w-2/3">
                             <Magnifier className="flex justify-center items-center -mb-2" src={image} mgShowOverflow={false} />
@@ -64,7 +64,7 @@ const ProductDetails = () => {
                                 {/* Product Body */}
                                 <table className="w-full mb-6">
                                     <tbody>
-                                        <tr className="border-b-2 border-gray-300">
+                                        <tr className="border-b-2 border-gray-200">
                                             <td className="w-24 py-3">
                                                 <span className="text-xs text-gray-600">Category</span>
                                             </td>
@@ -72,7 +72,7 @@ const ProductDetails = () => {
                                                 <span className="font-semibold">{category}</span>
                                             </td>
                                         </tr>
-                                        <tr className="border-b-2 border-gray-300">
+                                        <tr className="border-b-2 border-gray-200">
                                             <td className="w-24 py-3">
                                                 <span className="text-xs text-gray-600">Price</span>
                                             </td>
@@ -100,7 +100,7 @@ const ProductDetails = () => {
                                 <div>
                                     <div className="flex">
                                         <input
-                                            className="text-xs w-20 h-11 mr-3 px-4 border-2 border-gray-300 focus:border-gray-900 rounded focus:outline-none"
+                                            className="text-xs w-20 h-11 mr-3 px-4 border-2 border-gray-300 focus:border-gray-900 rounded-lg focus:outline-none"
                                             type="number"
                                             minLength={1}
                                             maxLength={stock}
@@ -125,7 +125,7 @@ const ProductDetails = () => {
                         <table className="text-xs text-gray-600 w-full">
                             <tbody>
                                 {specifications.map((specification, key) => (
-                                    <tr className={key < specifications.length - 1 ? 'border-b-2 border-gray-300' : ''} key={key}>
+                                    <tr className={key < specifications.length - 1 ? 'border-b-2 border-gray-200' : ''} key={key}>
                                         <td className="align-top py-3 w-36">{specification.title}</td>
                                         <td className="py-3 capitalize">{specification.description.toLowerCase()}</td>
                                     </tr>

@@ -25,7 +25,7 @@ const RecommendedProducts = () => {
     ];
 
     return (
-        <div className="flex flex-col h-full">
+        <div className="products-recommended flex flex-col h-full">
             <div className="mb-6">
                 <a className="inline-flex items-center text-gray-400 hover:text-gray-900 transition" href="#">
                     <h1 className="text-lg text-gray-900 font-bold">Recommended</h1>
@@ -34,7 +34,7 @@ const RecommendedProducts = () => {
                     </span>
                 </a>
             </div>
-            <div className="flex flex-grow bg-white rounded shadow transition hover:shadow-lg overflow-hidden">
+            <div className="flex flex-grow bg-white rounded-lg shadow-sm hover:shadow transition overflow-hidden">
                 <Slider {...settings}>
                     {recommendedProducts.map((recommendedProduct, key) => (
                         <div className="h-full focus:outline-none" key={key}>

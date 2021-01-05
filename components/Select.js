@@ -5,7 +5,7 @@ const Select = ({ id, name, options, width, height }) => {
     return (
         <select
             className={
-                'text-xs border-2 border-gray-300 px-4 rounded focus:outline-none focus:border-gray-900 appearance-none' +
+                'text-xs border-2 border-gray-300 px-4 rounded-lg focus:outline-none focus:border-gray-900 appearance-none' +
                 widthClassName + 
                 heightClassName
             }

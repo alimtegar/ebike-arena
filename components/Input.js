@@ -12,7 +12,7 @@ const Input = ({ type, placeholder, width, height, prefix }) => {
             ) : null}
             <input
                 className={
-                    'text-xs border-2 border-gray-300 focus:border-gray-900 rounded focus:outline-none' +
+                    'text-xs border-2 border-gray-300 focus:border-gray-900 rounded-lg focus:outline-none' +
                     paddingClassName +
                     widthClassName +
                     heightClassName

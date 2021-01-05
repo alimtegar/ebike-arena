@@ -8,6 +8,7 @@ module.exports = {
       },
       height: {
         '128': '32rem',
+        'slider': 'calc(100vh - 112px)',
         '13/12': '1.08333333333%',
       },
       minHeight: {
