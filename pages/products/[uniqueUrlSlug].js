@@ -42,7 +42,6 @@ const ProductDetails = () => {
 
     return (
         <Layout>
-
             <section className="product-details flex flex-col bg-gray-100 px-3 md:px-24 pt-3 md:pt-12 pb-3 md:pb-12">
                 <div className="relative z-10 bg-white mb-0 md:-mb-3x rounded-lg shadow-sm hover:shadow transition duration-300 overflow-hidden">
                     <div className="flex flex-wrap">
@@ -116,7 +115,7 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </section>
-            <section className="px-6 md:px-24 py-6 md:py-12">
+            <section className="product-details-content relative px-6 md:px-24 py-6 md:py-12">
                 <div className="flex flex-wrap -m-6">
                     <div className="w-full md:w-1/2 p-6">
                         <div className="mb-6">

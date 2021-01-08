@@ -4,10 +4,10 @@ import Footer from '../components/Footer';
 
 const Layout = ({ children }) => (
     <>
-        <header className="sticky top-0 z-50 shadow">
+        <div className="sticky top-0 z-50 shadow">
             <Navbar />
             <SubNavbar />
-        </header>
+        </div>
 
         <main>
             {children}
