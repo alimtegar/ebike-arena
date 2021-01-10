@@ -4,6 +4,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap');
 
+/* NProgressBar Overrided Styles */
+#nprogress .peg { box-shadow: none; }
+#nprogress .spinner { display: none; }
+
+/* Main Styles */
 html {
     font-family: 'Poppins', sans-serif;
 }
@@ -25,8 +30,8 @@ html {
     bottom: 12px;
 }
 
-.slider .slick-dots li.slick-active button:before,
-.slider .slick-dots li button:before {
+.slider .slick-dots li button:before,
+.slider .slick-dots li.slick-active button:before {
     color: white;
 }
 

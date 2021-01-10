@@ -1,3 +1,5 @@
+import Link from './Link';
+
 const SubNavbar = () => {
     const menu = [
         { title: 'Why EMTB', url: '#', },
@@ -23,9 +25,11 @@ const SubNavbar = () => {
                             }`}
                         key={menuItem.title}
                     >
-                        <a href="#">
-                            {menuItem.title}
-                        </a>
+                        <Link href={menuItem.url}>
+                            <a>
+                                {menuItem.title}
+                            </a>
+                        </Link>
                     </li>
                 ))}
             </ul>

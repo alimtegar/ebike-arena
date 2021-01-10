@@ -3,13 +3,13 @@ import PostsItem from './PostsItem';
 import { ChevronRightIcon } from '../Icons';
 import { range } from '../../helpers';
 
-const Posts = () => {
-    const posts = [
-        { title: 'Suspendisse Nec Leo Dapibus Ipsum Iaculis Blandit', url: '/products/product-details', image: 'https://www.rodalink.com/pub/media/rodalinkapp/blogpost/image/1/6/1606813611.jpg', },
-        { title: 'Vivamus vel Metus ac Tellus Faucibus Pellentesque', url: '/products/product-details', image: 'https://www.rodalink.com/pub/media/rodalinkapp/blogpost/image/1/6/1605783294.jpg', },
-        { title: 'Sed Euismod Risus Quis Euismod', url: '/products/product-details', image: 'https://www.rodalink.com/pub/media/rodalinkapp/blogpost/image/1/6/1603764650.jpg', },
-        { title: 'Ut Egestas Tellus Vitae Aliquet Pulvinar', url: '/products/product-details', image: 'https://www.rodalink.com/pub/media/wysiwyg/blog/blog_2020/keselamatan_bersepeda_untuk_riders_5.jpg', },
-    ];
+const Posts = ({ posts }) => {
+    // const posts = [
+    //     { title: 'Suspendisse Nec Leo Dapibus Ipsum Iaculis Blandit', url: '/products/product-details', image: 'https://www.rodalink.com/pub/media/rodalinkapp/blogpost/image/1/6/1606813611.jpg', },
+    //     { title: 'Vivamus vel Metus ac Tellus Faucibus Pellentesque', url: '/products/product-details', image: 'https://www.rodalink.com/pub/media/rodalinkapp/blogpost/image/1/6/1605783294.jpg', },
+    //     { title: 'Sed Euismod Risus Quis Euismod', url: '/products/product-details', image: 'https://www.rodalink.com/pub/media/rodalinkapp/blogpost/image/1/6/1603764650.jpg', },
+    //     { title: 'Ut Egestas Tellus Vitae Aliquet Pulvinar', url: '/products/product-details', image: 'https://www.rodalink.com/pub/media/wysiwyg/blog/blog_2020/keselamatan_bersepeda_untuk_riders_5.jpg', },
+    // ];
 
     return (
         <section className="text-center md:text-left px-3 md:px-24 pt-6 md:pt-12 pb-3 md:pb-12">

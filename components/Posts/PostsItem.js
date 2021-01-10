@@ -1,7 +1,7 @@
 const PostsItem = ({ title, image, url, height, headingSize, imageCover }) => {;
     const heightClassName = height ? ' h-' + height : '';
     const headingSizeClassName = headingSize ? ' text-' + headingSize : '';
-    const imageCoverClassName = imageCover ? ' w-full md:' + imageCover + '-full group-hover:scale-105' : '';
+    const imageCoverClassName = imageCover ? ' w-full md:w-auto md:' + imageCover + '-full group-hover:scale-105' : '';
     
     return (
         <a className={'group relative flex justify-center items-center bg-gray-500 text-left text-white w-full rounded-lg overflow-hidden' + heightClassName} href="#">

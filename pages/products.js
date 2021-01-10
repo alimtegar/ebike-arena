@@ -1,3 +1,5 @@
+import { NextSeo, CorporateContactJsonLd } from 'next-seo';
+
 import Layout from '../components/Layout';
 import ProductsItem from '../components/Products/LatestProducts/LatestProductsItem';
 
@@ -31,6 +33,10 @@ const Products = () => {
 
     return (
         <Layout>
+            <NextSeo
+                titleTemplate={process.env.NEXT_PUBLIC_WEB_TITLE + ' | Products'}
+            />
+
             <section className="bg-gray-100">
                 <div className="flex flex-wrap">
                     <div className="w-full md:w-1/5">

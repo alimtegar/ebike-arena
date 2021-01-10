@@ -2,7 +2,7 @@ import Link from '../../Link';
 import ProductItemDiscountLabel from '../ProductsItemDiscountLabel';
 import { getDiscountedPrice } from '../../../helpers';
 
-const LatestProductsItem = ({ title, image, url, price, discount }) => (
+const LatestProductsItem = ({ title, image, price, discount }) => (
     <div className="group relative flex flex-col bg-white h-60 text-center shadow-sm hover:shadow rounded-lg overflow-hidden transition">
         {discount ? (
             <ProductItemDiscountLabel discount={discount} />
@@ -11,7 +11,7 @@ const LatestProductsItem = ({ title, image, url, price, discount }) => (
             <img className="absolute max-w-none h-full transform group-hover:scale-105 transition duration-300" src={image} alt={title} />
         </div>
         <div className="flex flex-col h-1/2 px-6 py-3">
-            <Link href={url}>
+            <Link href="#">
                 <a className="text-xs text-gray-600 hover:text-gray-900 hover:underline mb-3">
                     <h2>
                         {title.substring(0, 30).trim() + '...'}

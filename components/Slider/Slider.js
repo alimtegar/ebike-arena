@@ -1,11 +1,12 @@
-import Slider from "react-slick";
-import OutlineButton from './OutlineButton';
-import { ChevronLeftIcon, ChevronRightIcon } from './Icons';
+import SlickSlider from "react-slick";
+import SliderItem from './SliderItem';
+import OutlineButton from '../OutlineButton';
+import { ChevronLeftIcon, ChevronRightIcon } from '../Icons';
 
-const MySlider = () => {
+const Slider = ({ slider }) => {
     let sliderRef;
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
@@ -14,23 +15,16 @@ const MySlider = () => {
         autoplaySpeed: 8000,
         pauseOnHover: true,
     };
-    const slider = [
-        { title: 'Slider 1', url: '#', image: '/images/slider-1.jpg', description: 'Slider 1', },
-        { title: 'Slider 2', url: '#', image: '/images/slider-2.jpg', description: 'Slider 2', },
-        { title: 'Slider 3', url: '#', image: '/images/slider-3.jpg', description: 'Slider 3', },
-    ];
 
     return (
         <section className="group slider bg-gray-300 relative h-36 md:h-128 overflow-hidden">
-            <Slider ref={(c) => sliderRef = c} {...settings}>
+            <SlickSlider ref={(c) => sliderRef = c} {...settings}>
                 {slider.map((sliderItem, key) => (
                     <div className="h-full focus:outline-none" key={key}>
-                        <a className="relative flex justify-center items-center w-full h-full overflow-hidden" href={sliderItem.url}>
-                            <img className="absolute max-w-none h-auto w-full focus:outline-none" src={sliderItem.image} alt={sliderItem.title} />
-                        </a>
+                        <SliderItem {...sliderItem} />
                     </div>
                 ))}
-            </Slider>
+            </SlickSlider>
 
             {slider.length > 1 ? (
                 <div className="absolute hidden md:flex justify-between top-1/2 left-0 transform -translate-y-1/2 w-full px-12 pointer-events-none">
@@ -46,4 +40,4 @@ const MySlider = () => {
     );
 };
 
-export default MySlider;
+export default Slider;

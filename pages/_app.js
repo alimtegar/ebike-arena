@@ -11,7 +11,7 @@ import '../styles.css'
 const App = ({ Component, pageProps }) => (
   <>
     <DefaultSeo {...SEO} />
-    <NextNProgress color="#FED830" />
+    <NextNProgress color="#FED830" height={3} />
     <Component {...pageProps} />
   </>
 );

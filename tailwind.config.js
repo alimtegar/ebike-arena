@@ -15,9 +15,12 @@ module.exports = {
         '60': '15rem',
         '120': '30rem',
       },
+      textColor: {
+        'primary': '#FED831',
+      },
       backgroundColor: {
         'primary': '#FED831',
-      }
+      },
     },
   },
   variants: {
