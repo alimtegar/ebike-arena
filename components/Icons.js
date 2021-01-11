@@ -110,3 +110,13 @@ export const WhatsAppIcon = ({ width, height, color }) => {
         </svg>
     );
 };
+
+export const SocialMediaIcon = ({ title, width, height }) => {
+    switch (title) {
+        case 'twitter': return <TwitterIcon width={width} height={height} />;
+        case 'facebook': return <FacebookIcon width={width} height={height} />;
+        case 'instagram': return <InstagramIcon width={width} height={height} />;
+        case 'whatsapp': return <WhatsAppIcon width={width} height={height} />;
+        default: return <span>?</span>;
+    }
+};

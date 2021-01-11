@@ -2,18 +2,22 @@ import Navbar from '../components/Navbar';
 import SubNavbar from '../components/SubNavbar';
 import Footer from '../components/Footer';
 
-const Layout = ({ children }) => (
+const Layout = ({ children, navbarMenu, footerMenu, footerPosts, footerSocialMedias }) => (
     <>
         <div className="sticky top-0 z-50 shadow">
             <Navbar />
-            <SubNavbar />
+            <SubNavbar menu={navbarMenu} />
         </div>
 
         <main>
             {children}
         </main>
 
-        <Footer />
+        <Footer 
+            menu={footerMenu}  
+            posts={footerPosts}
+            socialMedias={footerSocialMedias}
+        />
     </>
 );
 

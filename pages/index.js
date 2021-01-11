@@ -1,32 +1,32 @@
-import { NextSeo, CorporateContactJsonLd } from 'next-seo';
-
 import Layout from '../components/Layout';
+import Seo from '../components/Seo';
 import Slider from '../components/Slider';
 import AboutUs from '../components/AboutUs';
 import Services from '../components/Services';
 import Products from '../components/Products';
 import Posts from '../components/Posts';
 
-const Home = ({ profile, menu, slider, services, recommendedProducts, latestProducts, posts }) => (
-    <Layout>
-        {/* Make the default for this */}
-        <NextSeo titleTemplate={process.env.NEXT_PUBLIC_WEB_TITLE + ' | Home'} />
-        <CorporateContactJsonLd
+const Home = ({ profile, navbarMenu, footerMenu, slider, services, recommendedProducts, latestProducts, posts }) => (
+    <Layout
+        navbarMenu={navbarMenu}
+        footerMenu={footerMenu}
+        footerPosts={posts}
+        footerSocialMedias={profile.social_medias}
+    >
+        <Seo
+            title={process.env.NEXT_PUBLIC_WEB_TITLE}
+            description={process.env.NEXT_PUBLIC_WEB_DESCRIPTION}
             url={process.env.NEXT_PUBLIC_WEB_URL}
-            logo={process.env.NEXT_PUBLIC_WEB_URL + 'images/android-icon-1024x1024.png'}
-            contactPoint={[
-                {
-                    telephone: profile.phone,
-                    contactType: 'customer service',
-                    availableLanguage: ['English', 'Indonesia'],
-                },
-            ]}
+            phone={profile.phone}
         />
         <Slider slider={slider} />
         <AboutUs content={profile.content} />
         <Services services={services} />
-        <Products recommendedProducts={recommendedProducts} latestProducts={latestProducts} />
-        <Posts posts={posts} />
+        <Products
+            recommendedProducts={recommendedProducts}
+            latestProducts={latestProducts}
+        />
+        <Posts posts={posts.slice(0, 4)} />
     </Layout>
 );
 
@@ -39,10 +39,23 @@ export const getStaticProps = async () => {
     res = await res.json();
     const profile = res.data[0];
 
+    // Fetch product categories
+    res = await fetch(apiUrl + 'items/product_categories?fields=id,title&filter[status]=published&sort=sort');
+    res = await res.json();
+    const productCategories = res.data;
+
     // Fetch menu
     res = await fetch(apiUrl + 'items/menu?fields=title,url,position&filter[status]=published&sort=sort');
     res = await res.json();
     const menu = res.data;
+    const navbarMenu = [
+        ...menu.filter((menuItem) => menuItem.position === 'navbar'),
+        ...productCategories.map((productCategory) => ({ 
+            title: productCategory.title, 
+            url: 'products/c/' + productCategory.id 
+        })),
+    ];
+    const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');
 
     // Fetch slider
     res = await fetch(apiUrl + 'items/slider?fields=image,title,url&filter[status]=published&sort=sort');
@@ -89,7 +102,7 @@ export const getStaticProps = async () => {
     latestProducts.map((latestProduct, key) => latestProduct.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=200&h=200&q=80&f=contain');
 
     // Fetch posts
-    res = await fetch(apiUrl + 'items/posts?fields=created_on,image,title&filter[status]=published&sort=created_on&limit=4');
+    res = await fetch(apiUrl + 'items/posts?fields=created_on,image,title&filter[status]=published&sort=created_on&limit=5');
     res = await res.json();
     let posts = res.data;
 
@@ -104,7 +117,8 @@ export const getStaticProps = async () => {
     return {
         props: {
             profile: profile,
-            menu: menu,
+            navbarMenu: navbarMenu,
+            footerMenu: footerMenu,
             slider: slider,
             services: services,
             recommendedProducts: recommendedProducts,
