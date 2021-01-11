@@ -1,40 +1,33 @@
-import { NextSeo, CorporateContactJsonLd } from 'next-seo';
+import { useRouter } from 'next/router'
 
 import Layout from '../components/Layout';
+import Seo from '../components/Seo';
 import ProductsItem from '../components/Products/LatestProducts/LatestProductsItem';
 
+import { InfoIcon } from '../components/Icons';
 import Input from '../components/Input';
 import Select from '../components/Select';
 import Button from '../components/Button';
 
-const Products = () => {
-    const products = [
-        { title: 'Brooks Slender Leather 130 mm Handle Grip', url: '/products/product-details', price: 109000, discount: 5, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/728894.PNG' },
-        { title: 'Polisport Bilby Junior Baby Carrier', url: '/products/product-details', price: 63000, discount: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/722570001.jpg' },
-        { title: 'Shimano AM501 Gravity Bike Shoes', url: '/products/product-details', price: 53000, discount: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/3/730995.PNG' },
-        { title: 'Brooks Slender Leather 130 mm Handle Grip', url: '/products/product-details', price: 109000, discount: 10, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/728894.PNG' },
-        { title: 'Polisport Bilby Junior Baby Carrier', url: '/products/product-details', price: 63000, discount: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/722570001.jpg' },
-        { title: 'Shimano AM501 Gravity Bike Shoes', url: '/products/product-details', price: 53000, discount: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/3/730995.PNG' },
-        { title: 'Brooks Slender Leather 130 mm Handle Grip', url: '/products/product-details', price: 109000, discount: 8, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/728894.PNG' },
-        { title: 'Polisport Bilby Junior Baby Carrier', url: '/products/product-details', price: 63000, discount: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/722570001.jpg' },
-        { title: 'Brooks Slender Leather 130 mm Handle Grip', url: '/products/product-details', price: 109000, discount: 5, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/728894.PNG' },
-        { title: 'Polisport Bilby Junior Baby Carrier', url: '/products/product-details', price: 63000, discount: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/722570001.jpg' },
-        { title: 'Shimano AM501 Gravity Bike Shoes', url: '/products/product-details', price: 53000, discount: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/3/730995.PNG' },
-        { title: 'Brooks Slender Leather 130 mm Handle Grip', url: '/products/product-details', price: 109000, discount: 10, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/728894.PNG' },
-        { title: 'Polisport Bilby Junior Baby Carrier', url: '/products/product-details', price: 63000, discount: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/722570001.jpg' },
-        { title: 'Shimano AM501 Gravity Bike Shoes', url: '/products/product-details', price: 53000, discount: 0, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/3/730995.PNG' },
-        { title: 'Brooks Slender Leather 130 mm Handle Grip', url: '/products/product-details', price: 109000, discount: 8, image: 'https://www.rodalink.com/pub/media/catalog/product/cache/small_image/365x258/beff4985b56e3afdbeabfc89641a4582/7/2/728894.PNG' },
-    ];
-    const sortSelectOptions = [
-        { title: 'Latest', value: 'latest', selected: false, },
-        { title: 'Name', value: 'name', selected: false, },
-        { title: 'Price', value: 'price', selected: true, },
-    ];
+const Products = ({ profile, navbarMenu, footerMenu, products, posts }) => {
+    const router = useRouter();
+
+    // console.log('query', router.query);
+
+    const { sort, max_price, min_price } = router.query;
 
     return (
-        <Layout>
-            <NextSeo
-                titleTemplate={process.env.NEXT_PUBLIC_WEB_TITLE + ' | Products'}
+        <Layout
+            navbarMenu={navbarMenu}
+            footerMenu={footerMenu}
+            footerPosts={posts}
+            footerSocialMedias={profile.social_medias}
+        >
+            <Seo
+                title={process.env.NEXT_PUBLIC_WEB_TITLE}
+                description={process.env.NEXT_PUBLIC_WEB_DESCRIPTION}
+                url={process.env.NEXT_PUBLIC_WEB_URL}
+                phone={profile.phone}
             />
 
             <section className="bg-gray-100">
@@ -44,24 +37,35 @@ const Products = () => {
                             {/* Sort */}
                             <div className="mb-6">
                                 <div className="mb-3">
-                                    <span className="font-semibold">Sort</span>
+                                    <span className="font-semibold">Sort by</span>
                                 </div>
                                 <div>
-                                    <Select id="sort-select" name="sort-select" options={sortSelectOptions} width="full" height={11} />
+                                    <Select
+                                        id="sort-select"
+                                        name="sort-select"
+                                        options={[
+                                            { title: 'Latest', value: 'latest' },
+                                            { title: 'Name', value: 'name' },
+                                            { title: 'Price', value: 'price' },
+                                        ]}
+                                        selectedOption={sort}
+                                        width="full"
+                                        height={11}
+                                    />
                                 </div>
                             </div>
 
                             {/* Price */}
                             <div>
                                 <div className="mb-3">
-                                    <span className="font-semibold">Price</span>
+                                    <span className="font-semibold mr-1">Price</span>
                                 </div>
                                 <div className="text-center">
                                     <div className="mb-3">
-                                        <Input type="text" placeholder="Min price..." width="full" height={11} prefix="Rp" />
+                                        <Input type="text" placeholder="Minimal price..." width="full" height={11} prefix="Rp" />
                                     </div>
                                     <div className="mb-3">
-                                        <Input type="text" placeholder="Max price..." width="full" height={11} prefix="Rp" />
+                                        <Input type="text" placeholder="Maximal price..." width="full" height={11} prefix="Rp" />
                                     </div>
                                     <Button width="full" height={11} rounded={true}>Apply</Button>
                                 </div>
@@ -70,8 +74,11 @@ const Products = () => {
                     </div>
                     <div className="w-full md:w-4/5">
                         <div className="pt-6 md:pt-12 pb-3 md:pb-12 pl-3 md:pl-6 pr-3 md:pr-24">
-                            <div className="text-xs text-gray-600 mb-6">
-                                Found 10 results in products
+                            <div className="flex items-center text-xs text-gray-600 mb-6">
+                                <span className="mr-1.5">
+                                    <InfoIcon width={4} height={4} />
+                                </span>
+                                Showing 10 of 100 results found in the products
                                 </div>
                             <div className="flex flex-wrap -m-1.5">
                                 {products.map((product, key) => (
@@ -86,6 +93,71 @@ const Products = () => {
             </section>
         </Layout>
     );
+};
+
+export const getStaticProps = async () => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const limit = 10;
+    let res;
+
+    // Fetch profile
+    res = await fetch(apiUrl + 'items/profile');
+    res = await res.json();
+    const profile = res.data[0];
+
+    // Fetch product categories
+    res = await fetch(apiUrl + 'items/product_categories?fields=id,title&filter[status]=published&sort=sort');
+    res = await res.json();
+    const productCategories = res.data;
+
+    // Fetch menu
+    res = await fetch(apiUrl + 'items/menu?fields=title,url,position&filter[status]=published&sort=sort');
+    res = await res.json();
+    const menu = res.data;
+    const navbarMenu = [
+        ...menu.filter((menuItem) => menuItem.position === 'navbar'),
+        ...productCategories.map((productCategory) => ({
+            title: productCategory.title,
+            url: 'products/categories/' + productCategory.id,
+        })),
+    ];
+    const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');
+
+    // Fetch products
+    res = await fetch(apiUrl + 'items/products?fields=image,title,price,discount&filter[status]=published&sort=created_on&limit=' + limit);
+    res = await res.json();
+    let products = res.data;
+
+    // Fetch product images
+    res = await Promise.all(products.map((product) => fetch(apiUrl + 'files/' + product.image + '?fields=private_hash')));
+    res = await Promise.all(res.map((resItem) => resItem.json()));
+
+    products.map((product, key) => product.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=200&h=200&q=80&f=contain');
+
+    console.log('products', products);
+
+    // Fetch posts
+    res = await fetch(apiUrl + 'items/posts?fields=created_on,image,title&filter[status]=published&sort=created_on&limit=5');
+    res = await res.json();
+    let posts = res.data;
+
+    // Fetch latest product images
+    res = await Promise.all(posts.map((post) => fetch(apiUrl + 'files/' + post.image + '?fields=private_hash')));
+    res = await Promise.all(res.map((resItem) => resItem.json()));
+
+    posts.map((post, key) => post.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=600&h=600&q=80&f=contain');
+
+    console.log('posts', posts);
+
+    return {
+        props: {
+            profile: profile,
+            navbarMenu: navbarMenu,
+            footerMenu: footerMenu,
+            products: products,
+            posts: posts,
+        },
+    };
 };
 
 export default Products;

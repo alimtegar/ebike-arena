@@ -52,7 +52,7 @@ export const getStaticProps = async () => {
         ...menu.filter((menuItem) => menuItem.position === 'navbar'),
         ...productCategories.map((productCategory) => ({ 
             title: productCategory.title, 
-            url: 'products/c/' + productCategory.id 
+            url: 'products/categories/' + productCategory.id,
         })),
     ];
     const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');
@@ -126,6 +126,6 @@ export const getStaticProps = async () => {
             posts: posts,
         },
     };
-}
+};
 
 export default Home;
