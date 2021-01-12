@@ -1,19 +1,14 @@
 import { useRouter } from 'next/router'
-
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 import ProductsItem from '../components/Products/LatestProducts/LatestProductsItem';
-
-import { InfoIcon } from '../components/Icons';
 import Input from '../components/Input';
 import Select from '../components/Select';
 import Button from '../components/Button';
+import { InfoIcon } from '../components/Icons';
 
 const Products = ({ profile, navbarMenu, footerMenu, products, posts }) => {
     const router = useRouter();
-
-    // console.log('query', router.query);
-
     const { sort, max_price, min_price } = router.query;
 
     return (
@@ -25,6 +20,7 @@ const Products = ({ profile, navbarMenu, footerMenu, products, posts }) => {
         >
             <Seo
                 title={process.env.NEXT_PUBLIC_WEB_TITLE}
+                subtitle="Products"
                 description={process.env.NEXT_PUBLIC_WEB_DESCRIPTION}
                 url={process.env.NEXT_PUBLIC_WEB_URL}
                 phone={profile.phone}
@@ -134,8 +130,6 @@ export const getStaticProps = async () => {
 
     products.map((product, key) => product.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=200&h=200&q=80&f=contain');
 
-    console.log('products', products);
-
     // Fetch posts
     res = await fetch(apiUrl + 'items/posts?fields=created_on,image,title&filter[status]=published&sort=created_on&limit=5');
     res = await res.json();
@@ -146,9 +140,7 @@ export const getStaticProps = async () => {
     res = await Promise.all(res.map((resItem) => resItem.json()));
 
     posts.map((post, key) => post.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=600&h=600&q=80&f=contain');
-
-    console.log('posts', posts);
-
+    
     return {
         props: {
             profile: profile,

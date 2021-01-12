@@ -7,7 +7,7 @@ const NavbarMenu = () => (
             <span className="hidden md:flex ml-1">Cart</span><sup className="font-semibold text-sm ml-1">0</sup>
         </div>
         <div className="navbar-menu-item-products relative hidden md:flex items-center font-bold ml-4">
-            Category
+            Products
             
             <span className="ml-1">
                 <ChevronDownIcon width={5} height={5} color="gray-400"/>

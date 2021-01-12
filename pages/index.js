@@ -6,6 +6,8 @@ import Services from '../components/Services';
 import Products from '../components/Products';
 import Posts from '../components/Posts';
 
+import { slugify } from '../helpers';
+
 const Home = ({ profile, navbarMenu, footerMenu, slider, services, recommendedProducts, latestProducts, posts }) => (
     <Layout
         navbarMenu={navbarMenu}
@@ -50,9 +52,9 @@ export const getStaticProps = async () => {
     const menu = res.data;
     const navbarMenu = [
         ...menu.filter((menuItem) => menuItem.position === 'navbar'),
-        ...productCategories.map((productCategory) => ({ 
-            title: productCategory.title, 
-            url: 'products/categories/' + productCategory.id,
+        ...productCategories.map((productCategory) => ({
+            title: productCategory.title,
+            url: 'products/categories/' + productCategory.id + '/' + slugify(productCategory.title),
         })),
     ];
     const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');
@@ -80,7 +82,7 @@ export const getStaticProps = async () => {
     services.map((service, key) => service.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=200&h=200&q=80&f=contain');
 
     // Fetch recommended products
-    res = await fetch(apiUrl + 'items/products?fields=image,title,price,discount&filter[status]=published&filter[recommended]=1&sort=created_on');
+    res = await fetch(apiUrl + 'items/products?fields=id,image,title,price,discount&filter[status]=published&filter[recommended]=1&sort=created_on');
     res = await res.json();
     let recommendedProducts = res.data;
 
@@ -91,7 +93,7 @@ export const getStaticProps = async () => {
     recommendedProducts.map((recommendedProduct, key) => recommendedProduct.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=600&h=600&q=80&f=contain');
 
     // Fetch latest products
-    res = await fetch(apiUrl + 'items/products?fields=image,title,price,discount&filter[status]=published&sort=created_on&limit=8');
+    res = await fetch(apiUrl + 'items/products?fields=id,image,title,price,discount&filter[status]=published&sort=created_on&limit=8');
     res = await res.json();
     let latestProducts = res.data;
 
@@ -102,7 +104,7 @@ export const getStaticProps = async () => {
     latestProducts.map((latestProduct, key) => latestProduct.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=200&h=200&q=80&f=contain');
 
     // Fetch posts
-    res = await fetch(apiUrl + 'items/posts?fields=created_on,image,title&filter[status]=published&sort=created_on&limit=5');
+    res = await fetch(apiUrl + 'items/posts?fields=id,created_on,image,title&filter[status]=published&sort=created_on&limit=5');
     res = await res.json();
     let posts = res.data;
 
@@ -111,8 +113,6 @@ export const getStaticProps = async () => {
     res = await Promise.all(res.map((resItem) => resItem.json()));
 
     posts.map((post, key) => post.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=600&h=600&q=80&f=contain');
-
-    console.log('posts', posts);
 
     return {
         props: {

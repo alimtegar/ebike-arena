@@ -12,7 +12,6 @@ const formatSup = (str) => {
 
 const FooterMenu = ({ title, menu }) => (
     <div>
-        {console.log('menu', menu)}
         <h2 className="font-semibold mb-3">{title}</h2>
         <ul className="text-xs -my-1.5">
             {menu.map((menuItem, key) => (
