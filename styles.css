@@ -47,7 +47,7 @@ html {
 
 .products-item-discount {
     position: absolute;
-    top: 0;
+    top: -1px;
     right: 0;
     line-height: 16px;
     padding: 0 24px;

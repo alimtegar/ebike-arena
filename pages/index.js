@@ -55,6 +55,7 @@ export const getStaticProps = async () => {
         ...productCategories.map((productCategory) => ({
             title: productCategory.title,
             url: 'products/categories/' + productCategory.id + '/' + slugify(productCategory.title),
+            path: 'products/categories/[...slug]'
         })),
     ];
     const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');

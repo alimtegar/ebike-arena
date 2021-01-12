@@ -6,7 +6,7 @@ const Button = ({ children, onClick, width, height, rounded }) => {
     return (
         <button
             className={
-                'flex justify-center items-center bg-gray-900 font-semibold text-xs text-white focus:outline-none' +
+                'flex justify-center items-center bg-gray-900 hover:bg-gray-700 font-semibold text-xs text-white focus:outline-none' +
                 widthClassName +
                 heightClassName +
                 roundedClassName
