@@ -1,7 +1,8 @@
 import Products from '../../products';
 import { slugify } from '../../../helpers';
 
-export const getStaticProps = async () => {
+export const getStaticProps = async (context) => {
+    const [category, _] = context.params.slug;
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const limit = 10;
     let res;
@@ -30,7 +31,7 @@ export const getStaticProps = async () => {
     const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');
 
     // Fetch products
-    res = await fetch(apiUrl + 'items/products?fields=id,image,title,price,discount&filter[status]=published&sort=created_on&limit=' + limit);
+    res = await fetch(apiUrl + 'items/products?fields=id,image,title,price,discount&filter[status]=published&filter[category]=' + category + '&sort=created_on&limit=' + limit);
     res = await res.json();
     let products = res.data;
 

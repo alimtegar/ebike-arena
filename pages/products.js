@@ -69,20 +69,26 @@ const Products = ({ profile, navbarMenu, footerMenu, products, posts }) => {
                         </div>
                     </div>
                     <div className="w-full md:w-4/5">
-                        <div className="pt-6 md:pt-12 pb-3 md:pb-12 pl-3 md:pl-6 pr-3 md:pr-24">
+                        <div className="flex flex-col min-h-full pt-6 md:pt-12 pb-3 md:pb-12 pl-3 md:pl-6 pr-3 md:pr-24">
                             <div className="flex items-center text-xs text-gray-600 mb-6">
                                 <span className="mr-1.5">
                                     <InfoIcon width={4} height={4} />
                                 </span>
-                                Showing 10 of 100 results found in the products
+
+                                {products.length ? 'Showing 10 of 100' : 'No'} results found in the products
                                 </div>
-                            <div className="flex flex-wrap -m-1.5">
-                                {products.map((product, key) => (
-                                    <div className="w-1/2 md:w-1/5 p-1.5" key={key}>
-                                        <ProductsItem {...product} />
+
+                                {products.length ? products.map((product, key) => (
+                                    <div className="flex flex-wrap -m-1.5">
+                                        <div className="w-1/2 md:w-1/5 p-1.5" key={key}>
+                                            <ProductsItem {...product} />
+                                        </div>
                                     </div>
-                                ))}
-                            </div>
+                                )) : (
+                                    <div className="flex flex-grow justify-center items-center">
+                                        <img className="h-20 opacity-10	" src="/images/empty.png" alt="Empty" />
+                                    </div>
+                                )}
                         </div>
                     </div>
                 </div>
@@ -140,7 +146,7 @@ export const getStaticProps = async () => {
     res = await Promise.all(res.map((resItem) => resItem.json()));
 
     posts.map((post, key) => post.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=600&h=600&q=80&f=contain');
-    
+
     return {
         props: {
             profile: profile,
