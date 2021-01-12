@@ -7,6 +7,12 @@ import Select from '../components/Select';
 import Button from '../components/Button';
 import { InfoIcon } from '../components/Icons';
 
+const Empty = () => (
+    <div className="flex flex-grow justify-center items-center">
+        <img className="h-20 opacity-10	" src="/images/empty.png" alt="Empty" />
+    </div>
+);
+
 const Products = ({ profile, navbarMenu, footerMenu, products, posts }) => {
     const router = useRouter();
     const { sort, max_price, min_price } = router.query;
@@ -78,17 +84,15 @@ const Products = ({ profile, navbarMenu, footerMenu, products, posts }) => {
                                 {products.length ? 'Showing 10 of 100' : 'No'} results found in the products
                                 </div>
 
-                                {products.length ? products.map((product, key) => (
-                                    <div className="flex flex-wrap -m-1.5">
+                                <div className="flex flex-grow flex-wrap -m-1.5">
+                                    {products.length ? products.map((product, key) => (
+
                                         <div className="w-1/2 md:w-1/5 p-1.5" key={key}>
                                             <ProductsItem {...product} />
                                         </div>
-                                    </div>
-                                )) : (
-                                    <div className="flex flex-grow justify-center items-center">
-                                        <img className="h-20 opacity-10	" src="/images/empty.png" alt="Empty" />
-                                    </div>
-                                )}
+
+                                    )) : (<Empty />)}
+                                </div>
                         </div>
                     </div>
                 </div>
