@@ -6,12 +6,12 @@ const ActiveLink = ({ children, ...props }) => {
     const router = useRouter();
     const child = Children.only(children);
     let className = child.props.className || "";
-    const isDynamicRoute = props.href.match(/^\/?\[{1,2}\.{0,3}[a-z]+\]{1,2}$/);
+    // const isDynamicRoute = typeof props.href === 'string' ? props.href.match(/^\/?\[{1,2}\.{0,3}[a-z]+\]{1,2}$/) : false;
 
     if (
-        (router.pathname === props.href && !isDynamicRoute && props.activeClassName) || 
+        (router.pathname === props.href && props.activeClassName) || 
         (router.asPath === props.href) ||
-        (router.asPath === props.as && isDynamicRoute)
+        (router.asPath === props.as)
     ) {
         className = `${className} ${props.activeClassName}`.trim();
     }
