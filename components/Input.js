@@ -5,7 +5,6 @@ const Input = ({ name, type, placeholder, width, height, prefix, value, onChange
 
     return (
         <div className={'relative' + widthClassName}>
-            {console.log(onChange)}
             {prefix ? (
                 <div className="absolute top-1/2 transform -translate-y-1/2 flex justify-center items-center text-xs text-gray-600 w-12 h-8 border-r-2">
                     {prefix}

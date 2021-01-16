@@ -67,6 +67,7 @@ export const getStaticProps = async () => {
         fetchPosts(),
     ]);
 
+    // Separate menu into navbar and footer menu
     const navbarMenu = [
         ...menu.filter((menuItem) => menuItem.position === 'navbar'),
         ...productCategories.map((productCategory) => ({
