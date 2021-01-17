@@ -1,9 +1,8 @@
-import { useRouter } from 'next/router'
 import Layout from '../../../components/Layout';
 import Seo from '../../../components/Seo';
 import ProductsItem from '../../../components/Products/LatestProducts/LatestProductsItem';
-import Input from '../../../components/Input';
-import Button from '../../../components/Button';
+import SortFilter from '../../../components/SortFilter';
+import PriceFilter from '../../../components/PriceFilter';
 import { InfoIcon } from '../../../components/Icons';
 
 // Fetchers
@@ -11,7 +10,6 @@ import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPo
 
 // Helpers
 import { slugify } from '../../../helpers';
-import SortFilter from '../../../components/SortFilter';
 
 const Empty = () => (
     <div className="flex flex-grow justify-center items-center">
@@ -20,7 +18,7 @@ const Empty = () => (
 );
 
 const Products = (props) => {
-    const { profile, navbarMenu, footerMenu, products, posts, limit, sort } = props;
+    const { profile, navbarMenu, footerMenu, products, posts } = props;
 
     return Object.keys(props).length ? (
         <Layout
@@ -42,22 +40,7 @@ const Products = (props) => {
                     <div className="w-full md:w-1/5">
                         <div className="bg-white h-full px-6 py-6 md:py-12">
                             <SortFilter />
-
-                            {/* Price */}
-                            <div>
-                                <div className="mb-3">
-                                    <span className="font-semibold mr-1">Price</span>
-                                </div>
-                                <div className="text-center">
-                                    <div className="mb-3">
-                                        <Input type="text" placeholder="Minimal price..." width="full" height={11} prefix="Rp" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <Input type="text" placeholder="Maximal price..." width="full" height={11} prefix="Rp" />
-                                    </div>
-                                    <Button width="full" height={11} rounded={true}>Apply</Button>
-                                </div>
-                            </div>
+                            <PriceFilter />
                         </div>
                     </div>
                     <div className="w-full md:w-4/5">

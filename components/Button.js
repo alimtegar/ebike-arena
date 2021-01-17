@@ -1,4 +1,4 @@
-const Button = ({ children, onClick, width, height, rounded }) => {
+const Button = ({ children, type, onClick, width, height, rounded }) => {
     const widthClassName = width ? ' w-' + width : '';
     const heightClassName = height ? ' h-' + height : '';
     const roundedClassName = rounded ? ' rounded-lg' : '';
@@ -11,6 +11,7 @@ const Button = ({ children, onClick, width, height, rounded }) => {
                 heightClassName +
                 roundedClassName
             }
+            type={type}
             onClick={onClick}
         >
             {children}
