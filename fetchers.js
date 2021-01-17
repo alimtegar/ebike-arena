@@ -65,6 +65,17 @@ export const fetchProducts = async (id, recommended = false, limit = null, sort 
     const categoryParam = category ? '&filter[category]=' + category : '';
     const qParam = q ? '&q=' + q : '';
 
+    console.log(
+        apiUrl +
+        apiUrlEnd +
+        recommendedParam +
+        sortParam +
+        pxParam +
+        limitParam +
+        categoryParam +
+        qParam
+    );
+
     res = await fetch(
         apiUrl +
         apiUrlEnd +

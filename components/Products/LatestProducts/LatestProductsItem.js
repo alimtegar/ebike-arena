@@ -1,6 +1,6 @@
 import Link from '../../Link';
 import ProductItemDiscountLabel from '../ProductsItemDiscountLabel';
-import { slugify, discountPrice } from '../../../helpers';
+import { slugify, getDiscountedPx } from '../../../helpers';
 
 const LatestProductsItem = ({ id, title, image, price, discount }) => (
     <div className="group relative flex flex-col bg-white h-60 text-center shadow-sm hover:shadow rounded-lg overflow-hidden transition">
@@ -25,7 +25,7 @@ const LatestProductsItem = ({ id, title, image, price, discount }) => (
                     </s>
                 ) : null}
                 <h3 className="font-semibold text-sm text-gray-900">
-                    Rp{discountPrice(price, discount).toLocaleString('id-ID')}
+                    Rp{getDiscountedPx(price, discount).toLocaleString('id-ID')}
                 </h3>
             </div>
         </div>

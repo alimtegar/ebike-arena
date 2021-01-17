@@ -39,4 +39,8 @@ export const slugify = (str) => {
     return str;
 }
 
-export const discountPrice = (price, discount) => price - (price * discount / 100);
+export const getDiscountedPx = (price, discount) => 
+    price - (price * discount / 100);
+
+export const getParamVal = (params = {}, slug, parameterName, defaultValue = null) => 
+    Object.keys(params).length && slug.includes(parameterName) ? slug[slug.indexOf(parameterName) + 1] : defaultValue;

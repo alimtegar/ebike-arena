@@ -55,13 +55,13 @@ export const getStaticProps = async () => {
         fetchSlider(),
         fetchServices(),
         fetchProducts(
-            false,          // ID
-            true,           // Recommended
-            false,          // Limit
+            null,           // ID
+            false,          // Recommended
+            null,           // Limit
             'created_on'    // Sort by
         ),
         fetchProducts(
-            false,          // ID
+            null,           // ID
             false,          // Recommended
             8,              // Limit
             'sort'          // Sort by

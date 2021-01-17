@@ -9,7 +9,7 @@ import { InfoIcon } from '../../../components/Icons';
 import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPosts } from '../../../fetchers';
 
 // Helpers
-import { slugify } from '../../../helpers';
+import { slugify, getParamVal } from '../../../helpers';
 
 const Empty = () => (
     <div className="flex flex-grow justify-center items-center">
@@ -77,26 +77,24 @@ export const getStaticProps = async (context) => {
     const page = 1;
 
     // Category parameter
-    const catId = slug.includes('cat') ? slug[slug.indexOf('cat') + 1] : false;
+    const catId = getParamVal(context.params, slug, 'cat', null);
 
     // Price parameter
-    const px = slug[slug.indexOf('px') + 1];
-    const pxArr = px.split('-');
-    const minPx = pxArr[0];
-    const maxPx = pxArr[0];
+    const px = getParamVal(context.params, slug, 'px', null);
+    const newPx = px ? px.replace('-', ',') : null;
 
     // Sort parameter
-    const sort = slug[slug.indexOf('sort') + 1];
+    const sort = getParamVal(context.params, slug, 'sort', null);
     let newSort;
 
     switch (sort) {
         case 'latest': newSort = 'created_on'; break;
         case 'name': newSort = 'title'; break;
-        default: newSort = false; break;
+        default: newSort = null; break;
     }
 
     // Search query parameter
-    const q = slug[slug.indexOf('q') + 1];
+    const q = getParamVal(context.params, slug, 'q', null);
 
     const [
         profile,
@@ -109,13 +107,13 @@ export const getStaticProps = async (context) => {
         fetchMenu(),
         fetchProductCategories(),
         fetchProducts(
-            false,                   // ID
-            false,                  // Recommended
-            false,                  // Limit
-            newSort,                // Sort by
-            px.replace('-', ','),   // Price
-            catId,                  // Category
-            q,                      // Search query
+            null,       // ID
+            false,      // Recommended
+            null,       // Limit
+            newSort,    // Sort by
+            newPx,      // Price
+            catId,      // Category
+            q,          // Search query
         ),
         fetchPosts(),
     ]);

@@ -1,7 +1,7 @@
 import Link from '../../Link';
 import Button from '../../Button';
 import ProductItemDiscountLabel from '../ProductsItemDiscountLabel';
-import { slugify, discountPrice } from '../../../helpers';
+import { slugify, getDiscountedPx } from '../../../helpers';
 
 const RecommendedProductsItem = ({ id, title, image, price, discount }) => (
     <div className="relative flex flex-col justify-center items-center text-center min-h-120 h-full overflow-hidden">
@@ -27,7 +27,7 @@ const RecommendedProductsItem = ({ id, title, image, price, discount }) => (
                         </s>
                     ) : null}
                     <h3 className="font-semibold text-sm text-gray-900">
-                        Rp{discountPrice(price, discount).toLocaleString('id-ID')}
+                        Rp{getDiscountedPx(price, discount).toLocaleString('id-ID')}
                     </h3>
                 </div>
             </div>

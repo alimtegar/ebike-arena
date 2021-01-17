@@ -3,7 +3,7 @@ import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import ProductItemDiscountLabel from '../../components/Products/ProductsItemDiscountLabel';
 import Button from '../../components/Button';
-import { discountPrice, slugify } from '../../helpers';
+import { getDiscountedPx, slugify } from '../../helpers';
 
 // Fetchers
 import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPosts } from '../../fetchers';
@@ -63,7 +63,7 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                                                 </s>
                                             ) : null}
                                             <span className="font-semibold">
-                                                Rp{discountPrice(product.price, product.discount).toLocaleString('id-ID')}
+                                                Rp{getDiscountedPx(product.price, product.discount).toLocaleString('id-ID')}
                                             </span>
                                         </td>
                                     </tr>
