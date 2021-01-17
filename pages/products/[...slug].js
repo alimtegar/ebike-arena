@@ -5,6 +5,9 @@ import ProductItemDiscountLabel from '../../components/Products/ProductsItemDisc
 import Button from '../../components/Button';
 import { discountPrice, slugify } from '../../helpers';
 
+// Fetchers
+import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPosts } from '../../fetchers';
+
 const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => (
     <Layout
         navbarMenu={navbarMenu}
@@ -125,59 +128,30 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
 
 export const getStaticProps = async (context) => {
     const [id, _] = context.params.slug;
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    let res;
+    const [
+        profile,
+        menu,
+        productCategories,
+        product,
+        posts
+    ] = await Promise.all([
+        fetchProfile(),
+        fetchMenu(),
+        fetchProductCategories(),
+        fetchProducts(id),
+        fetchPosts(),
+    ]);
 
-    // Fetch profile
-    res = await fetch(apiUrl + 'items/profile');
-    res = await res.json();
-    const profile = res.data[0];
-
-    // Fetch product categories
-    res = await fetch(apiUrl + 'items/product_categories?fields=id,title&filter[status]=published&sort=sort');
-    res = await res.json();
-    const productCategories = res.data;
-
-    // Fetch menu
-    res = await fetch(apiUrl + 'items/menu?fields=title,url,position&filter[status]=published&sort=sort');
-    res = await res.json();
-    const menu = res.data;
+    // Separate menu into navbar and footer menu
     const navbarMenu = [
         ...menu.filter((menuItem) => menuItem.position === 'navbar'),
         ...productCategories.map((productCategory) => ({
             title: productCategory.title,
-            url: '/products/categories/' + productCategory.id + '/' + slugify(productCategory.title),
+            url: '/products/all/cat/' + productCategory.id + '/' + slugify(productCategory.title),
+            path: '/products/all/[[...slug]]'
         })),
     ];
     const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');
-
-    // Fetch product
-    res = await fetch(apiUrl + 'items/products/' + id);
-    res = await res.json();
-    let product = res.data;
-
-    // Fetch product image
-    res = await fetch(apiUrl + 'files/' + product.image + '?fields=private_hash');
-    res = await res.json();
-
-    product.image = apiUrl + 'assets/' + res.data.private_hash + '?w=1400&h=1400&q=80&f=contain';
-
-    // Fetch product category
-    res = await fetch(apiUrl + 'items/product_categories/' + product.category + '?fields=id,title');
-    res = await res.json();
-
-    product.category = res.data;
-
-    // Fetch posts
-    res = await fetch(apiUrl + 'items/posts?fields=created_on,image,title&filter[status]=published&sort=created_on&limit=5');
-    res = await res.json();
-    let posts = res.data;
-
-    // Fetch latest post images
-    res = await Promise.all(posts.map((post) => fetch(apiUrl + 'files/' + post.image + '?fields=private_hash')));
-    res = await Promise.all(res.map((resItem) => resItem.json()));
-
-    posts.map((post, key) => post.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=600&h=600&q=80&f=contain');
 
     return {
         props: {

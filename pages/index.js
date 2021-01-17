@@ -55,11 +55,13 @@ export const getStaticProps = async () => {
         fetchSlider(),
         fetchServices(),
         fetchProducts(
+            false,          // ID
             true,           // Recommended
             false,          // Limit
             'created_on'    // Sort by
         ),
         fetchProducts(
+            false,          // ID
             false,          // Recommended
             8,              // Limit
             'sort'          // Sort by
@@ -72,8 +74,8 @@ export const getStaticProps = async () => {
         ...menu.filter((menuItem) => menuItem.position === 'navbar'),
         ...productCategories.map((productCategory) => ({
             title: productCategory.title,
-            url: 'products/categories/' + productCategory.id + '/' + slugify(productCategory.title),
-            path: 'products/categories/[...slug]'
+            url: '/products/all/cat/' + productCategory.id + '/' + slugify(productCategory.title),
+            path: '/products/all/[[...slug]]'
         })),
     ];
     const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');

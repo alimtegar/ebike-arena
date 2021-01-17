@@ -50,8 +50,12 @@ export const fetchServices = async () => {
     return services;
 }
 
-export const fetchProducts = async (recommended, limit, sort, px = null, category = null, q = null) => {
+export const fetchProducts = async (id, recommended = false, limit = null, sort = null, px = null, category = null, q = null) => {
     let res;
+
+    const apiUrlEnd = id
+        ? 'items/products/' + id
+        : 'items/products?fields=id,image,title,price,discount&filter[status]=published';
 
     // Parameters
     const recommendedParam = recommended ? '&filter[recommended]=' + + recommended : '';
@@ -62,23 +66,30 @@ export const fetchProducts = async (recommended, limit, sort, px = null, categor
     const qParam = q ? '&q=' + q : '';
 
     res = await fetch(
-        apiUrl + 
-        'items/products?fields=id,image,title,price,discount&filter[status]=published' + 
-        recommendedParam + 
-        sortParam + 
+        apiUrl +
+        apiUrlEnd +
+        recommendedParam +
+        sortParam +
         pxParam +
-        limitParam + 
-        categoryParam + 
+        limitParam +
+        categoryParam +
         qParam
     );
     res = await res.json();
     let products = res.data;
 
     // Fetch images
-    res = await Promise.all(products.map((product) => fetch(apiUrl + 'files/' + product.image + '?fields=private_hash')));
-    res = await Promise.all(res.map((resItem) => resItem.json()));
+    if (id) {
+        res = await fetch(apiUrl + 'files/' + products.image + '?fields=private_hash');
+        res = await res.json();
 
-    products.map((product, key) => product.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=600&h=600&q=80&f=contain');
+        products.image = apiUrl + 'assets/' + res.data.private_hash + '?w=1400&h=1400&q=80&f=contain';
+    } else {
+        res = await Promise.all(products.map((product) => fetch(apiUrl + 'files/' + product.image + '?fields=private_hash')));
+        res = await Promise.all(res.map((resItem) => resItem.json()));
+
+        products.map((product, key) => product.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=600&h=600&q=80&f=contain');
+    }
 
     return products;
 }

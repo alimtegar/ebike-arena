@@ -109,6 +109,7 @@ export const getStaticProps = async (context) => {
         fetchMenu(),
         fetchProductCategories(),
         fetchProducts(
+            false,                   // ID
             false,                  // Recommended
             false,                  // Limit
             newSort,                // Sort by
@@ -124,8 +125,8 @@ export const getStaticProps = async (context) => {
         ...menu.filter((menuItem) => menuItem.position === 'navbar'),
         ...productCategories.map((productCategory) => ({
             title: productCategory.title,
-            url: 'products/categories/' + productCategory.id + '/' + slugify(productCategory.title),
-            path: 'products/categories/[...slug]'
+            url: '/products/all/cat/' + productCategory.id + '/' + slugify(productCategory.title),
+            path: '/products/all/[[...slug]]'
         })),
     ];
     const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');
