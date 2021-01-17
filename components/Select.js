@@ -1,6 +1,6 @@
 import { ChevronDownIcon } from './Icons';
 
-const Select = ({ id, name, options, selectedOption, width, height }) => {
+const Select = ({ id, name, options, selectedOption, width, height, onChange }) => {
     const widthClassName = width ? ' w-' + width : '';
     const heightClassName = height ? ' h-' + height : '';
 
@@ -14,6 +14,7 @@ const Select = ({ id, name, options, selectedOption, width, height }) => {
                 }
                 id={id}
                 name={name}
+                onChange={onChange}
             >
                 {options.map((option, key) => (
                     <option value={option.value} selected={option.value == selectedOption} key={key}>{option.title}</option>

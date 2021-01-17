@@ -1,30 +1,32 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 import { SearchIcon } from '../Icons';
-import Link from '../Link';
 import Input from '../Input';
 
 const NavbarSearch = () => {
     // Use router
     const router = useRouter();
-    const { search } = router.query;
-
-    console.log('router = ', router);
+    const slug = router.query.slug;
+    const qKey = Object.keys(router.query).length && slug.includes('q') ? slug.indexOf('q') + 1 : false;
+    const q = qKey ? slug[qKey] : '';
 
     // Use state
-    const [newSearch, setNewSearch] = useState('');
+    const [newQ, setNewQ] = useState('');
 
     // Use effect
-    useEffect(() => { setNewSearch(search); }, [search]);
+    useEffect(() => { setNewQ(q); }, [q]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const newSlug = qKey 
+            ? slug.map((slugItem, key) => key === qKey ? newQ : slugItem) 
+            : ['q', newQ];
+
         router.push({
-            pathname: router.pathname === '/products/categories/[...slug]' ? router.pathname : '/products/[...slug]',
+            pathname: '/products/all/[[...slug]]',
             query: {
-                ...router.query,
-                search: newSearch,
+                slug: newSlug,
             }
         });
     };
@@ -39,8 +41,8 @@ const NavbarSearch = () => {
                 placeholder="Searh our products here..."
                 width="full"
                 height={11}
-                value={newSearch}
-                onChange={(e) => setNewSearch(e.target.value)}
+                value={newQ}
+                onChange={(e) => setNewQ(e.target.value)}
             />
             <button className="absolute top-0 right-0 flex justify-center items-center text-gray-400 w-11 h-11 hover:text-gray-900">
                 <SearchIcon width={5} height={5} />

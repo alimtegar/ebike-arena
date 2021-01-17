@@ -50,15 +50,17 @@ export const fetchServices = async () => {
     return services;
 }
 
-export const fetchProducts = async (recommended, limit, sort) => {
+export const fetchProducts = async (recommended, limit, sort, category = false, q = false) => {
     let res;
 
     // Parameters
     const recommendedParam = recommended ? '&filter[recommended]=' + + recommended : '';
     const sortParam = sort ? '&sort=' + sort : '';
     const limitParam = limit ? '&limit=' + limit : '';
+    const categoryParam = category ? '&filter[category]=' + category : '';
+    const qParam = q ? '&q=' + q : '';
 
-    res = await fetch(apiUrl + 'items/products?fields=id,image,title,price,discount&filter[status]=published' + recommendedParam + sortParam + limitParam);
+    res = await fetch(apiUrl + 'items/products?fields=id,image,title,price,discount&filter[status]=published' + recommendedParam + sortParam + limitParam + categoryParam + qParam);
     res = await res.json();
     let products = res.data;
 

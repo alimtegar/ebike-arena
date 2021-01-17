@@ -3,7 +3,6 @@ import Layout from '../../../components/Layout';
 import Seo from '../../../components/Seo';
 import ProductsItem from '../../../components/Products/LatestProducts/LatestProductsItem';
 import Input from '../../../components/Input';
-import Select from '../../../components/Select';
 import Button from '../../../components/Button';
 import { InfoIcon } from '../../../components/Icons';
 
@@ -12,6 +11,7 @@ import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPo
 
 // Helpers
 import { slugify } from '../../../helpers';
+import SortFilter from '../../../components/SortFilter';
 
 const Empty = () => (
     <div className="flex flex-grow justify-center items-center">
@@ -41,26 +41,7 @@ const Products = (props) => {
                 <div className="flex flex-wrap">
                     <div className="w-full md:w-1/5">
                         <div className="bg-white h-full px-6 py-6 md:py-12">
-                            {/* Sort */}
-                            <div className="mb-6">
-                                <div className="mb-3">
-                                    <span className="font-semibold">Sort by</span>
-                                </div>
-                                <div>
-                                    <Select
-                                        id="sort-select"
-                                        name="sort-select"
-                                        options={[
-                                            { title: 'Latest', value: 'latest' },
-                                            { title: 'Name', value: 'name' },
-                                            { title: 'Price', value: 'price' },
-                                        ]}
-                                        selectedOption={sort}
-                                        width="full"
-                                        height={11}
-                                    />
-                                </div>
-                            </div>
+                            <SortFilter />
 
                             {/* Price */}
                             <div>
@@ -108,10 +89,31 @@ const Products = (props) => {
 
 
 export const getStaticProps = async (context) => {
-
-    
+    const slug = context.params.slug;
     const limit = 20;
-    const sort = 'created_on';
+    const page = 1;
+
+    // Category parameter
+    const catId = slug.includes('cat') ? slug[slug.indexOf('cat') + 1] : false;
+
+    // Price parameter
+    const px = slug[slug.indexOf('px') + 1];
+    const pxArr = px.split('-');
+    const minPx = pxArr[0];
+    const maxPx = pxArr[0];
+
+    // Sort parameter
+    const sort = slug[slug.indexOf('sort') + 1];
+    let newSort;
+
+    switch (sort) {
+        case 'latest': newSort = 'created_on'; break;
+        case 'name': newSort = 'title'; break;
+        default: newSort = false; break;
+    }
+
+    // Search query parameter
+    const q = slug[slug.indexOf('q') + 1];
 
     const [
         profile,
@@ -124,9 +126,11 @@ export const getStaticProps = async (context) => {
         fetchMenu(),
         fetchProductCategories(),
         fetchProducts(
-            false,           // Recommended
-            false,          // Limit
-            'created_on'    // Sort by
+            false,     // Recommended
+            false,     // Limit
+            newSort,   // Sort by
+            catId,     // Category
+            q,
         ),
         fetchPosts(),
     ]);
@@ -150,7 +154,7 @@ export const getStaticProps = async (context) => {
             products: products,
             posts: posts,
             limit: limit,
-            sort: sort,
+            sort: newSort,
         },
         revalidate: 1,
     };
