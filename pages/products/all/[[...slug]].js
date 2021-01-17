@@ -109,11 +109,12 @@ export const getStaticProps = async (context) => {
         fetchMenu(),
         fetchProductCategories(),
         fetchProducts(
-            false,     // Recommended
-            false,     // Limit
-            newSort,   // Sort by
-            catId,     // Category
-            q,
+            false,                  // Recommended
+            false,                  // Limit
+            newSort,                // Sort by
+            px.replace('-', ','),   // Price
+            catId,                  // Category
+            q,                      // Search query
         ),
         fetchPosts(),
     ]);
@@ -136,8 +137,6 @@ export const getStaticProps = async (context) => {
             footerMenu: footerMenu,
             products: products,
             posts: posts,
-            limit: limit,
-            sort: newSort,
         },
         revalidate: 1,
     };
