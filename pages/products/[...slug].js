@@ -3,6 +3,7 @@ import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import ProductItemDiscountLabel from '../../components/Products/ProductsItemDiscountLabel';
 import { Button } from '../../components/Form';
+import Link from '../../components/Link';
 
 // Fetchers
 import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPosts } from '../../fetchers';
@@ -52,7 +53,9 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                                             <span className="text-xs text-gray-600">Category</span>
                                         </td>
                                         <td>
-                                            <span className="font-semibold">{product.category.title}</span>
+                                            <Link href={'/products/all/cat/' + product.category.id + '/' + slugify(product.category.title)}>
+                                                <a className="font-semibold">{product.category.title}</a>
+                                            </Link>
                                         </td>
                                     </tr>
                                     <tr className="border-b-2 border-gray-200">

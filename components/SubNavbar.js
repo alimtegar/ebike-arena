@@ -11,7 +11,10 @@ const SubNavbar = ({ menu }) => (
                         }`}
                     key={menuItem.title}
                 >
-                    <Link href={menuItem.url} activeClassName="bg-gray-700">
+                    <Link 
+                        href={menuItem.url} 
+                        // activeClassName="bg-gray-700"
+                    >
                         <a className="hover:bg-gray-700 px-2 py-1 rounded-lg">
                             {menuItem.title}
                         </a>

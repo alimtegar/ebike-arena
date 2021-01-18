@@ -48,7 +48,7 @@ const Cart = ({ profile, navbarMenu, footerMenu, products, posts }) => (
             </div>
         </section>
 
-        <section className="flex justify-center px-6 md:px-24 py-6 md:py-12">
+        <section className="cart-form relative flex justify-center px-6 md:px-24 py-6 md:py-12">
             <div className="w-full md:w-1/2">
                 <div className="text-center">
                     <h1 className="text-lg font-bold mb-6">Shopping Cart</h1>
@@ -175,8 +175,6 @@ export const getStaticProps = async () => {
         })),
     ];
     const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');
-
-    console.log('products', products)
 
     return {
         props: {

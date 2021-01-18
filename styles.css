@@ -71,7 +71,8 @@ html {
         border-bottom-color: #111827;
     }
     
-    .product-details-content:before {
+    .product-details-content:before,
+    .cart-form:before {
         content: '';
         position: absolute;
         top: 0;
