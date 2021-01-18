@@ -24,8 +24,8 @@ const Seo = ({ title, subtitle, description, url, phone }) => (
             }}
         />
         <CorporateContactJsonLd
-            url={url}
-            logo={url + 'images/android-icon-1024x1024.png'}
+            url={process.env.NEXT_PUBLIC_WEB_URL}
+            logo={process.env.NEXT_PUBLIC_WEB_URL + 'images/android-icon-1024x1024.png'}
             contactPoint={[
                 {
                     telephone: phone,

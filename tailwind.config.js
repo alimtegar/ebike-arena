@@ -21,6 +21,9 @@ module.exports = {
       backgroundColor: {
         'primary': '#FED831',
       },
+      paddingLeft: {
+        '15': '3.75rem',
+      }
     },
   },
   variants: {

@@ -44,3 +44,6 @@ export const getDiscountedPx = (price, discount) =>
 
 export const getParamVal = (params = {}, slug, parameterName, defaultValue = null) => 
     Object.keys(params).length && slug.includes(parameterName) ? slug[slug.indexOf(parameterName) + 1] : defaultValue;
+
+export const getSentence = (str, i) => 
+    /^(.*?)[.?!]\s/.exec(str)[i];

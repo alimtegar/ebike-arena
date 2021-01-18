@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import Select from './Select';
+import {Select} from '../Form';
 
 const SortFilter = () => {
     const sortOptions = [
@@ -10,7 +10,7 @@ const SortFilter = () => {
     
     // Use router
     const router = useRouter();
-    const slug = router.query.slug;
+    const slug = Object.keys(router.query).length ? router.query.slug : [];
     const sortKey = Object.keys(router.query).length && slug.includes('sort') ? slug.indexOf('sort') + 1 : false;
     const sort = sortKey ? slug[sortKey] : '';
 
@@ -18,7 +18,7 @@ const SortFilter = () => {
         const newSort = e.target.value;
         const newSlug = sortKey 
             ? slug.map((slugItem, key) => key === sortKey ? newSort : slugItem) 
-            : ['sort', newSort];
+            : [...slug, 'sort', newSort];
 
         router.push({
             pathname: '/products/all/[[...slug]]',

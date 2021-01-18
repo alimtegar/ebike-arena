@@ -1,5 +1,5 @@
 import Link from '../../Link';
-import Button from '../../Button';
+import { Button } from '../../Form';
 import ProductItemDiscountLabel from '../ProductsItemDiscountLabel';
 import { slugify, getDiscountedPx } from '../../../helpers';
 

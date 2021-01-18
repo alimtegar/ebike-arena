@@ -95,6 +95,8 @@ export const fetchProducts = async (id, recommended = false, limit = null, sort 
         res = await res.json();
 
         products.image = apiUrl + 'assets/' + res.data.private_hash + '?w=1400&h=1400&q=80&f=contain';
+        
+        products.category = await fetchProductCategories(products.category);
     } else {
         res = await Promise.all(products.map((product) => fetch(apiUrl + 'files/' + product.image + '?fields=private_hash')));
         res = await Promise.all(res.map((resItem) => resItem.json()));
@@ -121,10 +123,14 @@ export const fetchPosts = async () => {
     return posts;
 }
 
-export const fetchProductCategories = async () => {
+export const fetchProductCategories = async (id = null) => {
     let res;
 
-    res = await fetch(apiUrl + 'items/product_categories?fields=id,title&filter[status]=published&sort=sort');
+    const apiUrlEnd = id
+        ? 'items/product_categories/' + id + '?fields=id,title'
+        : 'items/product_categories?fields=id,title&filter[status]=published&sort=sort';
+
+    res = await fetch(apiUrl + apiUrlEnd);
     res = await res.json();
     const productCategories = res.data;
 

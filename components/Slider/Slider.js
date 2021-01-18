@@ -1,6 +1,6 @@
 import SlickSlider from "react-slick";
 import SliderItem from './SliderItem';
-import OutlineButton from '../OutlineButton';
+import { OutlineButton } from '../Form';
 import { ChevronLeftIcon, ChevronRightIcon } from '../Icons';
 
 const Slider = ({ slider }) => {

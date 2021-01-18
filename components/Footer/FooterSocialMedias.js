@@ -1,4 +1,4 @@
-import OutlineButton from '../OutlineButton';
+import { OutlineButton } from '../Form';
 import { SocialMediaIcon } from '../Icons';
 
 const FooterSocialMedias = ({ title, socialMedias }) => (

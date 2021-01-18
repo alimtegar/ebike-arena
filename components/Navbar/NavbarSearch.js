@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 import { SearchIcon } from '../Icons';
-import Input from '../Input';
+import { Input } from '../Form';
 
 const NavbarSearch = () => {
     // Use router
@@ -19,8 +19,8 @@ const NavbarSearch = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const newSlug = qKey 
-            ? slug.map((slugItem, key) => key === qKey ? newQ : slugItem) 
+        const newSlug = qKey
+            ? slug.map((slugItem, key) => key === qKey ? newQ : slugItem)
             : ['q', newQ];
 
         router.push({

@@ -1,8 +1,9 @@
 import Layout from '../../../components/Layout';
 import Seo from '../../../components/Seo';
 import ProductsItem from '../../../components/Products/LatestProducts/LatestProductsItem';
-import SortFilter from '../../../components/SortFilter';
-import PriceFilter from '../../../components/PriceFilter';
+import Loading from '../../../components/Loading';
+import Empty from '../../../components/Empty';
+import { SortFilter, PriceFilter } from '../../../components/Filters';
 import { InfoIcon } from '../../../components/Icons';
 
 // Fetchers
@@ -10,12 +11,6 @@ import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPo
 
 // Helpers
 import { slugify, getParamVal } from '../../../helpers';
-
-const Empty = () => (
-    <div className="flex flex-grow justify-center items-center">
-        <img className="h-20 opacity-10	" src="/images/empty.png" alt="Empty" />
-    </div>
-);
 
 const Products = (props) => {
     const { profile, navbarMenu, footerMenu, products, posts } = props;
@@ -67,7 +62,7 @@ const Products = (props) => {
                 </div>
             </section>
         </Layout>
-    ) : 'loading..';
+    ) : <Loading />;
 };
 
 
@@ -80,8 +75,11 @@ export const getStaticProps = async (context) => {
     const catId = getParamVal(context.params, slug, 'cat', null);
 
     // Price parameter
-    const px = getParamVal(context.params, slug, 'px', null);
-    const newPx = px ? px.replace('-', ',') : null;
+    const px = getParamVal(context.params, slug, 'px', '-');
+    const pxArr = px.split('-');
+    const minPx = parseInt(pxArr[0]) || 0;
+    const maxPx = parseInt(pxArr[1]) || 999_999_999_999;
+    const newPx = minPx + ',' + maxPx;
 
     // Sort parameter
     const sort = getParamVal(context.params, slug, 'sort', null);

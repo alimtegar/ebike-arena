@@ -2,11 +2,13 @@ import Magnifier from "react-magnifier";
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import ProductItemDiscountLabel from '../../components/Products/ProductsItemDiscountLabel';
-import Button from '../../components/Button';
-import { getDiscountedPx, slugify } from '../../helpers';
+import { Button } from '../../components/Form';
 
 // Fetchers
 import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPosts } from '../../fetchers';
+
+// Helpers
+import { slugify, getDiscountedPx, getSentence } from '../../helpers';
 
 const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => (
     <Layout
@@ -17,7 +19,8 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
     >
         <Seo
             title={process.env.NEXT_PUBLIC_WEB_TITLE}
-            description={process.env.NEXT_PUBLIC_WEB_DESCRIPTION}
+            subtitle={product.title}
+            description={getSentence(product.description, 0)}
             url={process.env.NEXT_PUBLIC_WEB_URL}
             phone={profile.phone}
         />
@@ -100,27 +103,31 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
         </section>
         <section className="product-details-content relative px-6 md:px-24 py-6 md:py-12">
             <div className="flex flex-wrap -m-6">
-                <div className="w-full md:w-1/2 p-6">
-                    <div className="mb-6">
-                        <h2 className="font-bold text-lg">Specifications</h2>
+                {product.specifications ? (
+                    <div className="w-full md:w-1/2 p-6">
+                        <div className="mb-6">
+                            <h2 className="font-bold text-lg">Specifications</h2>
+                        </div>
+                        <table className="text-xs text-gray-600 w-full">
+                            <tbody>
+                                {Object.keys(product.specifications).map((key) => (
+                                    <tr className={Object.keys(product.specifications).indexOf(key) < Object.keys(product.specifications).length - 1 ? 'border-b-2 border-gray-200' : ''} key={key}>
+                                        <td className="align-top py-3 w-36">{key}</td>
+                                        <td className="py-3 capitalize">{product.specifications[key]}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
-                    <table className="text-xs text-gray-600 w-full">
-                        <tbody>
-                            {Object.keys(product.specifications).map((key) => (
-                                <tr className={Object.keys(product.specifications).indexOf(key) < Object.keys(product.specifications).length - 1 ? 'border-b-2 border-gray-200' : ''} key={key}>
-                                    <td className="align-top py-3 w-36">{key}</td>
-                                    <td className="py-3 capitalize">{product.specifications[key]}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-                <div className="w-full md:w-1/2 p-6">
-                    <div className="mb-6">
-                        <h2 className="font-bold text-lg">Description</h2>
+                ) : null}
+                {product.description ? (
+                    <div className="w-full md:w-1/2 p-6">
+                        <div className="mb-6">
+                            <h2 className="font-bold text-lg">Description</h2>
+                        </div>
+                        <div className="product-details-description text-xs text-gray-600 text-justify" dangerouslySetInnerHTML={{ __html: product.description, }} />
                     </div>
-                    <div className="product-details-description text-xs text-gray-600 text-justify" dangerouslySetInnerHTML={{ __html: product.description, }} />
-                </div>
+                ) : null}
             </div>
         </section>
     </Layout>

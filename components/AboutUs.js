@@ -3,7 +3,7 @@ const AboutUs = ({ content }) => (
         <div className="w-full md:w-1/2">
             <h1 className="text-lg font-bold mb-6">
                 About ebike arena
-                        <sup className="font-semibold text-sm ml-1">.id</sup>
+                <sup className="font-semibold text-sm ml-1">.id</sup>
             </h1>
             <div className="text-xs text-gray-600" dangerouslySetInnerHTML={{ __html: content }} />
             {/* <p className="text-xs text-gray-600">

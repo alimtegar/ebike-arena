@@ -10,8 +10,6 @@ export const InfoIcon = ({ width, height, color }) => {
     );
 };
 
-
-
 export const ShoppingCartIcon = ({ width, height, color }) => {
     const widthClassName = width ? 'w-' + width : '';
     const heightClassName = height ? ' h-' + height : '';

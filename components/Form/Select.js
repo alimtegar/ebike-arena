@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from './Icons';
+import { ChevronDownIcon } from '../Icons';
 
 const Select = ({ id, name, options, selectedOption, width, height, onChange }) => {
     const widthClassName = width ? ' w-' + width : '';
