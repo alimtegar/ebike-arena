@@ -63,3 +63,6 @@ export const getTotalPrice = (obj) => {
 
     return totalPrice;
 };
+
+// export const getIndex = (obj, id) => 
+//     obj.findIndex((objItem) => objItem.id === id);

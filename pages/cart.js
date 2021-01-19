@@ -47,7 +47,10 @@ const Cart = ({ profile, navbarMenu, footerMenu, products, posts }) => {
                             <div className="w-1/2 md:w-1/6 p-1.5" key={cartItem.id}>
                                 <ProductsItem {...cartItem} />
                             </div>
-                        )) : (<Empty />)}
+                        )) : (
+                            // <Empty />
+                            null
+                        )}
                     </div>
                 </div>
             </section>

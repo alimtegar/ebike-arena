@@ -2,11 +2,19 @@ import Link from '../../Link';
 import ProductItemDiscountLabel from '../ProductsItemDiscountLabel';
 import { slugify, getDiscountedPx } from '../../../helpers';
 
-const LatestProductsItem = ({ id, title, image, price, discount }) => (
+const LatestProductsItem = ({ id, title, image, price, discount, amount }) => (
     <div className="group relative flex flex-col bg-white h-60 text-center shadow-sm hover:shadow rounded-lg overflow-hidden transition">
         {discount ? (
             <ProductItemDiscountLabel discount={discount} />
         ) : null}
+
+
+        {amount ? (
+            <div className="absolute z-10 font-semibold text-sm text-gray-900 p-3">
+                {amount}x
+            </div>
+        ) : null}
+
         <div className="relative flex justify-center items-center h-1/2">
             <img className="absolute max-w-none h-full transform group-hover:scale-105 transition duration-300" src={image} alt={title} />
         </div>

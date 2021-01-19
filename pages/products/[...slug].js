@@ -34,6 +34,8 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
             ...cart.filter((cartItem) => cartItem.id !== id), // Filter product that has same ID
         ]);
 
+    const indexInCart = cart.findIndex((cartIndex) => cartIndex.id === product.id);
+
     return (
         <Layout
             navbarMenu={navbarMenu}
@@ -111,17 +113,27 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                                 <div>
                                     <div className="flex">
                                         <span className="mr-3">
-                                            <Input
-                                                type="number"
-                                                width={20}
-                                                height={11}
-                                                minLength={1}
-                                                maxLength={product.stock}
-                                                value={amount}
-                                                onChange={(e) => setAmount(e.target.value)}
-                                            />
+                                            {indexInCart >= 0 ? (
+                                                <Input
+                                                    type="text"
+                                                    width={20}
+                                                    height={11}
+                                                    value={cart[indexInCart].amount}
+                                                    disabled={true}
+                                                />
+                                            ) : (
+                                                <Input
+                                                    type="number"
+                                                    width={20}
+                                                    height={11}
+                                                    minLength={1}
+                                                    maxLength={product.stock}
+                                                    value={amount}
+                                                    onChange={(e) => setAmount(e.target.value)}
+                                                />
+                                            )}
                                         </span>
-                                        {productInCart(product.id) ? (
+                                        {indexInCart >= 0 ? (
                                             <OutlineButton
                                                 color="gray-900"
                                                 contrastColor="white"
@@ -133,22 +145,22 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                                                 Remove from Cart
                                             </OutlineButton>
                                         ) : (
-                                                <Button
-                                                    width="full"
-                                                    height={11}
-                                                    rounded={true}
-                                                    onClick={() => addToCart({
-                                                        id: product.id,
-                                                        title: product.title,
-                                                        image: product.image, // Resize image from 1440x1440px to 600x600px
-                                                        price: product.price,
-                                                        discount: product.discount,
-                                                        amount: parseInt(amount),
-                                                    })}
-                                                >
-                                                    Add to Cart
-                                                </Button>
-                                            )}
+                                            <Button
+                                                width="full"
+                                                height={11}
+                                                rounded={true}
+                                                onClick={() => addToCart({
+                                                    id: product.id,
+                                                    title: product.title,
+                                                    image: product.image, // Resize image from 1440x1440px to 600x600px
+                                                    price: product.price,
+                                                    discount: product.discount,
+                                                    amount: parseInt(amount),
+                                                })}
+                                            >
+                                                Add to Cart
+                                            </Button>
+                                        )}
                                     </div>
                                 </div>
                             </div>
