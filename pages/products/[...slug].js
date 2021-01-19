@@ -140,10 +140,10 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                                                     onClick={() => addToCart({
                                                         id: product.id,
                                                         title: product.title,
-                                                        image: product.image.replaceAll('1440', '600'), // Resize image from 1440x1440px to 600x600px
+                                                        image: product.image, // Resize image from 1440x1440px to 600x600px
                                                         price: product.price,
                                                         discount: product.discount,
-                                                        amount: amount,
+                                                        amount: parseInt(amount),
                                                     })}
                                                 >
                                                     Add to Cart

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import createPersistedState from 'use-persisted-state';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
@@ -11,12 +10,12 @@ import { InfoIcon } from '../components/Icons';
 import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPosts } from '../fetchers';
 
 // Helpers
-import { slugify } from '../helpers';
+import { slugify, getTotalAmount, getTotalPrice } from '../helpers';
 
 const useCartState = createPersistedState('cart');
 
 const Cart = ({ profile, navbarMenu, footerMenu, products, posts }) => {
-    const [cart, setCart] = useCartState([]);
+    const [cart, _] = useCartState([]);
 
     return (
         <Layout
@@ -40,16 +39,14 @@ const Cart = ({ profile, navbarMenu, footerMenu, products, posts }) => {
                             <InfoIcon width={4} height={4} />
                         </span>
 
-                        {cart.length ? 'Showing 10 of 100' : 'No'} results found in the cart
+                        {cart && cart.length ? 'Showing 10 of 100' : 'No'} results found in the cart
                                 </div>
 
                     <div className="flex flex-grow flex-wrap -m-1.5">
-                        {cart.length ? cart.map((cartItem, key) => (
-
-                            <div className="w-1/2 md:w-1/6 p-1.5" key={key}>
+                        {cart && cart.length ? cart.map((cartItem, key) => (
+                            <div className="w-1/2 md:w-1/6 p-1.5" key={cartItem.id}>
                                 <ProductsItem {...cartItem} />
                             </div>
-
                         )) : (<Empty />)}
                     </div>
                 </div>
@@ -119,10 +116,10 @@ const Cart = ({ profile, navbarMenu, footerMenu, products, posts }) => {
                         <div className="w-3/4">
                             <Input
                                 type="text"
-                                placeholder="Total Product"
+                                placeholder="Total Amount"
                                 width="full"
                                 height={11}
-                                value={3}
+                                value={getTotalAmount(cart)}
                                 disabled={true}
                             />
                         </div>
@@ -138,7 +135,7 @@ const Cart = ({ profile, navbarMenu, footerMenu, products, posts }) => {
                                 prefix="Rp"
                                 width="full"
                                 height={11}
-                                value="1000.000.000"
+                                value={getTotalPrice(cart)}
                                 disabled={true}
                             />
                         </div>
@@ -146,7 +143,7 @@ const Cart = ({ profile, navbarMenu, footerMenu, products, posts }) => {
                     <div className="flex justify-center">
                         <Button width="1/2" height={11} rounded={true}>
                             Checkout
-                    </Button>
+                        </Button>
                     </div>
                 </div>
             </section>

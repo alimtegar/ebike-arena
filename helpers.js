@@ -24,11 +24,11 @@ export const range = (start, stop, step) => {
 export const slugify = (str) => {
     str = str.replace(/^\s+|\s+$/g, ''); // trim
     str = str.toLowerCase();
-  
+
     // remove accents, swap ñ for n, etc
     var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
-    var to   = "aaaaeeeeiiiioooouuuunc------";
-    for (var i=0, l=from.length ; i<l ; i++) {
+    var to = "aaaaeeeeiiiioooouuuunc------";
+    for (var i = 0, l = from.length; i < l; i++) {
         str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
     }
 
@@ -39,11 +39,27 @@ export const slugify = (str) => {
     return str;
 }
 
-export const getDiscountedPx = (price, discount) => 
+export const getDiscountedPx = (price, discount) =>
     price - (price * discount / 100);
 
-export const getParamVal = (params = {}, slug, parameterName, defaultValue = null) => 
+export const getParamVal = (params = {}, slug, parameterName, defaultValue = null) =>
     Object.keys(params).length && slug.includes(parameterName) ? slug[slug.indexOf(parameterName) + 1] : defaultValue;
 
-export const getSentence = (str, i) => 
+export const getSentence = (str, i) =>
     /^(.*?)[.?!]\s/.exec(str)[i];
+
+export const getTotalAmount = (obj) => {
+    let totalAmount = 0;
+
+    obj.map((objItem) => totalAmount += objItem.amount);
+
+    return totalAmount;
+};
+
+export const getTotalPrice = (obj) => {
+    let totalPrice = 0;
+
+    obj.map((objItem) => totalPrice += objItem.amount * objItem.price);
+
+    return totalPrice;
+};

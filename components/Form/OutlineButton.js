@@ -7,7 +7,7 @@ const OutlineButton = ({ children, color, contrastColor, onClick, width, height 
     return (
         <button 
             className={
-                'flex justify-center items-center text-xs text-white border-2 rounded-lg focus:outline-none pointer-events-auto' + 
+                'flex justify-center items-center font-semibold text-xs text-white border-2 rounded-lg focus:outline-none pointer-events-auto' + 
                 colorClassName +
                 contrastColorClassName +
                 widthClassName + 
