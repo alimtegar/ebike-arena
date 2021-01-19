@@ -32,3 +32,4 @@ yarn-error.log*
 tmp/*
 old/*
 .old-codes.js
+.next.zip
