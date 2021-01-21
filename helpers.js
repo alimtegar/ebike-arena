@@ -64,5 +64,6 @@ export const getTotalPrice = (arr) => {
     return totalPrice;
 };
 
-// export const getIndex = (obj, id) => 
-//     obj.findIndex((objItem) => objItem.id === id);
+export const stripHtml = (html) => {
+    return html.replace(/<[^>]*>?/gm, '').trim();
+}

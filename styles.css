@@ -73,8 +73,9 @@ html {
     clip-path: polygon(17% 0%, 83% -1%, 101% 100%, 0% 100%);
 }
 
-.product-details-description p:not(:last-child) {
-    margin-bottom: 0.75rem;
+.product-details-description p:not(:last-child),
+.post-details-content p:not(:last-child) { 
+    margin-bottom: 0.75rem; 
 }
 
 @media only screen and (min-width: 768px) {

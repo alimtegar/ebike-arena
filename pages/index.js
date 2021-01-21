@@ -80,6 +80,15 @@ export const getStaticProps = async () => {
     ];
     const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');
 
+    // Add URL to posts
+    const newPosts = [
+        ...posts.map((post) => ({
+            ...post,
+            url: '/posts/' + post.id + '/' + slugify(post.title),
+            path: '/posts/[...slug]',
+        })),
+    ];
+
     return {
         props: {
             profile: profile,
@@ -89,7 +98,7 @@ export const getStaticProps = async () => {
             services: services,
             recommendedProducts: recommendedProducts,
             latestProducts: latestProducts,
-            posts: posts,
+            posts: newPosts,
         },
     };
 };

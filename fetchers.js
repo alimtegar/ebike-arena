@@ -50,7 +50,7 @@ export const fetchServices = async () => {
     return services;
 }
 
-export const fetchProducts = async (id, recommended = false, limit = null, sort = null, px = null, category = null, q = null) => {
+export const fetchProducts = async (id = null, recommended = false, limit = null, sort = null, px = null, category = null, q = null) => {
     let res;
 
     const apiUrlEnd = id
@@ -84,7 +84,7 @@ export const fetchProducts = async (id, recommended = false, limit = null, sort 
         res = await res.json();
 
         products.image = apiUrl + 'assets/' + res.data.private_hash + '?w=1400&h=1400&q=80&f=contain';
-        
+
         products.category = await fetchProductCategories(products.category);
     } else {
         res = await Promise.all(products.map((product) => fetch(apiUrl + 'files/' + product.image + '?fields=private_hash')));
@@ -96,18 +96,29 @@ export const fetchProducts = async (id, recommended = false, limit = null, sort 
     return products;
 }
 
-export const fetchPosts = async () => {
+export const fetchPosts = async (id = null) => {
     let res;
 
-    res = await fetch(apiUrl + 'items/posts?fields=id,created_on,image,title&filter[status]=published&sort=created_on&limit=5');
+    const apiUrlEnd = id
+        ? 'items/posts/' + id
+        : 'items/posts?fields=id,created_on,image,title&filter[status]=published&sort=created_on&limit=5';
+
+    res = await fetch(apiUrl + apiUrlEnd );
     res = await res.json();
     let posts = res.data;
 
     // Fetch images
-    res = await Promise.all(posts.map((post) => fetch(apiUrl + 'files/' + post.image + '?fields=private_hash')));
-    res = await Promise.all(res.map((resItem) => resItem.json()));
+    if (id) {
+        res = await fetch(apiUrl + 'files/' + posts.image + '?fields=private_hash');
+        res = await res.json();
 
-    posts.map((post, key) => post.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=600&h=600&q=80&f=contain');
+        posts.image = apiUrl + 'assets/' + res.data.private_hash + '?w=1400&h=1400&q=80&f=contain';
+    } else {
+        res = await Promise.all(posts.map((post) => fetch(apiUrl + 'files/' + post.image + '?fields=private_hash')));
+        res = await Promise.all(res.map((resItem) => resItem.json()));
+
+        posts.map((post, key) => post.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=600&h=600&q=80&f=contain');
+    }
 
     return posts;
 }
