@@ -1,3 +1,4 @@
+import { ToastContainer } from 'react-toastify';
 import Navbar from '../components/Navbar';
 import SubNavbar from '../components/SubNavbar';
 import Footer from '../components/Footer';
@@ -13,10 +14,22 @@ const Layout = ({ children, navbarMenu, footerMenu, footerPosts, footerSocialMed
             {children}
         </main>
 
-        <Footer 
-            menu={footerMenu}  
+        <Footer
+            menu={footerMenu}
             posts={footerPosts}
             socialMedias={footerSocialMedias}
+        />
+
+        <ToastContainer
+            position="bottom-center"
+            autoClose={5000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            // closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
         />
     </>
 );

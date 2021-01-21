@@ -48,18 +48,18 @@ export const getParamVal = (params = {}, slug, parameterName, defaultValue = nul
 export const getSentence = (str, i) =>
     /^(.*?)[.?!]\s/.exec(str)[i];
 
-export const getTotalAmount = (obj) => {
+export const getTotalAmount = (arr) => {
     let totalAmount = 0;
 
-    obj.map((objItem) => totalAmount += objItem.amount);
+    arr.map((arrItem) => totalAmount += arrItem.amount);
 
     return totalAmount;
 };
 
-export const getTotalPrice = (obj) => {
+export const getTotalPrice = (arr) => {
     let totalPrice = 0;
 
-    obj.map((objItem) => totalPrice += objItem.amount * objItem.price);
+    arr.map((arrItem) => totalPrice += arrItem.amount * arrItem.price);
 
     return totalPrice;
 };

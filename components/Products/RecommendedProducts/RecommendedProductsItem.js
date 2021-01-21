@@ -33,7 +33,7 @@ const RecommendedProductsItem = ({ id, title, image, price, discount }) => (
             </div>
             <div className="flex-grow">
                 <Link href={'/products/' + id + '/' + slugify(title)}>
-                    <Button height={11} width="full">Add to Cart</Button>
+                    <Button height={11} width="full">More Details</Button>
                 </Link>
             </div>
         </div>

@@ -1,4 +1,4 @@
-const Input = ({ name, type, placeholder, width, height, prefix, value, minLength, maxLength, onChange, disabled }) => {
+const Input = ({ id, name, type, placeholder, width, height, prefix, value, minLength, maxLength, onChange, disabled }) => {
     const widthClassName = width ? ' w-' + width : '';
     const heightClassName = height ? ' h-' + height : '';
     const paddingClassName = prefix ? ' py-4 p-prefix pr-4' : ' px-4';
@@ -17,6 +17,7 @@ const Input = ({ name, type, placeholder, width, height, prefix, value, minLengt
                     widthClassName +
                     heightClassName
                 }
+                id={id}
                 name={name}
                 type={type}
                 placeholder={placeholder}

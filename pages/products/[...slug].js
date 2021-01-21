@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import createPersistedState from 'use-persisted-state';
 import Magnifier from "react-magnifier";
+import { toast } from 'react-toastify';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import ProductItemDiscountLabel from '../../components/Products/ProductsItemDiscountLabel';
@@ -29,7 +30,7 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
             product,
         ]);
 
-    const removeFromCart = (id) =>
+    const removeFromCart = (id) => 
         setCart([
             ...cart.filter((cartItem) => cartItem.id !== id), // Filter product that has same ID
         ]);
@@ -140,7 +141,10 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                                                 width="full"
                                                 height={11}
                                                 rounded={true}
-                                                onClick={() => removeFromCart(product.id)}
+                                                onClick={() => {
+                                                    removeFromCart(product.id);
+                                                    toast.success('Product removed from cart.');
+                                                }}
                                             >
                                                 Remove from Cart
                                             </OutlineButton>
@@ -149,14 +153,17 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                                                 width="full"
                                                 height={11}
                                                 rounded={true}
-                                                onClick={() => addToCart({
-                                                    id: product.id,
-                                                    title: product.title,
-                                                    image: product.image, // Resize image from 1440x1440px to 600x600px
-                                                    price: product.price,
-                                                    discount: product.discount,
-                                                    amount: parseInt(amount),
-                                                })}
+                                                onClick={() => {
+                                                    addToCart({
+                                                        id: product.id,
+                                                        title: product.title,
+                                                        image: product.image.replaceAll('1400', '600'), // Resize image from 1400x1400px to 600x600px
+                                                        price: product.price,
+                                                        discount: product.discount,
+                                                        amount: parseInt(amount),
+                                                    });
+                                                    toast.success('Product added to cart.');
+                                            }}
                                             >
                                                 Add to Cart
                                             </Button>
@@ -169,11 +176,11 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                 </div>
             </section>
             <section className="product-details-content relative px-6 md:px-24 py-6 md:py-12">
-                <div className="flex flex-wrap -m-6">
+                <div className="flex justify-center flex-wrap -m-6">
                     {product.specifications ? (
                         <div className="w-full md:w-1/2 p-6">
                             <div className="mb-6">
-                                <h2 className="font-bold text-lg">Specifications</h2>
+                                <h2 className={'font-bold text-lg' + (!product.specifications ? ' text-center' : '')}>Specifications</h2>
                             </div>
                             <table className="text-xs text-gray-600 w-full">
                                 <tbody>
@@ -190,7 +197,7 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                     {product.description ? (
                         <div className="w-full md:w-1/2 p-6">
                             <div className="mb-6">
-                                <h2 className="font-bold text-lg">Description</h2>
+                                <h2 className={'font-bold text-lg' + (!product.specifications ? ' text-center' : '')}>Description</h2>
                             </div>
                             <div className="product-details-description text-xs text-gray-600 text-justify" dangerouslySetInnerHTML={{ __html: product.description, }} />
                         </div>
