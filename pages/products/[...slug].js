@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import createPersistedState from 'use-persisted-state';
 import Magnifier from "react-magnifier";
 import { toast } from 'react-toastify';
@@ -12,7 +13,7 @@ import Link from '../../components/Link';
 import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPosts } from '../../fetchers';
 
 // Helpers
-import { slugify, getDiscountedPx, getSentence } from '../../helpers';
+import { slugify, stripTrailingSlash, getDiscountedPx, getSentence, stripHtml } from '../../helpers';
 
 const useCartState = createPersistedState('cart');
 
@@ -30,7 +31,7 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
             product,
         ]);
 
-    const removeFromCart = (id) => 
+    const removeFromCart = (id) =>
         setCart([
             ...cart.filter((cartItem) => cartItem.id !== id), // Filter product that has same ID
         ]);
@@ -47,8 +48,8 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
             <Seo
                 title={process.env.NEXT_PUBLIC_WEB_TITLE}
                 subtitle={product.title}
-                description={getSentence(product.description, 0)}
-                url={process.env.NEXT_PUBLIC_WEB_URL}
+                description={getSentence(stripHtml(product.description), 0)}
+                url={stripTrailingSlash(process.env.NEXT_PUBLIC_WEB_URL) + useRouter().asPath} // Current URL
                 phone={profile.phone}
             />
             <section className="product-details flex flex-col bg-gray-100 px-3 md:px-24 pt-3 md:pt-12 pb-3 md:pb-12">
@@ -123,16 +124,16 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                                                     disabled={true}
                                                 />
                                             ) : (
-                                                <Input
-                                                    type="number"
-                                                    width={20}
-                                                    height={11}
-                                                    minLength={1}
-                                                    maxLength={product.stock}
-                                                    value={amount}
-                                                    onChange={(e) => setAmount(e.target.value)}
-                                                />
-                                            )}
+                                                    <Input
+                                                        type="number"
+                                                        width={20}
+                                                        height={11}
+                                                        minLength={1}
+                                                        maxLength={product.stock}
+                                                        value={amount}
+                                                        onChange={(e) => setAmount(e.target.value)}
+                                                    />
+                                                )}
                                         </span>
                                         {indexInCart >= 0 ? (
                                             <OutlineButton
@@ -149,25 +150,25 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                                                 Remove from Cart
                                             </OutlineButton>
                                         ) : (
-                                            <Button
-                                                width="full"
-                                                height={11}
-                                                rounded={true}
-                                                onClick={() => {
-                                                    addToCart({
-                                                        id: product.id,
-                                                        title: product.title,
-                                                        image: product.image.replaceAll('1400', '600'), // Resize image from 1400x1400px to 600x600px
-                                                        price: product.price,
-                                                        discount: product.discount,
-                                                        amount: parseInt(amount),
-                                                    });
-                                                    toast.success('Product added to cart.');
-                                            }}
-                                            >
-                                                Add to Cart
-                                            </Button>
-                                        )}
+                                                <Button
+                                                    width="full"
+                                                    height={11}
+                                                    rounded={true}
+                                                    onClick={() => {
+                                                        addToCart({
+                                                            id: product.id,
+                                                            title: product.title,
+                                                            image: product.image.replaceAll('1400', '600'), // Resize image from 1400x1400px to 600x600px
+                                                            price: product.price,
+                                                            discount: product.discount,
+                                                            amount: parseInt(amount),
+                                                        });
+                                                        toast.success('Product added to cart.');
+                                                    }}
+                                                >
+                                                    Add to Cart
+                                                </Button>
+                                            )}
                                     </div>
                                 </div>
                             </div>

@@ -10,7 +10,7 @@ import Posts from '../components/Posts';
 import { fetchProfile, fetchProductCategories, fetchMenu, fetchSlider, fetchServices, fetchProducts, fetchPosts } from '../fetchers';
 
 // Helpers
-import { slugify } from '../helpers';
+import { slugify, stripTrailingSlash } from '../helpers';
 
 const Home = ({ profile, navbarMenu, footerMenu, slider, services, recommendedProducts, latestProducts, posts }) => (
     <Layout
@@ -22,7 +22,7 @@ const Home = ({ profile, navbarMenu, footerMenu, slider, services, recommendedPr
         <Seo
             title={process.env.NEXT_PUBLIC_WEB_TITLE}
             description={process.env.NEXT_PUBLIC_WEB_DESCRIPTION}
-            url={process.env.NEXT_PUBLIC_WEB_URL}
+            url={stripTrailingSlash(process.env.NEXT_PUBLIC_WEB_URL)}
             phone={profile.phone}
         />
         <Slider slider={slider} />

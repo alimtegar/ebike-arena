@@ -67,3 +67,7 @@ export const getTotalPrice = (arr) => {
 export const stripHtml = (html) => {
     return html.replace(/<[^>]*>?/gm, '').trim();
 }
+
+export const stripTrailingSlash = (url) => {
+    return url.replace(/\/$/, "");
+}

@@ -1,11 +1,13 @@
+import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
+import { format } from 'date-fns';
 
 // Fetchers
 import { fetchProfile, fetchProductCategories, fetchMenu, fetchPosts } from '../../fetchers';
 
 // Helpers
-import { slugify, getSentence, stripHtml } from '../../helpers';
+import { slugify, stripTrailingSlash, getSentence, stripHtml } from '../../helpers';
 
 const PostDetails = ({ profile, navbarMenu, footerMenu, post, posts }) => (
     <Layout
@@ -18,7 +20,7 @@ const PostDetails = ({ profile, navbarMenu, footerMenu, post, posts }) => (
             title={process.env.NEXT_PUBLIC_WEB_TITLE}
             subtitle={post.title}
             description={getSentence(stripHtml(post.content), 0)}
-            url={process.env.NEXT_PUBLIC_WEB_URL}
+            url={stripTrailingSlash(process.env.NEXT_PUBLIC_WEB_URL) + useRouter().asPath} // Current URL
             phone={profile.phone}
         />
         <section>
@@ -31,7 +33,7 @@ const PostDetails = ({ profile, navbarMenu, footerMenu, post, posts }) => (
                     <h1 className="text-lg font-bold">
                         {post.title}
                     </h1>
-                    <span className="text-xs text-gray-600">Published on 01/01/2021</span>
+                    <span className="text-xs text-gray-600">Published on {format(new Date(post.created_on), 'dd MMMM yyyy')}</span>
                 </div>
                 <div className="post-details-content text-xs text-gray-600 text-justify" dangerouslySetInnerHTML={{ __html: post.content }} />
             </div>

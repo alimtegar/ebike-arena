@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import Layout from '../../../components/Layout';
 import Seo from '../../../components/Seo';
 import ProductsItem from '../../../components/Products/LatestProducts/LatestProductsItem';
@@ -10,7 +11,7 @@ import { InfoIcon } from '../../../components/Icons';
 import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPosts } from '../../../fetchers';
 
 // Helpers
-import { slugify, getParamVal } from '../../../helpers';
+import { slugify, stripTrailingSlash, getParamVal } from '../../../helpers';
 
 const Products = (props) => {
     const { profile, navbarMenu, footerMenu, products, posts } = props;
@@ -26,7 +27,7 @@ const Products = (props) => {
                 title={process.env.NEXT_PUBLIC_WEB_TITLE}
                 subtitle="Products"
                 description={process.env.NEXT_PUBLIC_WEB_DESCRIPTION}
-                url={process.env.NEXT_PUBLIC_WEB_URL}
+                url={stripTrailingSlash(process.env.NEXT_PUBLIC_WEB_URL) + useRouter().asPath} // Current URL
                 phone={profile.phone}
             />
 

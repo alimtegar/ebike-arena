@@ -15,7 +15,7 @@ const Seo = ({ title, subtitle, description, url, phone }) => (
                 locale: 'id_ID',
                 images: [
                     {
-                        url: url + 'android-icon-1024x1024.png',
+                        url: process.env.NEXT_PUBLIC_WEB_URL + 'android-icon-1024x1024.png',
                         width: 1024,
                         height: 1024,
                         alt: title + ' Logo',
