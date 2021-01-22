@@ -22,9 +22,6 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
     const [cart, setCart] = useCartState([]);
     const [amount, setAmount] = useState(1);
 
-    const productInCart = (id) =>
-        cart.some((cartItem) => cartItem.id === id);
-
     const addToCart = (product) =>
         setCart([
             ...cart.filter((cartItem) => cartItem.id !== product.id), // Filter product that has same ID
@@ -51,6 +48,7 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                 description={getSentence(stripHtml(product.description), 0)}
                 url={stripTrailingSlash(process.env.NEXT_PUBLIC_WEB_URL) + useRouter().asPath} // Current URL
                 phone={profile.phone}
+                image={product.image}
             />
             <section className="product-details flex flex-col bg-gray-100 px-3 md:px-24 pt-3 md:pt-12 pb-3 md:pb-12">
                 <div className="relative z-10 bg-white mb-0 md:-mb-3x rounded-lg shadow-sm hover:shadow transition duration-300 overflow-hidden">
@@ -178,31 +176,43 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
             </section>
             <section className="product-details-content relative px-6 md:px-24 py-6 md:py-12">
                 <div className="flex justify-center flex-wrap -m-6">
-                    {product.specifications ? (
                         <div className="w-full md:w-1/2 p-6">
                             <div className="mb-6">
-                                <h2 className={'font-bold text-lg' + (!product.specifications ? ' text-center' : '')}>Specifications</h2>
+                                <h2 className="font-bold text-lg text-center md:text-left">Specifications</h2>
                             </div>
-                            <table className="text-xs text-gray-600 w-full">
-                                <tbody>
-                                    {Object.keys(product.specifications).map((key) => (
-                                        <tr className={Object.keys(product.specifications).indexOf(key) < Object.keys(product.specifications).length - 1 ? 'border-b-2 border-gray-200' : ''} key={key}>
-                                            <td className="align-top py-3 w-36">{key}</td>
-                                            <td className="py-3 capitalize">{product.specifications[key]}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            {product.specifications ? (
+                                <table className="text-xs text-gray-600 w-full">
+                                    <tbody>
+                                        {Object.keys(product.specifications).map((key) => (
+                                            <tr className={Object.keys(product.specifications).indexOf(key) < Object.keys(product.specifications).length - 1 ? 'border-b-2 border-gray-200' : ''} key={key}>
+                                                <td className="align-top py-3 w-36">{key}</td>
+                                                <td className="py-3 capitalize">{product.specifications[key]}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <div className="text-xs text-gray-600 text-center md:text-left">
+                                    No specifications.
+                                </div>
+                            )}
                         </div>
-                    ) : null}
-                    {product.description ? (
+                    
                         <div className="w-full md:w-1/2 p-6">
                             <div className="mb-6">
-                                <h2 className={'font-bold text-lg' + (!product.specifications ? ' text-center' : '')}>Description</h2>
+                                <h2 className="font-bold text-lg text-center md:text-left">Description</h2>
                             </div>
-                            <div className="product-details-description text-xs text-gray-600 text-justify" dangerouslySetInnerHTML={{ __html: product.description, }} />
+                            {product.description ? (
+                                <div 
+                                    className="product-details-description text-xs text-gray-600 text-justify" 
+                                    dangerouslySetInnerHTML={{ __html: product.description, }} 
+                                />
+                            ) : (
+                                <div className="text-xs text-gray-600 text-center md:text-left">
+                                    No description.
+                                </div>
+                            )}
                         </div>
-                    ) : null}
                 </div>
             </section>
         </Layout>

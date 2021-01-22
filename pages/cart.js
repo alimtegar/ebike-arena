@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import createPersistedState from 'use-persisted-state';
 import { toast } from 'react-toastify';
 import Layout from '../components/Layout';
@@ -12,7 +13,7 @@ import { InfoIcon } from '../components/Icons';
 import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPosts } from '../fetchers';
 
 // Helpers
-import { slugify, getTotalAmount, getTotalPrice } from '../helpers';
+import { slugify, stripTrailingSlash, getTotalAmount, getTotalPrice } from '../helpers';
 
 const useCartState = createPersistedState('cart');
 
@@ -97,7 +98,7 @@ const Cart = ({ profile, navbarMenu, footerMenu, posts }) => {
                 title={process.env.NEXT_PUBLIC_WEB_TITLE}
                 subtitle="Cart"
                 description={process.env.NEXT_PUBLIC_WEB_DESCRIPTION}
-                url={process.env.NEXT_PUBLIC_WEB_URL}
+                url={stripTrailingSlash(process.env.NEXT_PUBLIC_WEB_URL) + useRouter().asPath} // Current URL
                 phone={profile.phone}
             />
 
@@ -272,12 +273,21 @@ export const getStaticProps = async () => {
     ];
     const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');
 
+    // Add URL to posts
+    const newPosts = [
+        ...posts.map((post) => ({
+            ...post,
+            url: '/posts/' + post.id + '/' + slugify(post.title),
+            path: '/posts/[...slug]',
+        })),
+    ];
+
     return {
         props: {
             profile: profile,
             navbarMenu: navbarMenu,
             footerMenu: footerMenu,
-            posts: posts,
+            posts: newPosts,
         },
     };
 };

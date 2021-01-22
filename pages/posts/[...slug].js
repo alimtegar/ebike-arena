@@ -22,6 +22,7 @@ const PostDetails = ({ profile, navbarMenu, footerMenu, post, posts }) => (
             description={getSentence(stripHtml(post.content), 0)}
             url={stripTrailingSlash(process.env.NEXT_PUBLIC_WEB_URL) + useRouter().asPath} // Current URL
             phone={profile.phone}
+            image={post.image}
         />
         <section>
             <div className="relative flex justify-center items-center bg-gray-100 h-36 md:h-96 overflow-hidden">

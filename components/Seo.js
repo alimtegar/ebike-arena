@@ -1,6 +1,6 @@
 import { NextSeo, CorporateContactJsonLd } from 'next-seo';
 
-const Seo = ({ title, subtitle, description, url, phone }) => (
+const Seo = ({ title, subtitle, description, url, phone, image }) => (
     <>
         <NextSeo
             title={title}
@@ -15,10 +15,10 @@ const Seo = ({ title, subtitle, description, url, phone }) => (
                 locale: 'id_ID',
                 images: [
                     {
-                        url: process.env.NEXT_PUBLIC_WEB_URL + 'android-icon-1024x1024.png',
+                        url: image ? image : process.env.NEXT_PUBLIC_WEB_URL + 'android-icon-1024x1024.png',
                         width: 1024,
                         height: 1024,
-                        alt: title + ' Logo',
+                        alt: subtitle ? subtitle : title,
                     },
                 ],
             }}

@@ -12,13 +12,17 @@ const NavbarMenu = () => {
 
     return (
         <div className="flex">
-            <div className="flex items-center font-bold ml-6">
-                <ShoppingCartIcon width={5} height={5} />
+            {/* <div > */}
                 <Link href="/cart">
-                    <a className="hidden md:flex ml-1">Cart</a>
+                    <a className="flex items-center font-bold ml-6">
+                        <ShoppingCartIcon width={5} height={5} />
+
+                        <span className="hidden md:flex ml-1">Cart</span>
+
+                        <sup className="font-semibold text-sm ml-1">{getTotalAmount(cart)}</sup>
+                    </a>
                 </Link>
-                <sup className="font-semibold text-sm ml-1">{getTotalAmount(cart)}</sup>
-            </div>
+            {/* </div> */}
             <div className="navbar-menu-item-products relative hidden md:flex items-center font-bold ml-4">
                 <Link href="/products">
                     <a>Products</a>
