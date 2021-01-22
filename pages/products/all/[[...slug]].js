@@ -4,7 +4,7 @@ import Seo from '../../../components/Seo';
 import ProductsItem from '../../../components/Products/LatestProducts/LatestProductsItem';
 import Loading from '../../../components/Loading';
 import Empty from '../../../components/Empty';
-import { SortFilter, PriceFilter } from '../../../components/Filters';
+import { CategoryFilter, SortFilter, PriceFilter } from '../../../components/Filters';
 import { InfoIcon } from '../../../components/Icons';
 
 // Fetchers
@@ -14,7 +14,7 @@ import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPo
 import { slugify, stripTrailingSlash, getParamVal } from '../../../helpers';
 
 const Products = (props) => {
-    const { profile, navbarMenu, footerMenu, products, posts } = props;
+    const { profile, navbarMenu, footerMenu, products, posts, categoryFilterOptions } = props;
 
     return Object.keys(props).length ? (
         <Layout
@@ -35,6 +35,7 @@ const Products = (props) => {
                 <div className="flex flex-wrap">
                     <div className="w-full md:w-1/5">
                         <div className="bg-white h-full px-6 py-6 md:py-12">
+                            <CategoryFilter options={categoryFilterOptions} />
                             <SortFilter />
                             <PriceFilter />
                         </div>
@@ -117,6 +118,11 @@ export const getStaticProps = async (context) => {
         fetchPosts(),
     ]);
 
+    const categoryFilterOptions = productCategories.map((productCategory) => ({
+        title: productCategory.title,
+        value: productCategory.id,
+    }));
+
     // Separate menu into navbar and footer menu
     const navbarMenu = [
         ...menu.filter((menuItem) => menuItem.position === 'navbar'),
@@ -144,6 +150,7 @@ export const getStaticProps = async (context) => {
             footerMenu: footerMenu,
             products: products,
             posts: newPosts,
+            categoryFilterOptions: categoryFilterOptions,
         },
         revalidate: 1,
     };

@@ -4,7 +4,7 @@ import {Select} from '../Form';
 const SortFilter = () => {
     const sortOptions = [
         { title: 'Latest', value: 'latest' },
-        { title: 'Name', value: 'name' },
+        { title: 'Name (A-Z)', value: 'name' },
         // { title: 'Price', value: 'price' },
     ];
     
