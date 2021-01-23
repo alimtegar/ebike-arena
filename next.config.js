@@ -6,6 +6,11 @@ module.exports = {
                 destination: '/products/all',
                 permanent: true,
             },
+            {
+                source: '/posts',
+                destination: '/posts/all',
+                permanent: true,
+            },
         ]
     },
 }

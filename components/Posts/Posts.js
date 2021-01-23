@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import Link from '../Link';
 import PostsItem from './PostsItem';
 import { ChevronRightIcon } from '../Icons';
 import { range } from '../../helpers';
@@ -14,12 +15,14 @@ const Posts = ({ posts }) => {
     return (
         <section className="text-center md:text-left px-3 md:px-24 pt-6 md:pt-12 pb-3 md:pb-12">
             <div className="mb-6">
-                <a className="inline-flex items-center text-gray-400 hover:text-gray-900 transition" href="#">
-                    <h1 className="text-lg text-gray-900 font-bold">Posts</h1>
-                    <span className="ml-1">
-                        <ChevronRightIcon width={5} height={5} />
-                    </span>
-                </a>
+                <Link href="/posts/all">
+                    <a className="inline-flex items-center text-gray-400 hover:text-gray-900 transition">
+                        <h1 className="text-lg text-gray-900 font-bold">Posts</h1>
+                        <span className="ml-1">
+                            <ChevronRightIcon width={5} height={5} />
+                        </span>
+                    </a>
+                </Link>
             </div>
             <div className="flex flex-wrap -m-1.5">
                 {range(Math.ceil(posts.length / 4)).map((_, key1) => (

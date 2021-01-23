@@ -16,8 +16,6 @@ const CategoryFilter = ({ options }) => {
         const newCatId = e.target.value;
         const newCatTitle = options.find((option) => option.value == newCatId).title;
 
-        console.log('options', JSON.stringify(options));
-
         const newSlug = catIdKey 
             ? slug.map((slugItem, key) => 
                 key === catIdKey 

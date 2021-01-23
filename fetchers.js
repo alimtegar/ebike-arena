@@ -50,7 +50,17 @@ export const fetchServices = async () => {
     return services;
 }
 
-export const fetchProducts = async (id = null, recommended = false, limit = null, sort = null, px = null, category = null, q = null, page = null, meta = null) => {
+export const fetchProducts = async (
+    id = null,
+    recommended = false,
+    limit = null,
+    sort = null,
+    px = null,
+    category = null,
+    q = null,
+    page = null,
+    meta = null
+) => {
     let res;
 
     const apiUrlEnd = id
@@ -68,16 +78,16 @@ export const fetchProducts = async (id = null, recommended = false, limit = null
     const metaParam = meta ? '&meta=' + meta : '';
 
     const url = apiUrl +
-                apiUrlEnd +
-                recommendedParam +
-                sortParam +
-                pxParam +
-                limitParam +
-                categoryParam +
-                qParam + 
-                pageParam + 
-                metaParam;
-    
+        apiUrlEnd +
+        recommendedParam +
+        sortParam +
+        pxParam +
+        limitParam +
+        categoryParam +
+        qParam +
+        pageParam +
+        metaParam;
+
     res = await fetch(url);
     res = await res.json();
 
@@ -102,16 +112,38 @@ export const fetchProducts = async (id = null, recommended = false, limit = null
     return meta ? { meta: productsMeta, data: products } : products;
 }
 
-export const fetchPosts = async (id = null) => {
+export const fetchPosts = async (
+    id = null,
+    limit = 4,
+    sort = null,
+    q = null,
+    page = null,
+    meta = null
+) => {
     let res;
 
     const apiUrlEnd = id
         ? 'items/posts/' + id
         : 'items/posts?fields=id,created_on,image,title&filter[status]=published&sort=created_on&limit=5';
 
-    res = await fetch(apiUrl + apiUrlEnd );
+    const limitParam = limit ? '&limit=' + limit : '';
+    const sortParam = sort ? '&sort=' + sort : '';
+    const qParam = q ? '&q=' + q : '';
+    const pageParam = page ? '&page=' + page : '';
+    const metaParam = meta ? '&meta=' + meta : '';
+
+    const url = apiUrl +
+        apiUrlEnd +
+        sortParam +
+        limitParam +
+        qParam +
+        pageParam +
+        metaParam;
+
+    res = await fetch(url);
     res = await res.json();
     let posts = res.data;
+    const postsMeta = meta ? res.meta : null;
 
     // Fetch images
     if (id) {
@@ -125,8 +157,8 @@ export const fetchPosts = async (id = null) => {
 
         posts.map((post, key) => post.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=600&h=600&q=80&f=contain');
     }
-
-    return posts;
+    
+    return meta ? { meta: postsMeta, data: posts } : posts;
 }
 
 export const fetchProductCategories = async (id = null) => {

@@ -10,7 +10,7 @@ import { Input, TextArea, Button } from '../components/Form';
 import { InfoIcon } from '../components/Icons';
 
 // Fetchers
-import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPosts } from '../fetchers';
+import { fetchProfile, fetchProductCategories, fetchMenu, fetchPosts } from '../fetchers';
 
 // Helpers
 import { slugify, stripTrailingSlash, getTotalAmount, getTotalPrice } from '../helpers';
@@ -109,7 +109,7 @@ const Cart = ({ profile, navbarMenu, footerMenu, posts }) => {
                             <InfoIcon width={4} height={4} />
                         </span>
 
-                        {cart && cart.length ? 'Showing 10 of 100' : 'No'} results found in the cart
+                        {cart && cart.length ? 'Showing ' + cart.length + ' of ' + cart.length : 'No'} results found in the cart.
                                 </div>
 
                     <div className="flex flex-grow flex-wrap -m-1.5">
@@ -129,7 +129,7 @@ const Cart = ({ profile, navbarMenu, footerMenu, posts }) => {
                 <div className="w-full md:w-1/2">
                     <div className="text-center">
                         <h1 className="text-lg font-bold mb-6">Shopping Cart</h1>
-                        <p className="text-xs text-gray-600 mb-6 md:mb-12">To finish your order, please fill the form below and then press the checkout button.</p>
+                        <p className="text-xs text-gray-600 mb-6 md:mb-12">To finish your order, please fill the form below and then press the button.</p>
                     </div>
 
                     <form onSubmit={(e) => handleSubmit(e)}>

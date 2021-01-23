@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../../components/Layout';
 import Seo from '../../../components/Seo';
@@ -8,62 +9,62 @@ import Empty from '../../../components/Empty';
 import { CategoryFilter, SortFilter, PriceFilter } from '../../../components/Filters';
 import { InfoIcon } from '../../../components/Icons';
 
+import PostsItem from '../../../components/Posts/PostsItem';
+
 // Fetchers
 import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPosts } from '../../../fetchers';
 
 // Helpers
-import { slugify, stripTrailingSlash, getParamVal } from '../../../helpers';
+import { range, slugify, stripTrailingSlash, getParamVal } from '../../../helpers';
 
-const Products = (props) => {
-    const { profile, navbarMenu, footerMenu, products, posts, categoryFilterOptions, lim, page, productsMeta } = props;
+const Posts = (props) => {
+    const { profile, navbarMenu, footerMenu, posts, footerPosts, lim, page, postsMeta } = props;
 
     return Object.keys(props).length ? (
         <Layout
             navbarMenu={navbarMenu}
             footerMenu={footerMenu}
-            footerPosts={posts}
+            footerPosts={footerPosts}
             footerSocialMedias={profile.social_medias}
         >
             <Seo
                 title={process.env.NEXT_PUBLIC_WEB_TITLE}
-                subtitle="Products"
+                subtitle="Posts"
                 description={process.env.NEXT_PUBLIC_WEB_DESCRIPTION}
                 url={stripTrailingSlash(process.env.NEXT_PUBLIC_WEB_URL) + useRouter().asPath} // Current URL
                 phone={profile.phone}
             />
 
-            <section className="bg-gray-100">
-                <div className="flex flex-wrap">
-                    <div className="w-full md:w-1/5">
-                        <div className="bg-white h-full px-6 py-6 md:py-12">
-                            <CategoryFilter options={categoryFilterOptions} />
-                            <SortFilter />
-                            <PriceFilter />
-                        </div>
-                    </div>
-                    <div className="w-full md:w-4/5">
-                        <div className="flex flex-col min-h-full pt-6 md:pt-12 pb-3 md:pb-12 pl-3 md:pl-6 pr-3 md:pr-24">
-                            <div className="flex items-center text-xs text-gray-600 mb-6">
-                                <span className="mr-1.5">
-                                    <InfoIcon width={4} height={4} />
-                                </span>
-                                {products.length ? 'Showing ' + (productsMeta.total_count - (page * lim) < 0 ? lim + (productsMeta.total_count - (page * lim)) : lim) + ' of ' + productsMeta.total_count : 'No'} results found in the products.
-                                </div>
-
-                            <div className="flex flex-grow flex-wrap -m-1.5">
-                                {products.length ? products.map((product, key) => (
-                                    <div className="w-1/2 md:w-1/5 p-1.5" key={key}>
-                                        <ProductsItem {...product} />
-                                    </div>
-                                )) : (<Empty />)}
-                            </div>
-
-                            {productsMeta.page_count > 1 ? (
-                                <Pagination total={productsMeta.page_count} active={page} />
-                            ) : null}
-                        </div>
-                    </div>
+            <section className="px-24 py-12">
+                <div className="text-center mb-12">
+                    <h1 className="text-lg font-bold mb-3">All Posts</h1>
+                    <p className="text-xs text-gray-600">{posts.length ? 'Showing ' + (postsMeta.total_count - (page * lim) < 0 ? lim + (postsMeta.total_count - (page * lim)) : lim) + ' of ' + postsMeta.total_count : 'No'} results found in the products.</p>
                 </div>
+                <div className="flex flex-wrap -m-1.5">
+                    {range(Math.ceil(posts.length / 4)).map((_, key1) => (
+                        <Fragment key={key1}>
+                            <div className="flex flex-grow w-full md:w-1/2 min-h-60 p-1.5">
+                                <PostsItem {...posts[4 * key1]} height="full" headingSize="lg" imageCover="h" />
+                            </div>
+                            <div className="flex flex-wrap w-full md:w-1/2">
+                                {posts.slice(4 * key1 + 1, 4 * key1 + 4).map((post, key2) => {
+                                    const widthClassname = key2 ? " w-full md:w-1/2" : " w-full";
+                                    const headingSize = key2 ? "sm" : "md";
+                                    const imageCover = key2 ? 'h' : 'w';
+
+                                    return (
+                                        <div className={'p-1.5' + widthClassname} key={key2}>
+                                            <PostsItem {...post} height={60} headingSize={headingSize} imageCover={imageCover} />
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </Fragment>
+                    ))}
+                </div>
+                {postsMeta.page_count > 1 ? (
+                    <Pagination total={postsMeta.page_count} active={page} />
+                ) : null}
             </section>
         </Layout>
     ) : <Loading />;
@@ -78,16 +79,6 @@ export const getStaticProps = async (context) => {
 
     // Category parameter
     const lim = getParamVal(context.params, slug, 'lim', 20);
-
-    // Category parameter
-    const catId = getParamVal(context.params, slug, 'cat', null);
-
-    // Price parameter
-    const px = getParamVal(context.params, slug, 'px', '-');
-    const pxArr = px.split('-');
-    const minPx = parseInt(pxArr[0]) || 0;
-    const maxPx = parseInt(pxArr[1]) || 999_999_999_999;
-    const newPx = minPx + ',' + maxPx;
 
     // Sort parameter
     const sort = getParamVal(context.params, slug, 'sort', null);
@@ -106,30 +97,22 @@ export const getStaticProps = async (context) => {
         profile,
         menu,
         productCategories,
-        products,
-        posts
+        posts,
+        footerPosts
     ] = await Promise.all([
         fetchProfile(),
         fetchMenu(),
         fetchProductCategories(),
-        fetchProducts(
+        fetchPosts(
             null,       // ID
-            false,      // Recommended
-            lim,       // Limit
-            newSort,    // Sort by
-            newPx,      // Price
-            catId,      // Category
+            lim,        // Limit
+            null,       // Sort
             q,          // Search query
             page,       // Page
             '*'         // Meta
         ),
         fetchPosts(),
     ]);
-
-    const categoryFilterOptions = productCategories.map((productCategory) => ({
-        title: productCategory.title,
-        value: productCategory.id,
-    }));
 
     // Separate menu into navbar and footer menu
     const navbarMenu = [
@@ -144,7 +127,15 @@ export const getStaticProps = async (context) => {
 
     // Add URL to posts
     const newPosts = [
-        ...posts.map((post) => ({
+        ...posts.data.map((post) => ({
+            ...post,
+            url: '/posts/' + post.id + '/' + slugify(post.title),
+            path: '/posts/[...slug]',
+        })),
+    ];
+
+    const newFooterPosts = [
+        ...footerPosts.map((post) => ({
             ...post,
             url: '/posts/' + post.id + '/' + slugify(post.title),
             path: '/posts/[...slug]',
@@ -156,12 +147,11 @@ export const getStaticProps = async (context) => {
             profile: profile,
             navbarMenu: navbarMenu,
             footerMenu: footerMenu,
-            products: products.data,
             posts: newPosts,
-            categoryFilterOptions: categoryFilterOptions,
+            footerPosts: newFooterPosts,
             lim: lim,
             page: page,
-            productsMeta: products.meta,
+            postsMeta: posts.meta,
         },
         revalidate: 1,
     };
@@ -169,4 +159,4 @@ export const getStaticProps = async (context) => {
 
 export const getStaticPaths = async () => ({ paths: [], fallback: true, });
 
-export default Products;
+export default Posts;
