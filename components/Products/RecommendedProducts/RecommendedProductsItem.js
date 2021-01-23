@@ -3,7 +3,7 @@ import { Button } from '../../Form';
 import ProductItemDiscountLabel from '../ProductsItemDiscountLabel';
 import { slugify, getDiscountedPx } from '../../../helpers';
 
-const RecommendedProductsItem = ({ id, title, image, price, discount }) => (
+const RecommendedProductsItem = ({ id, title, image, price, old_price, discount }) => (
     <div className="relative flex flex-col justify-center items-center text-center min-h-120 h-full overflow-hidden">
         {discount ? (
             <ProductItemDiscountLabel discount={discount} />
@@ -23,11 +23,11 @@ const RecommendedProductsItem = ({ id, title, image, price, discount }) => (
                 <div>
                     {discount ? (
                         <s className="text-xs text-gray-400">
-                            Rp{price.toLocaleString('id-ID')}
+                            Rp{old_price.toLocaleString('id-ID')}
                         </s>
                     ) : null}
                     <h3 className="font-semibold text-sm text-gray-900">
-                        Rp{getDiscountedPx(price, discount).toLocaleString('id-ID')}
+                        Rp{price.toLocaleString('id-ID')}
                     </h3>
                 </div>
             </div>

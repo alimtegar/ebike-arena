@@ -50,12 +50,12 @@ export const fetchServices = async () => {
     return services;
 }
 
-export const fetchProducts = async (id = null, recommended = false, limit = null, sort = null, px = null, category = null, q = null) => {
+export const fetchProducts = async (id = null, recommended = false, limit = null, sort = null, px = null, category = null, q = null, page = null, meta = null) => {
     let res;
 
     const apiUrlEnd = id
         ? 'items/products/' + id
-        : 'items/products?fields=id,image,title,price,discount&filter[status]=published';
+        : 'items/products?fields=id,image,title,price,old_price,discount&filter[status]=published';
 
     // Parameters
     const recommendedParam = recommended ? '&filter[recommended]=' + + recommended : '';
@@ -64,19 +64,25 @@ export const fetchProducts = async (id = null, recommended = false, limit = null
     const limitParam = limit ? '&limit=' + limit : '';
     const categoryParam = category ? '&filter[category]=' + category : '';
     const qParam = q ? '&q=' + q : '';
+    const pageParam = page ? '&page=' + page : '';
+    const metaParam = meta ? '&meta=' + meta : '';
 
-    res = await fetch(
-        apiUrl +
-        apiUrlEnd +
-        recommendedParam +
-        sortParam +
-        pxParam +
-        limitParam +
-        categoryParam +
-        qParam
-    );
+    const url = apiUrl +
+                apiUrlEnd +
+                recommendedParam +
+                sortParam +
+                pxParam +
+                limitParam +
+                categoryParam +
+                qParam + 
+                pageParam + 
+                metaParam;
+    
+    res = await fetch(url);
     res = await res.json();
+
     let products = res.data;
+    const productsMeta = meta ? res.meta : null;
 
     // Fetch images
     if (id) {
@@ -93,7 +99,7 @@ export const fetchProducts = async (id = null, recommended = false, limit = null
         products.map((product, key) => product.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=600&h=600&q=80&f=contain');
     }
 
-    return products;
+    return meta ? { meta: productsMeta, data: products } : products;
 }
 
 export const fetchPosts = async (id = null) => {

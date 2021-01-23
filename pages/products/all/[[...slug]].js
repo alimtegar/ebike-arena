@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import Layout from '../../../components/Layout';
 import Seo from '../../../components/Seo';
 import ProductsItem from '../../../components/Products/LatestProducts/LatestProductsItem';
+import Pagination from '../../../components/Pagination';
 import Loading from '../../../components/Loading';
 import Empty from '../../../components/Empty';
 import { CategoryFilter, SortFilter, PriceFilter } from '../../../components/Filters';
@@ -14,7 +15,7 @@ import { fetchProfile, fetchProductCategories, fetchMenu, fetchProducts, fetchPo
 import { slugify, stripTrailingSlash, getParamVal } from '../../../helpers';
 
 const Products = (props) => {
-    const { profile, navbarMenu, footerMenu, products, posts, categoryFilterOptions } = props;
+    const { profile, navbarMenu, footerMenu, products, posts, categoryFilterOptions, lim, page, productsMeta } = props;
 
     return Object.keys(props).length ? (
         <Layout
@@ -46,19 +47,20 @@ const Products = (props) => {
                                 <span className="mr-1.5">
                                     <InfoIcon width={4} height={4} />
                                 </span>
-
-                                {products.length ? 'Showing 10 of 100' : 'No'} results found in the products
+                                {products.length ? 'Showing ' + (productsMeta.total_count - (page * lim) < 0 ? lim + (productsMeta.total_count - (page * lim)) : lim) + ' of ' + productsMeta.total_count : 'No'} results found in the products
                                 </div>
 
                             <div className="flex flex-grow flex-wrap -m-1.5">
                                 {products.length ? products.map((product, key) => (
-
                                     <div className="w-1/2 md:w-1/5 p-1.5" key={key}>
                                         <ProductsItem {...product} />
                                     </div>
-
                                 )) : (<Empty />)}
                             </div>
+
+                            {productsMeta.page_count > 1 ? (
+                                <Pagination total={productsMeta.page_count} active={page} />
+                            ) : null}
                         </div>
                     </div>
                 </div>
@@ -70,8 +72,12 @@ const Products = (props) => {
 
 export const getStaticProps = async (context) => {
     const slug = context.params.slug;
-    const limit = 20;
-    const page = 1;
+
+    // Category parameter
+    const page = getParamVal(context.params, slug, 'page', 1);
+
+    // Category parameter
+    const lim = getParamVal(context.params, slug, 'lim', 20);
 
     // Category parameter
     const catId = getParamVal(context.params, slug, 'cat', null);
@@ -109,11 +115,13 @@ export const getStaticProps = async (context) => {
         fetchProducts(
             null,       // ID
             false,      // Recommended
-            null,       // Limit
+            lim,       // Limit
             newSort,    // Sort by
             newPx,      // Price
             catId,      // Category
             q,          // Search query
+            page,       // Page
+            '*'         // Meta
         ),
         fetchPosts(),
     ]);
@@ -148,9 +156,12 @@ export const getStaticProps = async (context) => {
             profile: profile,
             navbarMenu: navbarMenu,
             footerMenu: footerMenu,
-            products: products,
+            products: products.data,
             posts: newPosts,
             categoryFilterOptions: categoryFilterOptions,
+            lim: lim,
+            page: page,
+            productsMeta: products.meta,
         },
         revalidate: 1,
     };

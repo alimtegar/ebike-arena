@@ -56,7 +56,7 @@ export const getStaticProps = async () => {
         fetchServices(),
         fetchProducts(
             null,           // ID
-            false,          // Recommended
+            true,          // Recommended
             null,           // Limit
             'created_on'    // Sort by
         ),

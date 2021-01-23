@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      margin: {
+        '0.75': '0.1875rem',
+      },
       width: {
         '13/12': '1.08333333333%',
       },
@@ -23,7 +26,8 @@ module.exports = {
       },
       paddingLeft: {
         '15': '3.75rem',
-      }
+      },
+
     },
   },
   variants: {

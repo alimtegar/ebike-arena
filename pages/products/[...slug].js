@@ -90,11 +90,11 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                                             <td>
                                                 {product.discount ? (
                                                     <s className="text-xs text-gray-400 mr-2">
-                                                        Rp{product.price.toLocaleString('id-ID')}
+                                                        Rp{product.old_price.toLocaleString('id-ID')}
                                                     </s>
                                                 ) : null}
                                                 <span className="font-semibold">
-                                                    Rp{getDiscountedPx(product.price, product.discount).toLocaleString('id-ID')}
+                                                    Rp{product.price.toLocaleString('id-ID')}
                                                 </span>
                                             </td>
                                         </tr>
@@ -111,17 +111,18 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
 
                                 {/* Product Footer */}
                                 <div>
-                                    <div className="flex">
-                                        <span className="mr-3">
-                                            {indexInCart >= 0 ? (
-                                                <Input
-                                                    type="text"
-                                                    width={20}
-                                                    height={11}
-                                                    value={cart[indexInCart].amount}
-                                                    disabled={true}
-                                                />
-                                            ) : (
+                                    {product.stock > 0 ? (
+                                        <div className="flex">
+                                            <span className="mr-3">
+                                                {indexInCart >= 0 ? (
+                                                    <Input
+                                                        type="text"
+                                                        width={20}
+                                                        height={11}
+                                                        value={cart[indexInCart].amount}
+                                                        disabled={true}
+                                                    />
+                                                ) : (
                                                     <Input
                                                         type="number"
                                                         width={20}
@@ -132,22 +133,22 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                                                         onChange={(e) => setAmount(e.target.value)}
                                                     />
                                                 )}
-                                        </span>
-                                        {indexInCart >= 0 ? (
-                                            <OutlineButton
-                                                color="gray-900"
-                                                contrastColor="white"
-                                                width="full"
-                                                height={11}
-                                                rounded={true}
-                                                onClick={() => {
-                                                    removeFromCart(product.id);
-                                                    toast.success('Product removed from cart.');
-                                                }}
-                                            >
-                                                Remove from Cart
-                                            </OutlineButton>
-                                        ) : (
+                                            </span>
+                                            {indexInCart >= 0 ? (
+                                                <OutlineButton
+                                                    color="gray-900"
+                                                    contrastColor="white"
+                                                    width="full"
+                                                    height={11}
+                                                    rounded={true}
+                                                    onClick={() => {
+                                                        removeFromCart(product.id);
+                                                        toast.success('Product removed from cart.');
+                                                    }}
+                                                >
+                                                    Remove from Cart
+                                                </OutlineButton>
+                                            ) : (
                                                 <Button
                                                     width="full"
                                                     height={11}
@@ -166,8 +167,15 @@ const ProductDetails = ({ profile, navbarMenu, footerMenu, product, posts }) => 
                                                 >
                                                     Add to Cart
                                                 </Button>
-                                            )}
-                                    </div>
+                                            )}  
+                                        </div>
+                                    ) : (
+                                        <div className="flex">
+                                            <button className="bg-gray-100 text-gray-400 text-xs font-semibold w-full h-11 rounded-lg" disabled>
+                                                Out of Stock
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
