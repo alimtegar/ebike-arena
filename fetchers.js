@@ -174,3 +174,54 @@ export const fetchProductCategories = async (id = null) => {
 
     return productCategories;
 }
+
+export const fetchPages = async (
+    id = null,
+    limit = 4,
+    sort = null,
+    q = null,
+    page = null,
+    meta = null
+) => {
+    let res;
+
+    const apiUrlEnd = id
+        ? 'items/pages/' + id + '?filter[status]=published'
+        : 'items/pages?fields=id,created_on,image,title&filter[status]=published&sort=created_on&limit=5';
+
+    const limitParam = limit ? '&limit=' + limit : '';
+    const sortParam = sort ? '&sort=' + sort : '';
+    const qParam = q ? '&q=' + q : '';
+    const pageParam = page ? '&page=' + page : '';
+    const metaParam = meta ? '&meta=' + meta : '';
+
+    const url = apiUrl +
+        apiUrlEnd +
+        sortParam +
+        limitParam +
+        qParam +
+        pageParam +
+        metaParam;
+
+    console.log(url);
+
+    res = await fetch(url);
+    res = await res.json();
+    let pages = res.data;
+    const pagesMeta = meta ? res.meta : null;
+
+    // Fetch images
+    if (id) {
+        res = await fetch(apiUrl + 'files/' + pages.image + '?fields=private_hash');
+        res = await res.json();
+
+        pages.image = apiUrl + 'assets/' + res.data.private_hash + '?w=1400&h=1400&q=80&f=contain';
+    } else {
+        res = await Promise.all(pages.map((page) => fetch(apiUrl + 'files/' + page.image + '?fields=private_hash')));
+        res = await Promise.all(res.map((resItem) => resItem.json()));
+
+        pages.map((page, key) => page.image = apiUrl + 'assets/' + res[key].data.private_hash + '?w=600&h=600&q=80&f=contain');
+    }
+    
+    return meta ? { meta: pagesMeta, data: pages } : pages;
+}

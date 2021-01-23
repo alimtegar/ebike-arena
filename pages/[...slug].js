@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router';
-import Layout from '../../components/Layout';
-import Seo from '../../components/Seo';
+import Layout from '../components/Layout';
+import Seo from '../components/Seo';
 import { format } from 'date-fns';
 
 // Fetchers
-import { fetchProfile, fetchProductCategories, fetchMenu, fetchPosts } from '../../fetchers';
+import { fetchProfile, fetchProductCategories, fetchMenu, fetchPages, fetchPosts } from '../fetchers';
 
 // Helpers
-import { slugify, stripTrailingSlash, getSentence, stripHtml } from '../../helpers';
+import { slugify, stripTrailingSlash, getSentence, stripHtml } from '../helpers';
 
-const PostDetails = ({ profile, navbarMenu, footerMenu, post, posts }) => (
+const PageDetails = ({ profile, navbarMenu, footerMenu, page, posts }) => (
     <Layout
         navbarMenu={navbarMenu}
         footerMenu={footerMenu}
@@ -18,25 +18,25 @@ const PostDetails = ({ profile, navbarMenu, footerMenu, post, posts }) => (
     >
         <Seo
             title={process.env.NEXT_PUBLIC_WEB_TITLE}
-            subtitle={post.title}
-            description={getSentence(stripHtml(post.content), 0)}
+            subtitle={page.title}
+            description={getSentence(stripHtml(page.content), 0)}
             url={stripTrailingSlash(process.env.NEXT_PUBLIC_WEB_URL) + useRouter().asPath} // Current URL
             phone={profile.phone}
-            image={post.image}
+            image={page.image}
         />
         <section>
             <div className="relative flex justify-center items-center bg-gray-100 h-36 md:h-96 overflow-hidden">
-                <img className="absolute max-w-none h-auto w-full focus:outline-none" src={post.image} alt={post.title} />
+                <img className="absolute max-w-none h-auto w-full focus:outline-none" src={page.image} alt={page.title} />
             </div>
             <div className="text-center px-6 md:px-24 py-6 md:py-12">
 
                 <div className="mb-6 md:mb-12">
                     <h1 className="text-lg font-bold">
-                        {post.title}
+                        {page.title}
                     </h1>
-                    <span className="text-xs text-gray-600">Published on {format(new Date(post.created_on), 'dd MMMM yyyy')}</span>
+                    <span className="text-xs text-gray-600">Published on {format(new Date(page.created_on), 'dd MMMM yyyy')}</span>
                 </div>
-                <div className="post-details-content text-xs text-gray-600 text-justify" dangerouslySetInnerHTML={{ __html: post.content }} />
+                <div className="post-details-content text-xs text-gray-600 text-justify" dangerouslySetInnerHTML={{ __html: page.content }} />
             </div>
         </section>
     </Layout>
@@ -48,13 +48,13 @@ export const getStaticProps = async (context) => {
         profile,
         menu,
         productCategories,
-        post,
+        page,
         posts
     ] = await Promise.all([
         fetchProfile(),
         fetchMenu(),
         fetchProductCategories(),
-        fetchPosts(id),
+        fetchPages(id),
         fetchPosts(),
     ]);
 
@@ -92,7 +92,7 @@ export const getStaticProps = async (context) => {
             profile: profile,
             navbarMenu: navbarMenu,
             footerMenu: footerMenu,
-            post: post,
+            page: page,
             posts: newPosts,
         },
     };
@@ -102,15 +102,15 @@ export const getStaticPaths = async () => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     let res;
 
-    res = await fetch(apiUrl + 'items/posts?fields=id,title&filter[status]=published');
+    res = await fetch(apiUrl + 'items/pages?fields=id,title&filter[status]=published');
     res = await res.json();
-    const posts = res.data;
+    const pages = res.data;
 
-    const paths = posts.map((post) => ({
+    const paths = pages.map((page) => ({
         params: {
             slug: [
-                post.id + '',        // Convert int to string
-                slugify(post.title),
+                page.id + '',        // Convert int to string
+                slugify(page.title),
             ],
         },
     }));
@@ -121,4 +121,4 @@ export const getStaticPaths = async () => {
     };
 };
 
-export default PostDetails;
+export default PageDetails;

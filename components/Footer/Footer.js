@@ -8,7 +8,7 @@ const Footer = ({ menu, posts, socialMedias }) => (
                 <FooterMenu title="Menu" menu={menu} />
             </div>
             <div className="w-full md:w-1/2 mb-6 md:mb-0">
-                <FooterMenu title="Posts" menu={posts} />
+                <FooterMenu title="News" menu={posts} />
             </div>
             <div className="w-full md:w-1/4 mb-6 md:mb-0">
                 <FooterSocialMedias title="Follow Us" socialMedias={socialMedias} />

@@ -263,14 +263,23 @@ export const getStaticProps = async () => {
     ]);
 
     // Separate menu into navbar and footer menu
-    const navbarMenu = [
+    let navbarMenu = [
         ...menu.filter((menuItem) => menuItem.position === 'navbar'),
-        ...productCategories.map((productCategory) => ({
-            title: productCategory.title,
-            url: '/products/all/cat/' + productCategory.id + '/' + slugify(productCategory.title),
-            path: '/products/all/[[...slug]]'
-        })),
+        
     ];
+
+    // Show/hide product category menu
+    if (profile.product_category_menu) {
+        navbarMenu = [
+            ...navbarMenu,
+            ...productCategories.map((productCategory) => ({
+                title: productCategory.title,
+                url: '/products/all/cat/' + productCategory.id + '/' + slugify(productCategory.title),
+                path: '/products/all/[[...slug]]'
+            })),
+        ];
+    }
+
     const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');
 
     // Add URL to posts

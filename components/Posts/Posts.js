@@ -17,7 +17,7 @@ const Posts = ({ posts }) => {
             <div className="mb-6">
                 <Link href="/posts/all">
                     <a className="inline-flex items-center text-gray-400 hover:text-gray-900 transition">
-                        <h1 className="text-lg text-gray-900 font-bold">Posts</h1>
+                        <h1 className="text-lg text-gray-900 font-bold">News</h1>
                         <span className="ml-1">
                             <ChevronRightIcon width={5} height={5} />
                         </span>

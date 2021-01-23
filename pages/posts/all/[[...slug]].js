@@ -37,7 +37,7 @@ const Posts = (props) => {
 
             <section className="px-24 py-12">
                 <div className="text-center mb-12">
-                    <h1 className="text-lg font-bold mb-3">All Posts</h1>
+                    <h1 className="text-lg font-bold mb-3">All News</h1>
                     <p className="text-xs text-gray-600">{posts.length ? 'Showing ' + (postsMeta.total_count - (page * lim) < 0 ? lim + (postsMeta.total_count - (page * lim)) : lim) + ' of ' + postsMeta.total_count : 'No'} results found in the products.</p>
                 </div>
                 <div className="flex flex-wrap -m-1.5">
@@ -115,14 +115,23 @@ export const getStaticProps = async (context) => {
     ]);
 
     // Separate menu into navbar and footer menu
-    const navbarMenu = [
+    let navbarMenu = [
         ...menu.filter((menuItem) => menuItem.position === 'navbar'),
-        ...productCategories.map((productCategory) => ({
-            title: productCategory.title,
-            url: '/products/all/cat/' + productCategory.id + '/' + slugify(productCategory.title),
-            path: '/products/all/[[...slug]]'
-        })),
+        
     ];
+
+    // Show/hide product category menu
+    if (profile.product_category_menu) {
+        navbarMenu = [
+            ...navbarMenu,
+            ...productCategories.map((productCategory) => ({
+                title: productCategory.title,
+                url: '/products/all/cat/' + productCategory.id + '/' + slugify(productCategory.title),
+                path: '/products/all/[[...slug]]'
+            })),
+        ];
+    }
+
     const footerMenu = menu.filter((menuItem) => menuItem.position === 'footer');
 
     // Add URL to posts
